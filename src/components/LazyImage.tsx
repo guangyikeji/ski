@@ -1,6 +1,7 @@
 'use client'
 
 import { useState, useRef, useEffect } from 'react'
+import Image from 'next/image'
 
 interface LazyImageProps {
   src: string
@@ -9,19 +10,21 @@ interface LazyImageProps {
   width?: number
   height?: number
   placeholder?: string
+  fill?: boolean
 }
 
 export default function LazyImage({
   src,
   alt,
   className = '',
-  width,
-  height,
-  placeholder = 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjZjNmNGY2Ii8+PC9zdmc+'
+  width = 800,
+  height = 600,
+  placeholder = 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjZjNmNGY2Ii8+PC9zdmc+',
+  fill = false
 }: LazyImageProps) {
   const [isLoaded, setIsLoaded] = useState(false)
   const [isInView, setIsInView] = useState(false)
-  const imgRef = useRef<HTMLImageElement>(null)
+  const imgRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -42,22 +45,34 @@ export default function LazyImage({
   }, [])
 
   return (
-    <div className={`relative overflow-hidden ${className}`}>
-      <img
-        ref={imgRef}
-        src={isInView ? src : placeholder}
-        alt={alt}
-        width={width}
-        height={height}
-        className={`transition-opacity duration-300 ${
-          isLoaded ? 'opacity-100' : 'opacity-0'
-        } ${className}`}
-        onLoad={() => setIsLoaded(true)}
-        loading="lazy"
-      />
+    <div ref={imgRef} className={`relative overflow-hidden ${className}`}>
+      {isInView && (
+        <Image
+          src={src}
+          alt={alt}
+          width={fill ? undefined : width}
+          height={fill ? undefined : height}
+          fill={fill}
+          className={`transition-opacity duration-300 object-cover ${
+            isLoaded ? 'opacity-100' : 'opacity-0'
+          }`}
+          onLoad={() => setIsLoaded(true)}
+          placeholder="blur"
+          blurDataURL={placeholder}
+          sizes={fill ? "100vw" : undefined}
+        />
+      )}
       {!isLoaded && isInView && (
         <div className="absolute inset-0 bg-gray-200 animate-pulse flex items-center justify-center">
           <div className="w-8 h-8 border-2 border-ski-blue border-t-transparent rounded-full animate-spin"></div>
+        </div>
+      )}
+      {!isInView && (
+        <div
+          className="w-full h-full bg-gray-200 animate-pulse flex items-center justify-center"
+          style={{ aspectRatio: fill ? undefined : `${width}/${height}` }}
+        >
+          <div className="w-8 h-8 border-2 border-gray-400 border-t-transparent rounded-full animate-spin"></div>
         </div>
       )}
     </div>
