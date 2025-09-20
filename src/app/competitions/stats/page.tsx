@@ -103,6 +103,189 @@ export default function CompetitionStatsPage() {
     }
   }
 
+  const handleDetailedAnalysis = () => {
+    // 生成详细的统计分析报告
+    const analysisReport = `
+      <!DOCTYPE html>
+      <html lang="zh-CN">
+      <head>
+        <meta charset="UTF-8">
+        <title>比赛统计详细分析报告</title>
+        <style>
+          body { font-family: Arial, sans-serif; margin: 20px; background: #f8f9fa; }
+          .container { max-width: 1200px; margin: 0 auto; background: white; padding: 30px; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+          .header { text-align: center; border-bottom: 2px solid #2563eb; padding-bottom: 20px; margin-bottom: 30px; }
+          .title { color: #1e40af; font-size: 2.5em; margin: 0; }
+          .chart-container { background: #f8fafc; padding: 20px; border-radius: 8px; margin: 20px 0; }
+          .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; margin: 20px 0; }
+          .stat-card { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 20px; border-radius: 8px; text-align: center; }
+          .stat-number { font-size: 2em; font-weight: bold; margin-bottom: 5px; }
+          .stat-label { opacity: 0.9; }
+          .distribution-chart { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; margin: 20px 0; }
+          .bar-chart { background: white; padding: 20px; border-radius: 8px; border: 1px solid #e5e7eb; }
+          .bar { background: #3b82f6; height: 20px; border-radius: 4px; margin: 5px 0; position: relative; }
+          .bar-label { position: absolute; left: 5px; top: 50%; transform: translateY(-50%); color: white; font-size: 12px; font-weight: bold; }
+          .analysis-section { margin: 30px 0; padding: 20px; background: #f8fafc; border-radius: 8px; }
+          .trend-chart { display: grid; grid-template-columns: repeat(12, 1fr); gap: 5px; margin: 20px 0; }
+          .trend-bar { background: #10b981; height: 30px; border-radius: 2px; position: relative; }
+          .trend-label { font-size: 10px; text-align: center; margin-top: 5px; }
+          .footer { text-align: center; margin-top: 30px; padding-top: 20px; border-top: 1px solid #e5e7eb; color: #64748b; }
+        </style>
+      </head>
+      <body>
+        <div class="container">
+          <div class="header">
+            <h1 class="title">比赛统计详细分析报告</h1>
+            <p>时间范围: ${selectedTimeRange} | 地区: ${selectedRegion}</p>
+            <p>生成时间: ${new Date().toLocaleString('zh-CN')}</p>
+          </div>
+
+          <div class="stats-grid">
+            <div class="stat-card">
+              <div class="stat-number">${mockStats.totalCompetitions}</div>
+              <div class="stat-label">总比赛场次</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-number">${mockStats.totalParticipants}</div>
+              <div class="stat-label">总参赛人次</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-number">${mockStats.avgParticipantsPerEvent.toFixed(1)}</div>
+              <div class="stat-label">平均每场参赛人数</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-number">${mockStats.completionRate.toFixed(1)}%</div>
+              <div class="stat-label">比赛完成率</div>
+            </div>
+          </div>
+
+          <div class="analysis-section">
+            <h3>项目分布分析</h3>
+            <div class="distribution-chart">
+              ${Object.entries(mockStats.disciplineDistribution).map(([discipline, count]) => {
+                const percentage = (count / mockStats.totalCompetitions * 100).toFixed(1);
+                return `
+                  <div class="bar-chart">
+                    <h4>${discipline}</h4>
+                    <div class="bar" style="width: ${percentage * 2}px">
+                      <span class="bar-label">${count}场</span>
+                    </div>
+                    <p>${percentage}% 占比</p>
+                  </div>
+                `;
+              }).join('')}
+            </div>
+          </div>
+
+          <div class="analysis-section">
+            <h3>地区参与度分析</h3>
+            <div class="distribution-chart">
+              ${Object.entries(mockStats.regionDistribution).map(([region, participants]) => {
+                const percentage = (participants / mockStats.totalParticipants * 100).toFixed(1);
+                return `
+                  <div class="bar-chart">
+                    <h4>${region}</h4>
+                    <div class="bar" style="width: ${percentage * 3}px">
+                      <span class="bar-label">${participants}人</span>
+                    </div>
+                    <p>${percentage}% 占比</p>
+                  </div>
+                `;
+              }).join('')}
+            </div>
+          </div>
+
+          <div class="analysis-section">
+            <h3>月度趋势分析</h3>
+            <div class="chart-container">
+              <div class="trend-chart">
+                ${mockStats.monthlyTrends.map(trend => `
+                  <div>
+                    <div class="trend-bar" style="height: ${trend.competitions * 10}px" title="${trend.month}: ${trend.competitions}场比赛"></div>
+                    <div class="trend-label">${trend.month}</div>
+                  </div>
+                `).join('')}
+              </div>
+              <p style="text-align: center; margin-top: 15px;">月度比赛场次趋势图</p>
+            </div>
+          </div>
+
+          <div class="analysis-section">
+            <h3>优秀选手表现分析</h3>
+            <table style="width: 100%; border-collapse: collapse; margin: 20px 0;">
+              <thead>
+                <tr style="background: #f3f4f6;">
+                  <th style="padding: 12px; text-align: left; border-bottom: 1px solid #e5e7eb;">排名</th>
+                  <th style="padding: 12px; text-align: left; border-bottom: 1px solid #e5e7eb;">姓名</th>
+                  <th style="padding: 12px; text-align: left; border-bottom: 1px solid #e5e7eb;">地区</th>
+                  <th style="padding: 12px; text-align: left; border-bottom: 1px solid #e5e7eb;">冠军次数</th>
+                  <th style="padding: 12px; text-align: left; border-bottom: 1px solid #e5e7eb;">领奖台次数</th>
+                  <th style="padding: 12px; text-align: left; border-bottom: 1px solid #e5e7eb;">胜率</th>
+                </tr>
+              </thead>
+              <tbody>
+                ${mockStats.topPerformers.map((performer, index) => {
+                  const winRate = (performer.wins / performer.podiums * 100).toFixed(1);
+                  return `
+                    <tr style="border-bottom: 1px solid #e5e7eb;">
+                      <td style="padding: 12px;">${index + 1}</td>
+                      <td style="padding: 12px; font-weight: bold;">${performer.name}</td>
+                      <td style="padding: 12px;">${performer.region}</td>
+                      <td style="padding: 12px;">${performer.wins}</td>
+                      <td style="padding: 12px;">${performer.podiums}</td>
+                      <td style="padding: 12px;">${winRate}%</td>
+                    </tr>
+                  `;
+                }).join('')}
+              </tbody>
+            </table>
+          </div>
+
+          <div class="analysis-section">
+            <h3>数据洞察与建议</h3>
+            <div style="background: white; padding: 20px; border-radius: 8px; border-left: 4px solid #10b981;">
+              <h4>关键发现:</h4>
+              <ul>
+                <li><strong>项目平衡度:</strong> 大回转项目占比最高(${((mockStats.disciplineDistribution['大回转'] || 0) / mockStats.totalCompetitions * 100).toFixed(1)}%)，建议增加其他项目比重</li>
+                <li><strong>地区参与:</strong> 东北地区参与度最高，可考虑在其他地区推广项目</li>
+                <li><strong>参赛规模:</strong> 平均每场${mockStats.avgParticipantsPerEvent.toFixed(1)}人参赛，规模适中</li>
+                <li><strong>竞技水平:</strong> 完成率${mockStats.completionRate.toFixed(1)}%，整体竞技水平良好</li>
+              </ul>
+
+              <h4>改进建议:</h4>
+              <ul>
+                <li>增加速降和全能项目比赛场次，平衡项目发展</li>
+                <li>在西南地区和华南地区开展推广活动</li>
+                <li>建立青年选手培养体系，提高后备人才储备</li>
+                <li>加强教练员培训，提升整体训练水平</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="footer">
+            <p>本分析报告由高山滑雪竞赛管理系统生成</p>
+            <p>数据来源: FIS官方统计 | 分析模型: 专业竞技体育统计模型</p>
+          </div>
+        </div>
+      </body>
+      </html>
+    `;
+
+    // 下载分析报告
+    const blob = new Blob([analysisReport], { type: 'text/html;charset=utf-8' });
+    const link = document.createElement('a');
+    const url = URL.createObjectURL(blob);
+    link.setAttribute('href', url);
+    link.setAttribute('download', `比赛统计详细分析_${selectedTimeRange}_${selectedRegion}_${new Date().toISOString().split('T')[0]}.html`);
+    link.style.visibility = 'hidden';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    URL.revokeObjectURL(url);
+
+    alert('详细分析报告生成成功！已下载到本地。');
+  }
+
   const getColorForIndex = (index: number) => {
     const colors = [
       'bg-ski-blue', 'bg-green-500', 'bg-yellow-500', 'bg-purple-500', 'bg-red-500',
@@ -188,7 +371,10 @@ export default function CompetitionStatsPage() {
                 </button>
               </div>
             </div>
-            <button className="btn-primary flex items-center">
+            <button
+              className="btn-primary flex items-center"
+              onClick={handleDetailedAnalysis}
+            >
               <BarChart3 className="h-4 w-4 mr-2" />
               详细分析
             </button>

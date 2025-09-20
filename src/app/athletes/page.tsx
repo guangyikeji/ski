@@ -2,6 +2,7 @@
 
 import { useState } from 'react'
 import { getImagePath } from '@/utils/paths'
+import { exportToCSV, exportToExcel, exportToJSON } from '@/utils/exportUtils'
 import {
   User,
   Search,
@@ -88,6 +89,32 @@ export default function AthletesPage() {
   const [selectedStatus, setSelectedStatus] = useState('all')
   const [selectedRegion, setSelectedRegion] = useState('all')
   const [searchTerm, setSearchTerm] = useState('')
+
+  const handleAddAthlete = () => {
+    alert('运动员注册功能开发中，敬请期待！\n\n该功能将包括：\n- 基本信息录入\n- FIS编码申请\n- 证件上传\n- 资格审核\n\n预计下个版本上线。')
+  }
+
+  const handleExportAthletes = () => {
+    const exportData = {
+      filename: `运动员名单_${new Date().toISOString().split('T')[0]}`,
+      data: filteredAthletes.map(athlete => ({
+        'FIS编码': athlete.fisCode,
+        '姓名': athlete.name,
+        '性别': athlete.gender === 'male' ? '男' : '女',
+        '出生日期': athlete.birthDate,
+        '国籍': athlete.nationality,
+        '地区': athlete.region,
+        '状态': athlete.status === 'active' ? '活跃' : athlete.status === 'inactive' ? '非活跃' : '退役',
+        '专项': athlete.specialties?.join(', ') || '',
+        '当前积分': Object.values(athlete.currentPoints || {}).join(', ') || 'N/A',
+        '注册日期': athlete.registrationDate
+      })),
+      title: '运动员名单'
+    }
+
+    exportToExcel(exportData)
+    alert('运动员名单导出成功！')
+  }
 
   const stats = getStatistics()
 
@@ -214,11 +241,17 @@ export default function AthletesPage() {
           </div>
 
           <div className="flex space-x-2">
-            <button className="btn-primary flex items-center">
+            <button
+              className="btn-primary flex items-center"
+              onClick={handleAddAthlete}
+            >
               <Plus className="h-4 w-4 mr-2" />
               添加运动员
             </button>
-            <button className="btn-secondary flex items-center">
+            <button
+              className="btn-secondary flex items-center"
+              onClick={handleExportAthletes}
+            >
               <Download className="h-4 w-4 mr-2" />
               导出
             </button>

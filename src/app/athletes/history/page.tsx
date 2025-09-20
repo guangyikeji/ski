@@ -163,6 +163,203 @@ export default function AthletesHistoryPage() {
     }
   }
 
+  const handleTrendAnalysis = () => {
+    if (!selectedAthlete || filteredHistory.length === 0) {
+      alert('请选择运动员并确保有历史数据')
+      return
+    }
+
+    // 生成趋势分析报告
+    const analysisData = {
+      athlete: selectedAthlete,
+      history: filteredHistory,
+      totalRaces: filteredHistory.length,
+      bestPoints: Math.min(...filteredHistory.map(h => h.finalPoints)),
+      worstPoints: Math.max(...filteredHistory.map(h => h.finalPoints)),
+      averagePoints: filteredHistory.reduce((sum, h) => sum + h.finalPoints, 0) / filteredHistory.length,
+      improvementTrend: calculateImprovementTrend(filteredHistory),
+      disciplineStats: calculateDisciplineStats(filteredHistory)
+    }
+
+    const reportContent = `
+      <!DOCTYPE html>
+      <html lang="zh-CN">
+      <head>
+        <meta charset="UTF-8">
+        <title>${selectedAthlete.name} - 积分趋势分析报告</title>
+        <style>
+          body { font-family: Arial, sans-serif; margin: 20px; background: #f8f9fa; }
+          .container { max-width: 1000px; margin: 0 auto; background: white; padding: 30px; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+          .header { text-align: center; border-bottom: 2px solid #2563eb; padding-bottom: 20px; margin-bottom: 30px; }
+          .title { color: #1e40af; font-size: 2.2em; margin: 0; }
+          .athlete-info { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 20px; border-radius: 8px; margin: 20px 0; }
+          .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; margin: 20px 0; }
+          .stat-card { background: #f3f4f6; padding: 20px; border-radius: 8px; text-align: center; border-left: 4px solid #3b82f6; }
+          .stat-number { font-size: 1.8em; font-weight: bold; color: #1e40af; margin-bottom: 5px; }
+          .stat-label { color: #64748b; font-size: 0.9em; }
+          .trend-positive { color: #059669; font-weight: bold; }
+          .trend-negative { color: #dc2626; font-weight: bold; }
+          .trend-stable { color: #6b7280; font-weight: bold; }
+          .analysis-section { margin: 30px 0; padding: 20px; background: #f8fafc; border-radius: 8px; }
+          .discipline-chart { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 15px; margin: 20px 0; }
+          .discipline-item { background: white; padding: 15px; border-radius: 6px; text-align: center; border: 1px solid #e5e7eb; }
+          .history-table { width: 100%; border-collapse: collapse; margin: 20px 0; }
+          .history-table th, .history-table td { padding: 10px; text-align: left; border-bottom: 1px solid #e5e7eb; }
+          .history-table th { background: #f3f4f6; font-weight: bold; }
+          .improvement { background: #dcfce7 !important; }
+          .decline { background: #fef2f2 !important; }
+          .footer { text-align: center; margin-top: 30px; padding-top: 20px; border-top: 1px solid #e5e7eb; color: #64748b; }
+        </style>
+      </head>
+      <body>
+        <div class="container">
+          <div class="header">
+            <h1 class="title">${selectedAthlete.name} 积分趋势分析</h1>
+            <p>生成时间: ${new Date().toLocaleString('zh-CN')}</p>
+          </div>
+
+          <div class="athlete-info">
+            <h2>运动员基本信息</h2>
+            <p><strong>姓名:</strong> ${selectedAthlete.name}</p>
+            <p><strong>FIS编码:</strong> ${selectedAthlete.fisCode}</p>
+            <p><strong>国籍:</strong> ${selectedAthlete.nationality}</p>
+            <p><strong>所属地区:</strong> ${selectedAthlete.region}</p>
+            <p><strong>专项:</strong> ${selectedAthlete.specialties.join(', ')}</p>
+          </div>
+
+          <div class="stats-grid">
+            <div class="stat-card">
+              <div class="stat-number">${analysisData.totalRaces}</div>
+              <div class="stat-label">总比赛场次</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-number">${analysisData.bestPoints.toFixed(2)}</div>
+              <div class="stat-label">最佳积分</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-number">${analysisData.averagePoints.toFixed(2)}</div>
+              <div class="stat-label">平均积分</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-number ${analysisData.improvementTrend > 0 ? 'trend-positive' : analysisData.improvementTrend < 0 ? 'trend-negative' : 'trend-stable'}">
+                ${analysisData.improvementTrend > 0 ? '↗' : analysisData.improvementTrend < 0 ? '↘' : '→'} ${Math.abs(analysisData.improvementTrend).toFixed(1)}%
+              </div>
+              <div class="stat-label">总体趋势</div>
+            </div>
+          </div>
+
+          <div class="analysis-section">
+            <h3>项目表现分析</h3>
+            <div class="discipline-chart">
+              ${Object.entries(analysisData.disciplineStats).map(([discipline, stats]) => `
+                <div class="discipline-item">
+                  <h4>${discipline}</h4>
+                  <p>比赛: ${stats.count}场</p>
+                  <p>平均积分: ${stats.average.toFixed(2)}</p>
+                  <p>最佳: ${stats.best.toFixed(2)}</p>
+                </div>
+              `).join('')}
+            </div>
+          </div>
+
+          <div class="analysis-section">
+            <h3>比赛历史记录</h3>
+            <table class="history-table">
+              <thead>
+                <tr>
+                  <th>日期</th>
+                  <th>比赛</th>
+                  <th>项目</th>
+                  <th>排名</th>
+                  <th>时间</th>
+                  <th>最终积分</th>
+                  <th>趋势</th>
+                </tr>
+              </thead>
+              <tbody>
+                ${filteredHistory.map((record, index) => {
+                  const prevRecord = filteredHistory[index + 1];
+                  let trendClass = '';
+                  let trendIcon = '';
+                  if (prevRecord) {
+                    if (record.finalPoints < prevRecord.finalPoints) {
+                      trendClass = 'improvement';
+                      trendIcon = '↗ 提升';
+                    } else if (record.finalPoints > prevRecord.finalPoints) {
+                      trendClass = 'decline';
+                      trendIcon = '↘ 下降';
+                    } else {
+                      trendIcon = '→ 稳定';
+                    }
+                  }
+                  return `
+                    <tr class="${trendClass}">
+                      <td>${record.date}</td>
+                      <td>${record.competition}</td>
+                      <td>${record.discipline}</td>
+                      <td>${record.rank}</td>
+                      <td>${record.time}</td>
+                      <td>${record.finalPoints.toFixed(2)}</td>
+                      <td>${trendIcon}</td>
+                    </tr>
+                  `;
+                }).join('')}
+              </tbody>
+            </table>
+          </div>
+
+          <div class="footer">
+            <p>本分析报告由高山滑雪竞赛管理系统生成</p>
+            <p>数据来源: FIS官方数据</p>
+          </div>
+        </div>
+      </body>
+      </html>
+    `;
+
+    // 下载分析报告
+    const blob = new Blob([reportContent], { type: 'text/html;charset=utf-8' });
+    const link = document.createElement('a');
+    const url = URL.createObjectURL(blob);
+    link.setAttribute('href', url);
+    link.setAttribute('download', `${selectedAthlete.name}_趋势分析_${new Date().toISOString().split('T')[0]}.html`);
+    link.style.visibility = 'hidden';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    URL.revokeObjectURL(url);
+
+    alert('趋势分析报告生成成功！已下载到本地。');
+  }
+
+  const calculateImprovementTrend = (history: any[]) => {
+    if (history.length < 2) return 0;
+    const recent = history.slice(0, Math.ceil(history.length / 3));
+    const older = history.slice(-Math.ceil(history.length / 3));
+    const recentAvg = recent.reduce((sum, h) => sum + h.finalPoints, 0) / recent.length;
+    const olderAvg = older.reduce((sum, h) => sum + h.finalPoints, 0) / older.length;
+    return ((olderAvg - recentAvg) / olderAvg) * 100; // 积分越低越好，所以反向计算
+  }
+
+  const calculateDisciplineStats = (history: any[]) => {
+    const stats: any = {};
+    history.forEach(record => {
+      if (!stats[record.discipline]) {
+        stats[record.discipline] = { points: [], count: 0 };
+      }
+      stats[record.discipline].points.push(record.finalPoints);
+      stats[record.discipline].count++;
+    });
+
+    Object.keys(stats).forEach(discipline => {
+      const points = stats[discipline].points;
+      stats[discipline].average = points.reduce((a: number, b: number) => a + b, 0) / points.length;
+      stats[discipline].best = Math.min(...points);
+    });
+
+    return stats;
+  }
+
   const filteredHistory = selectedAthlete.pointsHistory.filter(record => {
     const matchDiscipline = selectedDiscipline === 'all' || record.discipline === selectedDiscipline
     const matchSearch = record.competition.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -306,7 +503,10 @@ export default function AthletesHistoryPage() {
           </div>
 
           <div className="flex space-x-4">
-            <button className="btn-secondary flex items-center">
+            <button
+              className="btn-secondary flex items-center"
+              onClick={handleTrendAnalysis}
+            >
               <BarChart3 className="h-4 w-4 mr-2" />
               趋势分析
             </button>
