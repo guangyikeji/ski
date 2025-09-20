@@ -459,7 +459,8 @@ npm run lint
 ## Git仓库信息 📦
 
 ### 🔗 远程仓库
-- **仓库地址**: https://gitee.com/guangyikeji/ski.git
+- **Gitee仓库**: https://gitee.com/guangyikeji/ski.git
+- **GitHub仓库**: https://github.com/guangyikeji/ski.git
 - **克隆命令**: `git clone https://gitee.com/guangyikeji/ski.git`
 - **主分支**: main
 
@@ -470,23 +471,35 @@ git config --global user.email '16161327+guangyikeji@user.noreply.gitee.com'
 ```
 
 ### 🔑 访问令牌
-- **Token**: `5cb815ad06bd80f3fa523ba8498a89d8`
-- **用途**: 用于推送代码到Gitee仓库
+- **Gitee Token**: `5cb815ad06bd80f3fa523ba8498a89d8`
+- **GitHub Token**: 请使用环境变量 `$GITHUB_TOKEN` 或安全存储
+- **用途**: 用于推送代码到远程仓库
 - **使用方法**: 在HTTPS URL中替换密码部分
 
 ### 📤 推送命令
 ```bash
-# 添加远程仓库
-git remote add origin https://guangyikeji:5cb815ad06bd80f3fa523ba8498a89d8@gitee.com/guangyikeji/ski.git
+# 添加Gitee远程仓库
+git remote add gitee https://guangyikeji:5cb815ad06bd80f3fa523ba8498a89d8@gitee.com/guangyikeji/ski.git
 
-# 推送代码
-git push origin main
+# 添加GitHub远程仓库 (使用环境变量)
+git remote add github https://guangyikeji:$GITHUB_TOKEN@github.com/guangyikeji/ski.git
+
+# 推送到Gitee
+git push gitee main
+
+# 推送到GitHub
+git push github main
 ```
 
 ### 🏷️ 分支管理
 - **main**: 主分支，稳定版本
 - **develop**: 开发分支（可选）
 - **feature/***: 功能分支（按需创建）
+
+### 📊 仓库状态
+- ✅ **Gitee**: 代码已成功推送，可正常访问
+- ✅ **GitHub**: 代码已成功推送，可正常访问
+- 🔄 **同步策略**: 双仓库同步更新
 
 ## 云服务器部署方案 ☁️
 
