@@ -107,7 +107,7 @@ export default function TestAccountsPage() {
               <div>• 这些账号仅用于功能测试和演示，请勿在生产环境中使用</div>
               <div>• 不同角色的菜单项和功能权限会有明显差异</div>
               <div>• 登录后可在页眉右上角看到当前用户角色标识</div>
-              <div>• 未登录状态下部分功能会显示"需要登录"提示</div>
+              <div>• 未登录状态下部分功能会显示&quot;需要登录&quot;提示</div>
             </div>
           </div>
         </div>
