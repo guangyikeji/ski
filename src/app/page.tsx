@@ -522,78 +522,6 @@ export default function HomePage() {
       </section>
 
       {/* Features Section */}
-      <section className="py-20 bg-gray-50 relative overflow-hidden">
-        {/* 背景装饰元素 - 简化设计，去除圆形图片 */}
-        <div className="absolute top-10 left-10 w-20 h-20 bg-ski-blue/10 rounded-lg opacity-50"></div>
-        <div className="absolute bottom-20 right-20 w-16 h-16 bg-sky-blue/10 rounded-lg opacity-40"></div>
-        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-12 h-12 bg-blue-200/10 rounded-lg opacity-30"></div>
-
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <div className="text-center mb-16">
-            <h2 className="section-title">核心功能</h2>
-            <p className="text-lg text-gray-600 max-w-3xl mx-auto">
-              基于中国滑雪协会标准的完整滑雪竞赛管理解决方案，从积分计算、运动员管理到赛事组织，
-              覆盖高山滑雪运动的所有核心环节，为中国滑雪运动数字化发展提供强有力支持
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {features.map((feature, index) => (
-              <div
-                key={index}
-                className={`card group hover:scale-105 transform transition-all duration-300 relative overflow-hidden ${
-                  feature.status === 'coming-soon' ? 'card-disabled' : ''
-                }`}
-              >
-                {/* 卡片装饰元素 - 简化为颜色块 */}
-                <div className={`absolute top-0 right-0 w-8 h-8 rounded-lg opacity-20 ${
-                  index % 4 === 0 ? 'bg-blue-500' :
-                  index % 4 === 1 ? 'bg-green-500' :
-                  index % 4 === 2 ? 'bg-purple-500' :
-                  'bg-orange-500'
-                }`}></div>
-
-                <div className="flex items-center mb-4 relative z-10">
-                  <div className={`p-3 rounded-lg bg-gradient-to-r ${
-                    index % 4 === 0 ? 'from-blue-50 to-blue-100 border border-blue-200' :
-                    index % 4 === 1 ? 'from-green-50 to-green-100 border border-green-200' :
-                    index % 4 === 2 ? 'from-purple-50 to-purple-100 border border-purple-200' :
-                    'from-orange-50 to-orange-100 border border-orange-200'
-                  } ${feature.color} animate-float`}
-                  style={{animationDelay: `${index * 0.2}s`}}>
-                    <feature.icon className="h-6 w-6" />
-                  </div>
-                  <div className="ml-4 flex-1">
-                    <h3 className="text-lg font-semibold text-gray-900">
-                      {feature.title}
-                    </h3>
-                    {feature.status === 'coming-soon' && (
-                      <span className="badge badge-coming-soon">即将上线</span>
-                    )}
-                    {feature.status === 'active' && (
-                      <span className="badge badge-active animate-pulse">已上线</span>
-                    )}
-                  </div>
-                </div>
-                <p className="text-gray-600 mb-4 relative z-10">{feature.description}</p>
-                {feature.status === 'active' ? (
-                  <Link
-                    href={feature.href}
-                    className="inline-flex items-center text-ski-blue hover:text-primary-700 font-medium group-hover:translate-x-1 transition-transform duration-200 relative z-10"
-                  >
-                    立即使用
-                    <ChevronRight className="ml-1 h-4 w-4" />
-                  </Link>
-                ) : (
-                  <div className="text-gray-400 font-medium relative z-10">
-                    敬请期待
-                  </div>
-                )}
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
 
       {/* About Section */}
       <section className="py-20 bg-white relative overflow-hidden">
@@ -690,13 +618,16 @@ export default function HomePage() {
                 </div>
                 <div className="space-y-2">
                   <Link href="/points/fis" className="block text-blue-100 hover:text-white text-sm transition-colors">
-                    • 中国积分查询
+                    • 积分查询
                   </Link>
                   <Link href="/points/rankings" className="block text-blue-100 hover:text-white text-sm transition-colors">
                     • 积分排行榜
                   </Link>
                   <Link href="/points/calculator" className="block text-blue-100 hover:text-white text-sm transition-colors">
                     • 积分计算器
+                  </Link>
+                  <Link href="/points/trends" className="block text-blue-100 hover:text-white text-sm transition-colors">
+                    • 积分趋势
                   </Link>
                 </div>
               </Link>
@@ -710,24 +641,27 @@ export default function HomePage() {
               >
                 <div className="bg-white/20 backdrop-blur-sm rounded-2xl p-6 mb-4 hover:bg-white/30 transition-all duration-300 border border-white/20">
                   <Users className="h-10 w-10 text-white mx-auto mb-3" />
-                  <h3 className="text-white font-semibold text-lg mb-2">运动员</h3>
-                  <p className="text-blue-100 text-sm">运动员信息管理</p>
+                  <h3 className="text-white font-semibold text-lg mb-2">运动员管理</h3>
+                  <p className="text-blue-100 text-sm">运动员信息和成绩管理</p>
                 </div>
                 <div className="space-y-2">
                   <Link href="/athletes" className="block text-blue-100 hover:text-white text-sm transition-colors">
                     • 运动员档案
                   </Link>
                   <Link href="/athletes/rankings" className="block text-blue-100 hover:text-white text-sm transition-colors">
-                    • 成绩排名
+                    • 积分排名
                   </Link>
                   <Link href="/athletes/history" className="block text-blue-100 hover:text-white text-sm transition-colors">
-                    • 历史记录
+                    • 成绩历史
+                  </Link>
+                  <Link href="/athletes/stats" className="block text-blue-100 hover:text-white text-sm transition-colors">
+                    • 数据统计
                   </Link>
                 </div>
               </Link>
             </div>
 
-            {/* 比赛管理 */}
+            {/* 赛事管理 */}
             <div className="text-center">
               <Link
                 href="/competitions"
@@ -735,18 +669,21 @@ export default function HomePage() {
               >
                 <div className="bg-white/20 backdrop-blur-sm rounded-2xl p-6 mb-4 hover:bg-white/30 transition-all duration-300 border border-white/20">
                   <Trophy className="h-10 w-10 text-white mx-auto mb-3" />
-                  <h3 className="text-white font-semibold text-lg mb-2">比赛管理</h3>
-                  <p className="text-blue-100 text-sm">竞赛信息管理</p>
+                  <h3 className="text-white font-semibold text-lg mb-2">赛事管理</h3>
+                  <p className="text-blue-100 text-sm">比赛组织和成绩管理</p>
                 </div>
                 <div className="space-y-2">
                   <Link href="/competitions" className="block text-blue-100 hover:text-white text-sm transition-colors">
                     • 比赛列表
                   </Link>
+                  <Link href="/competitions/schedule" className="block text-blue-100 hover:text-white text-sm transition-colors">
+                    • 赛事日程
+                  </Link>
                   <Link href="/results-import" className="block text-blue-100 hover:text-white text-sm transition-colors">
                     • 成绩导入
                   </Link>
                   <Link href="/results-announcement" className="block text-blue-100 hover:text-white text-sm transition-colors">
-                    • 成绩发布
+                    • 成绩公布
                   </Link>
                 </div>
               </Link>
@@ -760,18 +697,21 @@ export default function HomePage() {
               >
                 <div className="bg-white/20 backdrop-blur-sm rounded-2xl p-6 mb-4 hover:bg-white/30 transition-all duration-300 border border-white/20">
                   <FileText className="h-10 w-10 text-white mx-auto mb-3" />
-                  <h3 className="text-white font-semibold text-lg mb-2">系统工具</h3>
-                  <p className="text-blue-100 text-sm">规则和文档</p>
+                  <h3 className="text-white font-semibold text-lg mb-2">规则文档</h3>
+                  <p className="text-blue-100 text-sm">积分规则和技术规范</p>
                 </div>
                 <div className="space-y-2">
                   <Link href="/rules/points" className="block text-blue-100 hover:text-white text-sm transition-colors">
                     • 积分规则
                   </Link>
+                  <Link href="/rules/competition" className="block text-blue-100 hover:text-white text-sm transition-colors">
+                    • 竞赛规则
+                  </Link>
+                  <Link href="/rules/technical" className="block text-blue-100 hover:text-white text-sm transition-colors">
+                    • 技术规范
+                  </Link>
                   <Link href="/registration" className="block text-blue-100 hover:text-white text-sm transition-colors">
                     • 在线报名
-                  </Link>
-                  <Link href="/results-query" className="block text-blue-100 hover:text-white text-sm transition-colors">
-                    • 成绩查询
                   </Link>
                 </div>
               </Link>
