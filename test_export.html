@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>导出功能测试</title>
+    <meta charset="UTF-8">
+</head>
+<body>
+    <h1>导出功能测试</h1>
+    <button onclick="testCSVExport()">测试 CSV 导出</button>
+    <button onclick="testExcelExport()">测试 Excel 导出</button>
+    <button onclick="testJSONExport()">测试 JSON 导出</button>
+
+    <script>
+        // 模拟数据
+        const testData = [
+            { 排名: 1, 运动员: '张伟', '国家/地区': 'CHN', 项目: 'GS', 'FIS积分': 0.00 },
+            { 排名: 2, 运动员: '李雪', '国家/地区': 'CHN', 项目: 'GS', 'FIS积分': 8.45 }
+        ];
+
+        function exportToCSV(data, filename) {
+            const headers = Object.keys(data[0]);
+            const csvContent = [
+                headers.join(','),
+                ...data.map(row =>
+                    headers.map(header => {
+                        const value = row[header] || '';
+                        if (typeof value === 'string' && (value.includes(',') || value.includes('\n') || value.includes('"'))) {
+                            return `"${value.replace(/"/g, '""')}"`;
+                        }
+                        return value;
+                    }).join(',')
+                )
+            ].join('\n');
+
+            const BOM = '\uFEFF';
+            const blob = new Blob([BOM + csvContent], { type: 'text/csv;charset=utf-8;' });
+            const link = document.createElement('a');
+            const url = URL.createObjectURL(blob);
+            link.setAttribute('href', url);
+            link.setAttribute('download', filename + '.csv');
+            link.style.visibility = 'hidden';
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+            URL.revokeObjectURL(url);
+        }
+
+        function exportToExcel(data, filename) {
+            const headers = Object.keys(data[0]);
+            let htmlContent = `
+                <html>
+                <head>
+                    <meta charset="utf-8">
+                    <title>${filename}</title>
+                    <style>
+                        table { border-collapse: collapse; width: 100%; }
+                        th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+                        th { background-color: #f2f2f2; font-weight: bold; }
+                    </style>
+                </head>
+                <body>
+                    <table>
+                        <thead>
+                            <tr>
+                                ${headers.map(header => `<th>${header}</th>`).join('')}
+                            </tr>
+                        </thead>
+                        <tbody>
+                            ${data.map(row =>
+                                `<tr>${headers.map(header => `<td>${row[header] || ''}</td>`).join('')}</tr>`
+                            ).join('')}
+                        </tbody>
+                    </table>
+                </body>
+                </html>
+            `;
+
+            const blob = new Blob([htmlContent], { type: 'application/vnd.ms-excel' });
+            const link = document.createElement('a');
+            const url = URL.createObjectURL(blob);
+            link.setAttribute('href', url);
+            link.setAttribute('download', filename + '.xls');
+            link.style.visibility = 'hidden';
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+            URL.revokeObjectURL(url);
+        }
+
+        function exportToJSON(data, filename) {
+            const jsonContent = JSON.stringify(data, null, 2);
+            const blob = new Blob([jsonContent], { type: 'application/json' });
+            const link = document.createElement('a');
+            const url = URL.createObjectURL(blob);
+            link.setAttribute('href', url);
+            link.setAttribute('download', filename + '.json');
+            link.style.visibility = 'hidden';
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+            URL.revokeObjectURL(url);
+        }
+
+        function testCSVExport() {
+            exportToCSV(testData, '测试数据_CSV');
+            alert('CSV 导出测试完成！检查下载文件夹。');
+        }
+
+        function testExcelExport() {
+            exportToExcel(testData, '测试数据_Excel');
+            alert('Excel 导出测试完成！检查下载文件夹。');
+        }
+
+        function testJSONExport() {
+            exportToJSON(testData, '测试数据_JSON');
+            alert('JSON 导出测试完成！检查下载文件夹。');
+        }
+    </script>
+</body>
+</html>

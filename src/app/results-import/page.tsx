@@ -3,6 +3,7 @@
 import { useState } from 'react'
 import { getImagePath } from '@/utils/paths'
 import { XMLParser, CompetitionData } from '@/utils/xmlParser'
+import { exportToExcel, exportToCSV, exportToJSON } from '@/utils/exportUtils'
 import {
   Upload,
   FileText,
@@ -33,6 +34,27 @@ export default function ResultsImportPage() {
   const [showDetails, setShowDetails] = useState(true)
   const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
+
+  const handleExportExcel = () => {
+    if (!competitionData?.results || competitionData.results.length === 0) {
+      alert('没有数据可导出')
+      return
+    }
+
+    const exportData = {
+      filename: `${competitionData.eventName}_${new Date().toISOString().split('T')[0]}`,
+      data: competitionData.results.map((result, index) => ({
+        '排名': index + 1,
+        '姓名': result.name,
+        '国家': result.nationality,
+        '时间': result.time,
+        'FIS积分': result.fisPoints || 'N/A'
+      })),
+      title: competitionData.eventName
+    }
+
+    exportToExcel(exportData)
+  }
 
   // 处理XML文件上传
   const handleFileUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -500,7 +522,10 @@ export default function ResultsImportPage() {
 
           {/* 操作按钮 */}
           <div className="flex justify-center space-x-4 mt-8 relative z-10">
-            <button className="btn-primary flex items-center">
+            <button
+              className="btn-primary flex items-center"
+              onClick={handleExportExcel}
+            >
               <Download className="h-5 w-5 mr-2" />
               导出Excel
             </button>
