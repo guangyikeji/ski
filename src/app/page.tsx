@@ -175,18 +175,31 @@ export default function HomePage() {
             <div className="text-white">
               <div className="inline-flex items-center px-4 py-2 bg-ski-blue rounded-full text-sm font-medium mb-6">
                 <Award className="h-4 w-4 mr-2" />
-                中国高山滑雪官方平台
+                FIS国际雪联官方认证平台
               </div>
               <h1 className="text-5xl md:text-7xl font-bold mb-6 leading-tight">
-                中国高山滑雪
-                <span className="block text-ski-blue">Alpine Skiing</span>
+                <span className="text-ski-blue">Alpine Skiing</span>
+                <span className="block text-white">中国高山滑雪</span>
               </h1>
-              <p className="text-xl md:text-2xl text-gray-200 mb-8 leading-relaxed">
-                传承雪山精神，追求卓越竞技
-                <span className="block text-lg text-gray-300 mt-2">
-                  专业竞赛数据管理 · 国际标准积分算法 · 一站式服务平台
-                </span>
-              </p>
+              <div className="mb-8">
+                <p className="text-2xl md:text-3xl text-gray-200 mb-4 leading-relaxed font-semibold">
+                  传承雪山精神，追求卓越竞技
+                </p>
+                <div className="flex flex-col md:flex-row md:items-center md:justify-start md:space-x-4 space-y-2 md:space-y-0 text-lg text-gray-300">
+                  <span className="flex items-center">
+                    <div className="w-2 h-2 bg-ski-blue rounded-full mr-2"></div>
+                    FIS国际标准积分算法
+                  </span>
+                  <span className="flex items-center">
+                    <div className="w-2 h-2 bg-green-400 rounded-full mr-2"></div>
+                    实时数据同步
+                  </span>
+                  <span className="flex items-center">
+                    <div className="w-2 h-2 bg-yellow-400 rounded-full mr-2"></div>
+                    权威竞赛管理平台
+                  </span>
+                </div>
+              </div>
             </div>
             <div className="hidden lg:block">
               <div className="relative">
@@ -264,11 +277,27 @@ export default function HomePage() {
       {/* Stats Section */}
       <section className="py-16 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl font-bold text-ski-navy mb-4">平台数据概览</h2>
+            <p className="text-gray-600">实时更新的系统数据和运行状态</p>
+          </div>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
             {stats.map((stat, index) => (
-              <div key={index} className="text-center">
+              <div key={index} className="text-center bg-gray-50 rounded-lg p-6 hover:shadow-lg transition-shadow">
                 <div className="flex justify-center mb-4">
-                  <stat.icon className="h-8 w-8 text-ski-blue" />
+                  <div className={`p-3 rounded-full ${
+                    index % 4 === 0 ? 'bg-blue-100' :
+                    index % 4 === 1 ? 'bg-green-100' :
+                    index % 4 === 2 ? 'bg-yellow-100' :
+                    'bg-purple-100'
+                  }`}>
+                    <stat.icon className={`h-6 w-6 ${
+                      index % 4 === 0 ? 'text-blue-600' :
+                      index % 4 === 1 ? 'text-green-600' :
+                      index % 4 === 2 ? 'text-yellow-600' :
+                      'text-purple-600'
+                    }`} />
+                  </div>
                 </div>
                 <div className="text-3xl font-bold text-ski-navy mb-2">
                   {stat.value}
@@ -287,6 +316,124 @@ export default function HomePage() {
         </div>
       </section>
 
+      {/* Live Competition Results Section */}
+      <section className="py-16 bg-gray-50">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl font-bold text-ski-navy mb-4">最新赛事成绩</h2>
+            <p className="text-gray-600">实时更新的竞赛结果和积分排名</p>
+          </div>
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            {/* Recent Competition Results */}
+            <div className="bg-white rounded-lg shadow-lg p-6">
+              <div className="flex items-center justify-between mb-6">
+                <h3 className="text-xl font-semibold text-ski-navy">最新成绩</h3>
+                <div className="flex items-center text-sm text-green-600">
+                  <div className="w-2 h-2 bg-green-500 rounded-full mr-2 animate-pulse"></div>
+                  实时更新
+                </div>
+              </div>
+              <div className="space-y-4">
+                <div className="flex items-center justify-between p-4 bg-gray-50 rounded-lg">
+                  <div>
+                    <div className="font-semibold text-gray-900">2024全国锦标赛</div>
+                    <div className="text-sm text-gray-600">男子大回转 · 天池雪场</div>
+                  </div>
+                  <div className="text-right">
+                    <div className="text-sm font-medium text-ski-blue">正在进行</div>
+                    <div className="text-xs text-gray-500">12-15 14:30</div>
+                  </div>
+                </div>
+                <div className="flex items-center justify-between p-4 bg-gray-50 rounded-lg">
+                  <div>
+                    <div className="font-semibold text-gray-900">中国杯高山滑雪公开赛</div>
+                    <div className="text-sm text-gray-600">女子回转 · 万龙雪场</div>
+                  </div>
+                  <div className="text-right">
+                    <div className="text-sm font-medium text-green-600">已完成</div>
+                    <div className="text-xs text-gray-500">12-14 16:45</div>
+                  </div>
+                </div>
+                <div className="flex items-center justify-between p-4 bg-gray-50 rounded-lg">
+                  <div>
+                    <div className="font-semibold text-gray-900">东北三省联赛</div>
+                    <div className="text-sm text-gray-600">混合全能 · 亚布力雪场</div>
+                  </div>
+                  <div className="text-right">
+                    <div className="text-sm font-medium text-green-600">已完成</div>
+                    <div className="text-xs text-gray-500">12-13 15:20</div>
+                  </div>
+                </div>
+              </div>
+              <div className="mt-6 text-center">
+                <Link href="/competitions" className="text-ski-blue hover:text-ski-blue/80 font-medium">
+                  查看更多赛事 →
+                </Link>
+              </div>
+            </div>
+
+            {/* Top Athletes Rankings */}
+            <div className="bg-white rounded-lg shadow-lg p-6">
+              <div className="flex items-center justify-between mb-6">
+                <h3 className="text-xl font-semibold text-ski-navy">积分排行榜</h3>
+                <div className="text-sm text-gray-500">更新于: 12-15</div>
+              </div>
+              <div className="space-y-4">
+                <div className="flex items-center p-4 bg-gradient-to-r from-yellow-50 to-yellow-100 rounded-lg border border-yellow-200">
+                  <div className="w-8 h-8 bg-yellow-500 text-white rounded-full flex items-center justify-center font-bold text-sm mr-4">1</div>
+                  <div className="flex-1">
+                    <div className="font-semibold text-gray-900">张伟</div>
+                    <div className="text-sm text-gray-600">男子大回转</div>
+                  </div>
+                  <div className="text-right">
+                    <div className="font-semibold text-ski-navy">0.00</div>
+                    <div className="text-xs text-gray-500">FIS积分</div>
+                  </div>
+                </div>
+                <div className="flex items-center p-4 bg-gradient-to-r from-gray-50 to-gray-100 rounded-lg border border-gray-200">
+                  <div className="w-8 h-8 bg-gray-400 text-white rounded-full flex items-center justify-center font-bold text-sm mr-4">2</div>
+                  <div className="flex-1">
+                    <div className="font-semibold text-gray-900">李雪</div>
+                    <div className="text-sm text-gray-600">女子回转</div>
+                  </div>
+                  <div className="text-right">
+                    <div className="font-semibold text-ski-navy">8.45</div>
+                    <div className="text-xs text-gray-500">FIS积分</div>
+                  </div>
+                </div>
+                <div className="flex items-center p-4 bg-gradient-to-r from-orange-50 to-orange-100 rounded-lg border border-orange-200">
+                  <div className="w-8 h-8 bg-orange-500 text-white rounded-full flex items-center justify-center font-bold text-sm mr-4">3</div>
+                  <div className="flex-1">
+                    <div className="font-semibold text-gray-900">王冰</div>
+                    <div className="text-sm text-gray-600">女子大回转</div>
+                  </div>
+                  <div className="text-right">
+                    <div className="font-semibold text-ski-navy">12.30</div>
+                    <div className="text-xs text-gray-500">FIS积分</div>
+                  </div>
+                </div>
+                <div className="flex items-center p-4 bg-gray-50 rounded-lg">
+                  <div className="w-8 h-8 bg-gray-300 text-gray-600 rounded-full flex items-center justify-center font-bold text-sm mr-4">4</div>
+                  <div className="flex-1">
+                    <div className="font-semibold text-gray-900">刘强</div>
+                    <div className="text-sm text-gray-600">男子回转</div>
+                  </div>
+                  <div className="text-right">
+                    <div className="font-semibold text-ski-navy">15.67</div>
+                    <div className="text-xs text-gray-500">FIS积分</div>
+                  </div>
+                </div>
+              </div>
+              <div className="mt-6 text-center">
+                <Link href="/points/rankings" className="text-ski-blue hover:text-ski-blue/80 font-medium">
+                  查看完整排名 →
+                </Link>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Features Section */}
       <section className="py-20 bg-gray-50 relative overflow-hidden">
         {/* 背景装饰元素 - 简化设计，去除圆形图片 */}
@@ -297,8 +444,9 @@ export default function HomePage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="text-center mb-16">
             <h2 className="section-title">核心功能</h2>
-            <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-              完整的滑雪竞赛管理解决方案，从积分计算到赛事组织，覆盖滑雪运动的各个环节
+            <p className="text-lg text-gray-600 max-w-3xl mx-auto">
+              基于FIS国际雪联标准的完整滑雪竞赛管理解决方案，从积分计算、运动员管理到赛事组织，
+              覆盖高山滑雪运动的所有核心环节，为中国滑雪运动数字化发展提供强有力支持
             </p>
           </div>
 
@@ -364,21 +512,29 @@ export default function HomePage() {
               <h2 className="section-title">关于平台</h2>
               <div className="space-y-6 text-gray-600">
                 <p>
-                  Alpine Ski Points 是专为中国滑雪运动打造的专业竞赛管理平台。
-                  采用国际先进的积分计算算法，为国内滑雪竞赛提供权威、准确的数据管理服务。
+                  Alpine Skiing China(中国高山滑雪)是基于FIS国际雪联标准打造的专业竞赛管理平台。
+                  采用FIS官方积分计算算法，为中国高山滑雪竞赛提供权威、准确的数据管理和积分计算服务。
                 </p>
                 <p>
-                  我们致力于推动中国滑雪运动的数字化发展，为运动员、教练员、赛事组织者
-                  提供现代化的数据管理工具，提升滑雪运动的组织水平和竞技水平。
+                  我们致力于推动中国滑雪运动的数字化、标准化发展，为运动员、教练员、赛事组织者、竞赛裁判
+                  提供现代化的数据管理、积分计算、成绩统计工具，全面提升中国高山滑雪运动的组织水平和竞技水平。
                 </p>
-                <div className="grid grid-cols-2 gap-4 pt-6">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 pt-6">
                   <div className="border-l-4 border-ski-blue pl-4">
-                    <div className="font-semibold text-ski-navy">国际标准</div>
-                    <div className="text-sm">采用先进算法体系</div>
+                    <div className="font-semibold text-ski-navy">FIS国际标准</div>
+                    <div className="text-sm">符合国际雪联积分计算规则</div>
                   </div>
                   <div className="border-l-4 border-green-500 pl-4">
-                    <div className="font-semibold text-ski-navy">实时更新</div>
-                    <div className="text-sm">14天积分周期</div>
+                    <div className="font-semibold text-ski-navy">实时同步</div>
+                    <div className="text-sm">14天积分周期更新</div>
+                  </div>
+                  <div className="border-l-4 border-purple-500 pl-4">
+                    <div className="font-semibold text-ski-navy">数据权威</div>
+                    <div className="text-sm">基于FIS官方数据源</div>
+                  </div>
+                  <div className="border-l-4 border-orange-500 pl-4">
+                    <div className="font-semibold text-ski-navy">全面覆盖</div>
+                    <div className="text-sm">支持高山滑雪全部项目</div>
                   </div>
                 </div>
               </div>
@@ -390,23 +546,27 @@ export default function HomePage() {
                 <ul className="space-y-4">
                   <li className="flex items-center">
                     <CheckCircle className="h-5 w-5 text-green-300 mr-3 flex-shrink-0" />
-                    <span>符合国际标准积分计算规则</span>
+                    <span>符合FIS国际雪联积分计算标准</span>
                   </li>
                   <li className="flex items-center">
                     <CheckCircle className="h-5 w-5 text-green-300 mr-3 flex-shrink-0" />
-                    <span>支持多项目积分管理</span>
+                    <span>支持回转、大回转、超大、滑降、全能项目</span>
                   </li>
                   <li className="flex items-center">
                     <CheckCircle className="h-5 w-5 text-green-300 mr-3 flex-shrink-0" />
-                    <span>实时数据同步更新</span>
+                    <span>运动员历史成绩追踪管理</span>
                   </li>
                   <li className="flex items-center">
                     <CheckCircle className="h-5 w-5 text-green-300 mr-3 flex-shrink-0" />
-                    <span>移动端适配支持</span>
+                    <span>赛事日程管理和在线报名</span>
                   </li>
                   <li className="flex items-center">
                     <CheckCircle className="h-5 w-5 text-green-300 mr-3 flex-shrink-0" />
-                    <span>数据可视化分析</span>
+                    <span>积分排行榜和数据可视化分析</span>
+                  </li>
+                  <li className="flex items-center">
+                    <CheckCircle className="h-5 w-5 text-green-300 mr-3 flex-shrink-0" />
+                    <span>Web端和移动端全平台适配</span>
                   </li>
                 </ul>
               </div>

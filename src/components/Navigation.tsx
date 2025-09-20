@@ -16,7 +16,11 @@ import {
   LogIn,
   User,
   LogOut,
-  Settings
+  Settings,
+  Calendar,
+  BarChart3,
+  Award,
+  TrendingUp
 } from 'lucide-react'
 import { useAuth } from '@/contexts/AuthContext'
 
@@ -28,37 +32,40 @@ const navigationItems = [
     active: true
   },
   {
-    name: '积分计算',
+    name: '积分系统',
     href: '/points',
     icon: Calculator,
     active: true,
     children: [
       { name: 'FIS积分查询', href: '/points/fis', active: true },
       { name: '积分计算器', href: '/points/calculator', active: true },
-      { name: '积分排行榜', href: '/points/rankings', active: true }
+      { name: '积分排行榜', href: '/points/rankings', active: true },
+      { name: '积分变化趋势', href: '/points/trends', active: false }
     ]
   },
   {
-    name: '竞赛管理',
+    name: '赛事管理',
     href: '/competitions',
     icon: Trophy,
     active: true,
     children: [
+      { name: '赛事日程', href: '/competitions/schedule', active: false },
       { name: '比赛列表', href: '/competitions', active: true },
-      { name: '成绩公布', href: '/results-announcement', active: true },
       { name: '成绩导入', href: '/results-import', active: true },
-      { name: '赛事统计', href: '/competitions/stats', active: true }
+      { name: '成绩公布', href: '/results-announcement', active: true },
+      { name: '数据分析', href: '/competitions/stats', active: true }
     ]
   },
   {
-    name: '运动员',
+    name: '运动员管理',
     href: '/athletes',
     icon: Users,
     active: true,
     children: [
       { name: '运动员档案', href: '/athletes', active: true },
-      { name: '积分历史', href: '/athletes/history', active: true },
-      { name: '排名变化', href: '/athletes/rankings', active: true }
+      { name: '成绩历史', href: '/athletes/history', active: true },
+      { name: '积分排名', href: '/athletes/rankings', active: false },
+      { name: '成绩统计', href: '/athletes/stats', active: false }
     ]
   },
   {
@@ -67,9 +74,10 @@ const navigationItems = [
     icon: UserPlus,
     active: true,
     children: [
-      { name: '在线报名', href: '/registration/online', active: true },
-      { name: '报名管理', href: '/registration/manage', active: true },
-      { name: '费用管理', href: '/registration/fees', active: true }
+      { name: '在线报名', href: '/registration', active: true },
+      { name: '报名管理', href: '/registration/manage', active: false },
+      { name: '资格审查', href: '/registration/verification', active: false },
+      { name: '费用管理', href: '/registration/fees', active: false }
     ]
   },
   {
@@ -78,9 +86,10 @@ const navigationItems = [
     icon: FileText,
     active: true,
     children: [
-      { name: 'FIS规则', href: '/rules/fis', active: true },
-      { name: '积分规则', href: '/rules/points', active: true },
-      { name: '竞赛规则', href: '/rules/competition', active: true }
+      { name: 'FIS积分规则', href: '/rules/points', active: true },
+      { name: '竞赛规则', href: '/rules/competition', active: false },
+      { name: '技术规范', href: '/rules/technical', active: false },
+      { name: '中英对照', href: '/rules/bilingual', active: false }
     ]
   }
 ]
@@ -122,7 +131,7 @@ export default function Navigation() {
             <Link href="/" className="flex items-center space-x-2">
               <Mountain className="h-8 w-8 text-ski-blue" />
               <span className="text-xl font-bold text-ski-navy">
-                Alpine Ski Points
+                Alpine Skiing China
               </span>
             </Link>
           </div>
