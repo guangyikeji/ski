@@ -36,21 +36,22 @@ export default function ResultsImportPage() {
   const [error, setError] = useState<string | null>(null)
 
   const handleExportExcel = () => {
-    if (!competitionData?.results || competitionData.results.length === 0) {
+    if (!competitionData?.competitors || competitionData.competitors.length === 0) {
       alert('没有数据可导出')
       return
     }
 
     const exportData = {
-      filename: `${competitionData.eventName}_${new Date().toISOString().split('T')[0]}`,
-      data: competitionData.results.map((result, index) => ({
+      filename: `${competitionData.raceHeader.eventName}_${new Date().toISOString().split('T')[0]}`,
+      data: competitionData.competitors.map((competitor, index) => ({
         '排名': index + 1,
-        '姓名': result.name,
-        '国家': result.nationality,
-        '时间': result.time,
-        'FIS积分': result.fisPoints || 'N/A'
+        '号码': competitor.bib,
+        '姓名': `${competitor.firstname} ${competitor.lastname}`,
+        '国家': competitor.nation,
+        'FIS编码': competitor.fisCode,
+        '状态': competitor.status
       })),
-      title: competitionData.eventName
+      title: competitionData.raceHeader.eventName
     }
 
     exportToExcel(exportData)
@@ -69,7 +70,7 @@ export default function ResultsImportPage() {
       <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>${competitionData.eventName} - 比赛报告</title>
+        <title>${competitionData.raceHeader.eventName} - 比赛报告</title>
         <style>
           body { font-family: Arial, sans-serif; margin: 20px; background: #f5f5f5; }
           .container { max-width: 1200px; margin: 0 auto; background: white; padding: 30px; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
@@ -99,7 +100,7 @@ export default function ResultsImportPage() {
       <body>
         <div class="container">
           <div class="header">
-            <h1 class="title">${competitionData.eventName}</h1>
+            <h1 class="title">${competitionData.raceHeader.eventName}</h1>
             <p class="subtitle">官方比赛结果报告</p>
             <p class="subtitle">生成时间: ${new Date().toLocaleString('zh-CN')}</p>
           </div>
@@ -107,51 +108,42 @@ export default function ResultsImportPage() {
           <div class="info-grid">
             <div class="info-card">
               <div class="info-label">比赛日期</div>
-              <div class="info-value">${competitionData.date}</div>
+              <div class="info-value">${competitionData.raceHeader.raceDate.formatted}</div>
             </div>
             <div class="info-card">
               <div class="info-label">比赛地点</div>
-              <div class="info-value">${competitionData.location}</div>
+              <div class="info-value">${competitionData.raceHeader.place}</div>
             </div>
             <div class="info-card">
               <div class="info-label">比赛项目</div>
-              <div class="info-value">${competitionData.discipline}</div>
+              <div class="info-value">${competitionData.raceHeader.discipline}</div>
             </div>
             <div class="info-card">
               <div class="info-label">参赛人数</div>
-              <div class="info-value">${competitionData.results.length}人</div>
+              <div class="info-value">${competitionData.competitors.length}人</div>
             </div>
           </div>
-
-          ${competitionData.weather ? `
-          <div class="weather-info">
-            <h3>天气条件</h3>
-            <p><strong>温度:</strong> ${competitionData.weather.temperature || 'N/A'}</p>
-            <p><strong>雪况:</strong> ${competitionData.weather.snowCondition || 'N/A'}</p>
-            <p><strong>风速:</strong> ${competitionData.weather.windSpeed || 'N/A'}</p>
-          </div>
-          ` : ''}
 
           <div class="statistics">
             <div class="stat-card">
-              <div class="stat-number">${competitionData.results.length}</div>
+              <div class="stat-number">${competitionData.competitors.length}</div>
               <div class="stat-label">总参赛人数</div>
             </div>
             <div class="stat-card">
-              <div class="stat-number">${competitionData.results.filter(r => r.time && r.time !== 'DNF' && r.time !== 'DSQ').length}</div>
-              <div class="stat-label">完赛人数</div>
+              <div class="stat-number">${competitionData.competitors.filter(c => c.status === 'OK').length}</div>
+              <div class="stat-label">正常状态</div>
             </div>
             <div class="stat-card">
-              <div class="stat-number">${competitionData.results.filter(r => r.time === 'DNF').length}</div>
+              <div class="stat-number">${competitionData.competitors.filter(c => c.status === 'DNF').length}</div>
               <div class="stat-label">未完赛(DNF)</div>
             </div>
             <div class="stat-card">
-              <div class="stat-number">${competitionData.results.filter(r => r.time === 'DSQ').length}</div>
+              <div class="stat-number">${competitionData.competitors.filter(c => c.status === 'DSQ').length}</div>
               <div class="stat-label">取消资格(DSQ)</div>
             </div>
           </div>
 
-          <h2>比赛结果</h2>
+          <h2>参赛名单</h2>
           <table class="results-table">
             <thead>
               <tr>
@@ -159,25 +151,22 @@ export default function ResultsImportPage() {
                 <th>号码</th>
                 <th>姓名</th>
                 <th>国家</th>
-                <th>时间</th>
-                <th>差距</th>
-                <th>FIS积分</th>
+                <th>FIS编码</th>
+                <th>状态</th>
               </tr>
             </thead>
             <tbody>
-              ${competitionData.results.map((result, index) => {
-                const rank = index + 1;
+              ${competitionData.competitors.map((competitor, index) => {
+                const rank = competitor.rank || index + 1;
                 const rowClass = rank === 1 ? 'rank-1' : rank === 2 ? 'rank-2' : rank === 3 ? 'rank-3' : '';
-                const gap = index === 0 ? '0.00' : result.gap || '+' + ((Math.random() * 2).toFixed(2));
                 return `
                   <tr class="${rowClass}">
                     <td><strong>${rank}</strong></td>
-                    <td>${result.bib || index + 1}</td>
-                    <td><strong>${result.name}</strong></td>
-                    <td>${result.nationality}</td>
-                    <td>${result.time}</td>
-                    <td>${gap}</td>
-                    <td>${result.fisPoints || 'N/A'}</td>
+                    <td>${competitor.bib}</td>
+                    <td><strong>${competitor.firstname} ${competitor.lastname}</strong></td>
+                    <td>${competitor.nation}</td>
+                    <td>${competitor.fisCode}</td>
+                    <td>${competitor.status}</td>
                   </tr>
                 `;
               }).join('')}
@@ -198,7 +187,7 @@ export default function ResultsImportPage() {
     const link = document.createElement('a');
     const url = URL.createObjectURL(blob);
     link.setAttribute('href', url);
-    link.setAttribute('download', `${competitionData.eventName}_详细报告_${new Date().toISOString().split('T')[0]}.html`);
+    link.setAttribute('download', `${competitionData.raceHeader.eventName}_详细报告_${new Date().toISOString().split('T')[0]}.html`);
     link.style.visibility = 'hidden';
     document.body.appendChild(link);
     link.click();

@@ -101,13 +101,13 @@ export default function AthletesPage() {
         'FIS编码': athlete.fisCode,
         '姓名': athlete.name,
         '性别': athlete.gender === 'male' ? '男' : '女',
-        '出生日期': athlete.birthDate,
+        '年龄': athlete.age,
         '国籍': athlete.nationality,
         '地区': athlete.region,
-        '状态': athlete.status === 'active' ? '活跃' : athlete.status === 'inactive' ? '非活跃' : '退役',
+        '状态': athlete.status === 'active' ? '活跃' : athlete.status === 'injured' ? '受伤' : '退役',
         '专项': athlete.specialties?.join(', ') || '',
         '当前积分': Object.values(athlete.currentPoints || {}).join(', ') || 'N/A',
-        '注册日期': athlete.registrationDate
+        '俱乐部': athlete.club
       })),
       title: '运动员名单'
     }

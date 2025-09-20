@@ -163,11 +163,11 @@ export default function CompetitionStatsPage() {
             <h3>项目分布分析</h3>
             <div class="distribution-chart">
               ${Object.entries(mockStats.disciplineDistribution).map(([discipline, count]) => {
-                const percentage = (count / mockStats.totalCompetitions * 100).toFixed(1);
+                const percentage = ((count as number) / mockStats.totalCompetitions * 100).toFixed(1);
                 return `
                   <div class="bar-chart">
                     <h4>${discipline}</h4>
-                    <div class="bar" style="width: ${percentage * 2}px">
+                    <div class="bar" style="width: ${Number(percentage) * 2}px">
                       <span class="bar-label">${count}场</span>
                     </div>
                     <p>${percentage}% 占比</p>
@@ -181,11 +181,11 @@ export default function CompetitionStatsPage() {
             <h3>地区参与度分析</h3>
             <div class="distribution-chart">
               ${Object.entries(mockStats.regionDistribution).map(([region, participants]) => {
-                const percentage = (participants / mockStats.totalParticipants * 100).toFixed(1);
+                const percentage = ((participants as number) / mockStats.totalParticipants * 100).toFixed(1);
                 return `
                   <div class="bar-chart">
                     <h4>${region}</h4>
-                    <div class="bar" style="width: ${percentage * 3}px">
+                    <div class="bar" style="width: ${Number(percentage) * 3}px">
                       <span class="bar-label">${participants}人</span>
                     </div>
                     <p>${percentage}% 占比</p>

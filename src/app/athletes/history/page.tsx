@@ -251,14 +251,17 @@ export default function AthletesHistoryPage() {
           <div class="analysis-section">
             <h3>项目表现分析</h3>
             <div class="discipline-chart">
-              ${Object.entries(analysisData.disciplineStats).map(([discipline, stats]) => `
-                <div class="discipline-item">
-                  <h4>${discipline}</h4>
-                  <p>比赛: ${stats.count}场</p>
-                  <p>平均积分: ${stats.average.toFixed(2)}</p>
-                  <p>最佳: ${stats.best.toFixed(2)}</p>
-                </div>
-              `).join('')}
+              ${Object.entries(analysisData.disciplineStats).map(([discipline, stats]) => {
+                const statsTyped = stats as { count: number, average: number, best: number };
+                return `
+                  <div class="discipline-item">
+                    <h4>${discipline}</h4>
+                    <p>比赛: ${statsTyped.count}场</p>
+                    <p>平均积分: ${statsTyped.average.toFixed(2)}</p>
+                    <p>最佳: ${statsTyped.best.toFixed(2)}</p>
+                  </div>
+                `;
+              }).join('')}
             </div>
           </div>
 
@@ -342,10 +345,10 @@ export default function AthletesHistoryPage() {
   }
 
   const calculateDisciplineStats = (history: any[]) => {
-    const stats: any = {};
+    const stats: Record<string, { points: number[], count: number, average: number, best: number }> = {};
     history.forEach(record => {
       if (!stats[record.discipline]) {
-        stats[record.discipline] = { points: [], count: 0 };
+        stats[record.discipline] = { points: [], count: 0, average: 0, best: 0 };
       }
       stats[record.discipline].points.push(record.finalPoints);
       stats[record.discipline].count++;
