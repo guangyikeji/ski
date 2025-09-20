@@ -16,16 +16,17 @@ export default function Footer() {
   return (
     <footer className="bg-ski-navy text-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           {/* Logo and Description */}
-          <div className="col-span-1">
+          <div className="col-span-1 md:col-span-2">
             <div className="flex items-center space-x-2 mb-4">
               <Mountain className="h-8 w-8 text-primary-400" />
               <span className="text-xl font-bold">Alpine Ski Points</span>
             </div>
-            <p className="text-gray-300 text-sm max-w-md">
+            <p className="text-gray-300 text-sm max-w-2xl leading-relaxed">
               参照国际雪联(FIS)积分体系的中国高山滑雪竞赛数据管理和积分计算系统，
-              为中国滑雪运动提供专业的数据分析和管理服务。
+              为中国滑雪运动提供专业的数据分析和管理服务。支持回转、大回转、超大、滑降、全能等项目，
+              致力于推动中国高山滑雪运动的数字化发展。
             </p>
             <div className="flex space-x-4 mt-6">
               <a
@@ -61,12 +62,7 @@ export default function Footer() {
                     中国积分查询
                   </Link>
                 </li>
-              ) : (
-                <li className="flex items-center text-gray-500">
-                  <Lock className="h-3 w-3 mr-2" />
-                  <span>中国积分查询 (需要登录)</span>
-                </li>
-              )}
+              ) : null}
 
               {isClient && hasPermission(Resource.POINTS_RANKING, Action.READ) ? (
                 <li>
@@ -74,12 +70,7 @@ export default function Footer() {
                     积分排行榜
                   </Link>
                 </li>
-              ) : (
-                <li className="flex items-center text-gray-500">
-                  <Lock className="h-3 w-3 mr-2" />
-                  <span>积分排行榜 (需要登录)</span>
-                </li>
-              )}
+              ) : null}
 
               {isClient && hasPermission(Resource.POINTS_CALCULATOR, Action.READ) ? (
                 <li>
@@ -87,12 +78,7 @@ export default function Footer() {
                     积分计算器
                   </Link>
                 </li>
-              ) : (
-                <li className="flex items-center text-gray-500">
-                  <Lock className="h-3 w-3 mr-2" />
-                  <span>积分计算器 (需要登录)</span>
-                </li>
-              )}
+              ) : null}
 
               {isClient && hasPermission(Resource.POINTS_TRENDS, Action.READ) ? (
                 <li>
@@ -100,12 +86,7 @@ export default function Footer() {
                     积分变化趋势
                   </Link>
                 </li>
-              ) : (
-                <li className="flex items-center text-gray-500">
-                  <Lock className="h-3 w-3 mr-2" />
-                  <span>积分变化趋势 (需要登录)</span>
-                </li>
-              )}
+              ) : null}
 
               {isClient && hasPermission(Resource.RULES_POINTS, Action.READ) ? (
                 <li>
@@ -113,10 +94,14 @@ export default function Footer() {
                     积分规则详解
                   </Link>
                 </li>
-              ) : (
-                <li className="flex items-center text-gray-500">
-                  <Lock className="h-3 w-3 mr-2" />
-                  <span>积分规则详解 (需要登录)</span>
+              ) : null}
+
+              {/* 未登录用户看到引导 */}
+              {isClient && !isAuthenticated && (
+                <li className="pt-2 border-t border-gray-600">
+                  <Link href="/login" className="text-sky-400 hover:text-sky-300 transition-colors text-sm">
+                    登录查看更多功能 →
+                  </Link>
                 </li>
               )}
             </ul>
@@ -132,12 +117,7 @@ export default function Footer() {
                     比赛列表
                   </Link>
                 </li>
-              ) : (
-                <li className="flex items-center text-gray-500">
-                  <Lock className="h-3 w-3 mr-2" />
-                  <span>比赛列表 (需要登录)</span>
-                </li>
-              )}
+              ) : null}
 
               {isClient && hasPermission(Resource.COMPETITIONS_SCHEDULE, Action.READ) ? (
                 <li>
@@ -145,38 +125,7 @@ export default function Footer() {
                     赛事日程
                   </Link>
                 </li>
-              ) : (
-                <li className="flex items-center text-gray-500">
-                  <Lock className="h-3 w-3 mr-2" />
-                  <span>赛事日程 (需要登录)</span>
-                </li>
-              )}
-
-              {isClient && hasPermission(Resource.RESULTS_IMPORT, Action.READ) ? (
-                <li>
-                  <Link href="/results-import" className="text-gray-300 hover:text-primary-400 transition-colors">
-                    成绩导入
-                  </Link>
-                </li>
-              ) : (
-                <li className="flex items-center text-gray-500">
-                  <Lock className="h-3 w-3 mr-2" />
-                  <span>成绩导入 (管理员功能)</span>
-                </li>
-              )}
-
-              {isClient && hasPermission(Resource.RESULTS_ANNOUNCEMENT, Action.READ) ? (
-                <li>
-                  <Link href="/results-announcement" className="text-gray-300 hover:text-primary-400 transition-colors">
-                    成绩公布
-                  </Link>
-                </li>
-              ) : (
-                <li className="flex items-center text-gray-500">
-                  <Lock className="h-3 w-3 mr-2" />
-                  <span>成绩公布 (管理员功能)</span>
-                </li>
-              )}
+              ) : null}
 
               {isClient && hasPermission(Resource.REGISTRATION, Action.READ) ? (
                 <li>
@@ -184,30 +133,56 @@ export default function Footer() {
                     在线报名
                   </Link>
                 </li>
-              ) : (
-                <li className="flex items-center text-gray-500">
-                  <Lock className="h-3 w-3 mr-2" />
-                  <span>在线报名 (需要登录)</span>
+              ) : null}
+
+              {/* 管理员功能 */}
+              {isClient && hasPermission(Resource.RESULTS_IMPORT, Action.READ) ? (
+                <li>
+                  <Link href="/results-import" className="text-gray-300 hover:text-primary-400 transition-colors">
+                    成绩导入
+                  </Link>
+                </li>
+              ) : null}
+
+              {isClient && hasPermission(Resource.RESULTS_ANNOUNCEMENT, Action.READ) ? (
+                <li>
+                  <Link href="/results-announcement" className="text-gray-300 hover:text-primary-400 transition-colors">
+                    成绩公布
+                  </Link>
+                </li>
+              ) : null}
+
+              {/* 未登录用户看到引导 */}
+              {isClient && !isAuthenticated && (
+                <li className="pt-2 border-t border-gray-600">
+                  <Link href="/register" className="text-sky-400 hover:text-sky-300 transition-colors text-sm">
+                    注册参与赛事 →
+                  </Link>
                 </li>
               )}
             </ul>
           </div>
         </div>
 
-        <div className="border-t border-gray-700 mt-8 pt-8 flex flex-col md:flex-row justify-between items-center">
-          <div className="text-sm text-gray-300">
-            © 2024 Alpine Ski Points. 基于 FIS 规则开发.
-          </div>
-          <div className="flex space-x-6 mt-4 md:mt-0 text-sm">
-            <a href="#" className="text-gray-300 hover:text-primary-400 transition-colors">
-              隐私政策
-            </a>
-            <a href="#" className="text-gray-300 hover:text-primary-400 transition-colors">
-              使用条款
-            </a>
-            <a href="#" className="text-gray-300 hover:text-primary-400 transition-colors">
-              Cookie政策
-            </a>
+        <div className="border-t border-gray-700 mt-12 pt-8">
+          <div className="flex flex-col md:flex-row justify-between items-start md:items-center">
+            <div className="text-sm text-gray-300 mb-4 md:mb-0">
+              © 2024 Alpine Ski Points. 参照国际雪联(FIS)标准开发的中国高山滑雪积分管理平台.
+            </div>
+            <div className="flex flex-wrap gap-6 text-sm">
+              <a href="#" className="text-gray-300 hover:text-primary-400 transition-colors">
+                隐私政策
+              </a>
+              <a href="#" className="text-gray-300 hover:text-primary-400 transition-colors">
+                使用条款
+              </a>
+              <a href="#" className="text-gray-300 hover:text-primary-400 transition-colors">
+                技术规范
+              </a>
+              <a href="#" className="text-gray-300 hover:text-primary-400 transition-colors">
+                联系我们
+              </a>
+            </div>
           </div>
         </div>
       </div>

@@ -911,25 +911,38 @@ git config --global user.email '16161327+guangyikeji@user.noreply.gitee.com'
 ```
 
 ### 🔑 访问令牌
-- **Gitee Token**: `[安全存储，见本地配置]`
-- **GitHub Token**: `[安全存储，见本地配置]`
+- **Gitee Token**: `[GITEE_TOKEN]` (在环境变量或安全配置中设置)
+- **GitHub Token**: `[GITHUB_TOKEN]` (在环境变量或安全配置中设置)
 - **用途**: 用于推送代码到对应仓库
 - **使用方法**: 在HTTPS URL中替换密码部分
 
 ### 📤 推送命令
+
+#### 🔄 双仓库同步策略 ⭐ 新增
+从现在开始，**所有代码修改必须同时推送到GitHub和Gitee两个仓库**，确保代码同步和双重备份。
+
 ```bash
 # 添加Gitee远程仓库
-git remote add origin https://guangyikeji:[GITEE_TOKEN]@gitee.com/guangyikeji/ski.git
+git remote add gitee https://guangyikeji:[GITEE_TOKEN]@gitee.com/guangyikeji/ski.git
 
 # 添加GitHub远程仓库
-git remote add github https://gaohao10010111-sketch:[GITHUB_TOKEN]@github.com/gaohao10010111-sketch/ski.git
+git remote add origin https://gaohao10010111-sketch:[GITHUB_TOKEN]@github.com/gaohao10010111-sketch/ski.git
 
-# 推送到Gitee
+# 推送到GitHub (origin - 触发GitHub Pages自动部署)
 git push origin main
 
-# 推送到GitHub (触发GitHub Pages自动部署)
-git push github main
+# 推送到Gitee (gitee - 代码备份)
+git push gitee main
+
+# 一键双推脚本 (推荐使用)
+./push-both.sh
 ```
+
+#### 📋 同步规则
+- **主要部署**: GitHub Pages (origin) - 优先推送
+- **代码备份**: Gitee (gitee) - 确保备份
+- **推送顺序**: GitHub → Gitee
+- **自动化**: 使用 `push-both.sh` 脚本一键同步
 
 ### 🏷️ 分支管理
 - **main**: 主分支，稳定版本

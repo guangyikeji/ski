@@ -207,6 +207,31 @@ export default function HomePage() {
                     <span className="text-white font-medium">中国滑雪官方平台</span>
                   </div>
                 </div>
+
+                {/* 登录注册引导 */}
+                {isClient && !isAuthenticated && (
+                  <div className="mt-8">
+                    <div className="flex flex-col sm:flex-row gap-4">
+                      <Link
+                        href="/register"
+                        className="inline-flex items-center justify-center px-6 py-3 bg-ski-blue text-white rounded-lg hover:bg-ski-blue/90 transition-colors font-semibold text-lg"
+                      >
+                        <UserPlus className="h-5 w-5 mr-2" />
+                        免费注册会员
+                      </Link>
+                      <Link
+                        href="/login"
+                        className="inline-flex items-center justify-center px-6 py-3 border-2 border-white text-white rounded-lg hover:bg-white hover:text-ski-navy transition-colors font-semibold text-lg"
+                      >
+                        <LogIn className="h-5 w-5 mr-2" />
+                        会员登录
+                      </Link>
+                    </div>
+                    <p className="text-gray-300 text-sm mt-4">
+                      注册成为会员，解锁积分查询、赛事报名、数据分析等专业功能
+                    </p>
+                  </div>
+                )}
               </div>
             </div>
             <div className="lg:block">
@@ -501,7 +526,41 @@ export default function HomePage() {
             </div>
           ) : (
             // 未登录用户看到的会员价值展示
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div>
+              {/* 会员价值提醒条 */}
+              <div className="bg-gradient-to-r from-sky-100 to-blue-100 border border-sky-200 rounded-lg p-6 mb-8">
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center">
+                    <div className="w-12 h-12 bg-sky-500 rounded-full flex items-center justify-center mr-4">
+                      <Lock className="h-6 w-6 text-white" />
+                    </div>
+                    <div>
+                      <h3 className="text-lg font-semibold text-sky-900 mb-1">
+                        解锁所有专业功能
+                      </h3>
+                      <p className="text-sky-700 text-sm">
+                        注册成为会员，享受完整的积分管理和赛事服务
+                      </p>
+                    </div>
+                  </div>
+                  <div className="flex gap-3">
+                    <Link
+                      href="/login"
+                      className="px-4 py-2 border border-sky-300 text-sky-700 rounded-lg hover:bg-sky-50 transition-colors text-sm font-medium"
+                    >
+                      登录
+                    </Link>
+                    <Link
+                      href="/register"
+                      className="px-4 py-2 bg-sky-500 text-white rounded-lg hover:bg-sky-600 transition-colors text-sm font-medium"
+                    >
+                      免费注册
+                    </Link>
+                  </div>
+                </div>
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {/* 积分系统 */}
               <div className="bg-white rounded-lg shadow-lg p-6 border-2 border-gray-200 hover:border-ski-blue/50 transition-colors relative">
                 <div className="absolute top-4 right-4">
