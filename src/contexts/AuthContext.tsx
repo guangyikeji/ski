@@ -182,8 +182,9 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       // 模拟API调用
       await new Promise(resolve => setTimeout(resolve, 1000))
 
-      // 模拟登录验证
+      // 模拟登录验证 - 4个权限级别测试账号
       if (credentials.email === 'admin@ski.com' && credentials.password === 'admin123') {
+        // 管理员账号 - 完整权限
         const user: User = {
           id: '1',
           username: 'admin',
@@ -196,6 +197,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         dispatch({ type: 'LOGIN_SUCCESS', payload: user })
         localStorage.setItem('auth_user', JSON.stringify(user))
       } else if (credentials.email === 'athlete@ski.com' && credentials.password === 'athlete123') {
+        // 运动员账号 - 会员基础功能
         const user: User = {
           id: '2',
           username: 'athlete_user',
@@ -208,8 +210,22 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         }
         dispatch({ type: 'LOGIN_SUCCESS', payload: user })
         localStorage.setItem('auth_user', JSON.stringify(user))
+      } else if (credentials.email === 'coach@ski.com' && credentials.password === 'coach123') {
+        // 教练账号 - 教练管理功能
+        const user: User = {
+          id: '3',
+          username: 'coach_user',
+          email: credentials.email,
+          role: UserRole.COACH,
+          status: UserStatus.ACTIVE,
+          coachId: 'COACH001',
+          createdAt: new Date(),
+          lastLoginAt: new Date()
+        }
+        dispatch({ type: 'LOGIN_SUCCESS', payload: user })
+        localStorage.setItem('auth_user', JSON.stringify(user))
       } else {
-        throw new Error('邮箱或密码错误')
+        throw new Error('邮箱或密码错误，请使用以下测试账号：\n管理员：admin@ski.com / admin123\n运动员：athlete@ski.com / athlete123\n教练：coach@ski.com / coach123')
       }
     } catch (error) {
       dispatch({ type: 'LOGIN_FAILURE', payload: error instanceof Error ? error.message : '登录失败' })
