@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
-import { Eye, EyeOff, User, Mail, Lock, UserPlus, Phone, IdCard } from 'lucide-react'
+import { Eye, EyeOff, User, Mail, Lock, UserPlus, Phone, CreditCard } from 'lucide-react'
 import { getImagePath } from '@/utils/paths'
 import { useAuth } from '@/contexts/AuthContext'
 
@@ -166,7 +166,7 @@ export default function RegisterPage() {
                 </label>
                 <div className="relative">
                   <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                    <IdCard className="h-5 w-5 text-gray-400" />
+                    <CreditCard className="h-5 w-5 text-gray-400" />
                   </div>
                   <input
                     id="realName"

@@ -37,8 +37,8 @@ const convertCompetitionData = (competitions: typeof mockCompetitions) => {
     status: competition.status,
     participants: competition.participants,
     organizer: competition.organizer,
-    level: competition.type === 'World Cup' ? 'international' :
-           competition.type === 'National Championship' ? 'national' : 'regional',
+    level: competition.type === 'National Championship' ? 'national' :
+           competition.type === 'China Cup' ? 'china_cup' : 'regional',
     weather: ['clear', 'snow', 'cloudy'][Math.floor(Math.random() * 3)],
     image: '/images/ski-bg.jpg'
   }))

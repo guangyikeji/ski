@@ -288,7 +288,7 @@ export const mockCompetitions: Competition[] = [
     status: 'completed',
     participants: 156,
     organizer: '中国滑雪协会',
-    fisCode: 'CHN2024001',
+    chinaCode: 'CHN2024001',
     resultsPublished: true
   },
   {

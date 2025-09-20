@@ -1,53 +1,53 @@
 'use client'
 
 import { createContext, useContext, useReducer, useEffect, ReactNode } from 'react'
-import { User, UserRole, AuthState, LoginRequest, RegisterRequest, Resource, Action } from '@/types/auth'
+import { User, UserRole, UserStatus, AuthState, LoginRequest, RegisterRequest, Resource, Action } from '@/types/auth'
 
 // 权限规则配置 - 中国高山滑雪积分管理平台
 const PERMISSIONS_MAP: Record<UserRole, Record<Resource, Action[]>> = {
   [UserRole.PUBLIC]: {
-    [Resource.HOME]: [Action.read],
-    [Resource.ABOUT]: [Action.read],
-    [Resource.NEWS]: [Action.read],
-    [Resource.CONTACT]: [Action.read],
+    [Resource.HOME]: [Action.READ],
+    [Resource.ABOUT]: [Action.READ],
+    [Resource.NEWS]: [Action.READ],
+    [Resource.CONTACT]: [Action.READ],
   } as Record<Resource, Action[]>,
 
   [UserRole.ATHLETE]: {
-    [Resource.HOME]: [Action.read],
-    [Resource.ABOUT]: [Action.read],
-    [Resource.NEWS]: [Action.read],
-    [Resource.CONTACT]: [Action.read],
-    [Resource.PROFILE]: [Action.read, Action.UPDATE],
-    [Resource.MY_POINTS]: [Action.read],
-    [Resource.RANKING]: [Action.read],
-    [Resource.EVENTS]: [Action.read, Action.WRITE],
+    [Resource.HOME]: [Action.READ],
+    [Resource.ABOUT]: [Action.READ],
+    [Resource.NEWS]: [Action.READ],
+    [Resource.CONTACT]: [Action.READ],
+    [Resource.PROFILE]: [Action.READ, Action.UPDATE],
+    [Resource.MY_POINTS]: [Action.READ],
+    [Resource.RANKING]: [Action.READ],
+    [Resource.EVENTS]: [Action.READ, Action.WRITE],
   } as Record<Resource, Action[]>,
 
   [UserRole.COACH]: {
-    [Resource.HOME]: [Action.read],
-    [Resource.ABOUT]: [Action.read],
-    [Resource.NEWS]: [Action.read],
-    [Resource.CONTACT]: [Action.read],
-    [Resource.PROFILE]: [Action.read, Action.UPDATE],
-    [Resource.MY_POINTS]: [Action.read],
-    [Resource.RANKING]: [Action.read],
-    [Resource.EVENTS]: [Action.read, Action.WRITE],
+    [Resource.HOME]: [Action.READ],
+    [Resource.ABOUT]: [Action.READ],
+    [Resource.NEWS]: [Action.READ],
+    [Resource.CONTACT]: [Action.READ],
+    [Resource.PROFILE]: [Action.READ, Action.UPDATE],
+    [Resource.MY_POINTS]: [Action.READ],
+    [Resource.RANKING]: [Action.READ],
+    [Resource.EVENTS]: [Action.READ, Action.WRITE],
   } as Record<Resource, Action[]>,
 
   [UserRole.ADMIN]: {
-    [Resource.HOME]: [Action.read],
-    [Resource.ABOUT]: [Action.read, Action.UPDATE],
-    [Resource.NEWS]: [Action.read, Action.WRITE, Action.UPDATE, Action.DELETE],
-    [Resource.CONTACT]: [Action.read, Action.UPDATE],
-    [Resource.PROFILE]: [Action.read, Action.UPDATE],
-    [Resource.MY_POINTS]: [Action.read],
-    [Resource.RANKING]: [Action.read],
-    [Resource.EVENTS]: [Action.read, Action.WRITE, Action.UPDATE, Action.DELETE],
-    [Resource.ADMIN_DASHBOARD]: [Action.read],
-    [Resource.POINTS_CALCULATION]: [Action.read, Action.WRITE, Action.UPDATE],
-    [Resource.USER_MANAGEMENT]: [Action.read, Action.WRITE, Action.UPDATE, Action.DELETE],
-    [Resource.STATISTICS]: [Action.read],
-    [Resource.SYSTEM_CONFIG]: [Action.read, Action.UPDATE],
+    [Resource.HOME]: [Action.READ],
+    [Resource.ABOUT]: [Action.READ, Action.UPDATE],
+    [Resource.NEWS]: [Action.READ, Action.WRITE, Action.UPDATE, Action.DELETE],
+    [Resource.CONTACT]: [Action.READ, Action.UPDATE],
+    [Resource.PROFILE]: [Action.READ, Action.UPDATE],
+    [Resource.MY_POINTS]: [Action.READ],
+    [Resource.RANKING]: [Action.READ],
+    [Resource.EVENTS]: [Action.READ, Action.WRITE, Action.UPDATE, Action.DELETE],
+    [Resource.ADMIN_DASHBOARD]: [Action.READ],
+    [Resource.POINTS_CALCULATION]: [Action.READ, Action.WRITE, Action.UPDATE],
+    [Resource.USER_MANAGEMENT]: [Action.READ, Action.WRITE, Action.UPDATE, Action.DELETE],
+    [Resource.STATISTICS]: [Action.READ],
+    [Resource.SYSTEM_CONFIG]: [Action.READ, Action.UPDATE],
   } as Record<Resource, Action[]>
 }
 
@@ -147,7 +147,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
           username: 'admin',
           email: credentials.email,
           role: UserRole.ADMIN,
-          status: 'active',
+          status: UserStatus.ACTIVE,
           createdAt: new Date(),
           lastLoginAt: new Date()
         }
@@ -159,7 +159,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
           username: 'athlete_user',
           email: credentials.email,
           role: UserRole.ATHLETE,
-          status: 'active',
+          status: UserStatus.ACTIVE,
           athleteId: 'ATH001',
           createdAt: new Date(),
           lastLoginAt: new Date()
@@ -188,7 +188,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         username: data.username,
         email: data.email,
         role: data.userType === 'athlete' ? UserRole.ATHLETE : UserRole.COACH,
-        status: 'pending',
+        status: UserStatus.PENDING,
         athleteId: data.userType === 'athlete' ? `ATH${Date.now()}` : undefined,
         coachId: data.userType === 'coach' ? `COACH${Date.now()}` : undefined,
         createdAt: new Date()
