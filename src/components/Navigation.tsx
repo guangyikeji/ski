@@ -454,7 +454,7 @@ export default function Navigation() {
               ) : (
                 <>
                   <Link
-                    href="/auth/login"
+                    href="/login"
                     className="flex items-center space-x-2 px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-ski-blue hover:bg-gray-50"
                     onClick={() => setIsMobileMenuOpen(false)}
                   >
@@ -462,7 +462,7 @@ export default function Navigation() {
                     <span>登录</span>
                   </Link>
                   <Link
-                    href="/auth/register"
+                    href="/register"
                     className="flex items-center space-x-2 px-3 py-2 rounded-md text-base font-medium bg-ski-blue text-white hover:bg-ski-blue/90 mt-2"
                     onClick={() => setIsMobileMenuOpen(false)}
                   >

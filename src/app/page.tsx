@@ -212,27 +212,27 @@ export default function HomePage() {
                   </div>
                 </div>
 
-                {/* 登录注册引导 */}
+                {/* 平台介绍引导 */}
                 {isClient && !isAuthenticated && (
                   <div className="mt-8">
                     <div className="flex flex-col sm:flex-row gap-4">
                       <Link
-                        href="/register"
+                        href="/about"
                         className="inline-flex items-center justify-center px-6 py-3 bg-ski-blue text-white rounded-lg hover:bg-ski-blue/90 transition-colors font-semibold text-lg"
                       >
-                        <UserPlus className="h-5 w-5 mr-2" />
-                        免费注册会员
+                        <FileText className="h-5 w-5 mr-2" />
+                        了解平台
                       </Link>
                       <Link
-                        href="/login"
+                        href="/rules/points"
                         className="inline-flex items-center justify-center px-6 py-3 border-2 border-white text-white rounded-lg hover:bg-white hover:text-ski-navy transition-colors font-semibold text-lg"
                       >
-                        <LogIn className="h-5 w-5 mr-2" />
-                        会员登录
+                        <Calculator className="h-5 w-5 mr-2" />
+                        积分规则
                       </Link>
                     </div>
                     <p className="text-gray-300 text-sm mt-4">
-                      注册成为会员，解锁积分查询、赛事报名、数据分析等专业功能
+                      了解中国高山滑雪积分体系，掌握专业竞赛规则和计算方法
                     </p>
                   </div>
                 )}
