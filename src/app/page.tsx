@@ -88,9 +88,9 @@ const features = [
 
 const stats = [
   { label: '支持项目', value: '5+', icon: Award },
-  { label: '积分规则', value: '100%', description: '符合FIS标准', icon: CheckCircle },
+  { label: '积分规则', value: '100%', description: '符合中国标准', icon: CheckCircle },
   { label: '更新频率', value: '14天', description: '积分周期', icon: Clock },
-  { label: '数据来源', value: 'FIS', description: '官方数据', icon: Database }
+  { label: '数据来源', value: '中国', description: '官方数据', icon: Database }
 ]
 
 // 动态新闻数据
@@ -441,7 +441,7 @@ export default function HomePage() {
           <div className="text-center mb-16">
             <h2 className="section-title">核心功能</h2>
             <p className="text-lg text-gray-600 max-w-3xl mx-auto">
-              基于FIS中国滑雪协会标准的完整滑雪竞赛管理解决方案，从积分计算、运动员管理到赛事组织，
+              基于中国滑雪协会标准的完整滑雪竞赛管理解决方案，从积分计算、运动员管理到赛事组织，
               覆盖高山滑雪运动的所有核心环节，为中国滑雪运动数字化发展提供强有力支持
             </p>
           </div>
@@ -514,7 +514,7 @@ export default function HomePage() {
               <h2 className="section-title">关于平台</h2>
               <div className="space-y-6 text-gray-600">
                 <p>
-                  Alpine Skiing China(中国高山滑雪积分管理平台)是基于FIS中国滑雪协会标准打造的专业竞赛管理平台。
+                  Alpine Skiing China(中国高山滑雪积分管理平台)是基于中国滑雪协会标准打造的专业竞赛管理平台。
                   采用符合中国标准的积分计算算法，为中国高山滑雪竞赛提供权威、准确的数据管理和积分计算服务。
                 </p>
                 <p>
@@ -524,7 +524,7 @@ export default function HomePage() {
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6 pt-6">
                   <div className="border-l-4 border-ski-blue pl-4">
                     <div className="font-semibold text-ski-navy">中国标准算法</div>
-                    <div className="text-sm">采用国际通用积分计算规则</div>
+                    <div className="text-sm">采用中国积分计算规则</div>
                   </div>
                   <div className="border-l-4 border-green-500 pl-4">
                     <div className="font-semibold text-ski-navy">实时同步</div>
@@ -548,7 +548,7 @@ export default function HomePage() {
                 <ul className="space-y-4">
                   <li className="flex items-center">
                     <CheckCircle className="h-5 w-5 text-green-300 mr-3 flex-shrink-0" />
-                    <span>采用国际通用积分计算标准</span>
+                    <span>采用中国积分计算标准</span>
                   </li>
                   <li className="flex items-center">
                     <CheckCircle className="h-5 w-5 text-green-300 mr-3 flex-shrink-0" />

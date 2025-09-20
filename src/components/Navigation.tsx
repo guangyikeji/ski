@@ -130,7 +130,7 @@ export default function Navigation() {
           <div className="flex items-center">
             <Link href="/" className="flex items-center space-x-2">
               <Mountain className="h-8 w-8 text-ski-blue" />
-              <span className="text-xl font-bold text-ski-navy">
+              <span className="text-xl font-bold text-ski-navy whitespace-nowrap">
                 Alpine Skiing China
               </span>
             </Link>

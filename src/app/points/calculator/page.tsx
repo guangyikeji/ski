@@ -3,13 +3,14 @@
 import { useState } from 'react'
 import { getImagePath } from '@/utils/paths'
 import { Calculator, Info, RotateCcw, TrendingUp } from 'lucide-react'
+import { chinaPointsCalculator, CHINA_DISCIPLINE_FACTORS, DisciplineCode } from '@/utils/chinaPointsCalculator'
 
 const disciplineFactors = {
-  DH: { name: '速降', factor: 1250, description: '高速度项目，技术要求高' },
-  SL: { name: '回转', factor: 730, description: '技术性强，转弯密集' },
-  GS: { name: '大回转', factor: 1010, description: '速度与技术的平衡' },
-  SG: { name: '超级大回转', factor: 1190, description: '高速技术项目' },
-  AC: { name: '全能', factor: 1360, description: '综合项目积分' }
+  DH: { name: '速降', factor: CHINA_DISCIPLINE_FACTORS.DH, description: '高速度项目，技术要求高' },
+  SL: { name: '回转', factor: CHINA_DISCIPLINE_FACTORS.SL, description: '技术性强，转弯密集' },
+  GS: { name: '大回转', factor: CHINA_DISCIPLINE_FACTORS.GS, description: '速度与技术的平衡' },
+  SG: { name: '超级大回转', factor: CHINA_DISCIPLINE_FACTORS.SG, description: '高速技术项目' },
+  AC: { name: '全能', factor: CHINA_DISCIPLINE_FACTORS.AC, description: '综合项目积分' }
 }
 
 export default function CalculatorPage() {
@@ -35,12 +36,22 @@ export default function CalculatorPage() {
       return
     }
 
-    const F = disciplineFactors[discipline as keyof typeof disciplineFactors].factor
-    const racePointsValue = F * (competitor / winner - 1)
-    const finalPoints = racePointsValue + penaltyValue
+    // 使用中国积分计算器
+    const racePointsValue = chinaPointsCalculator.calculateRacePoints(
+      competitor,
+      winner,
+      discipline as DisciplineCode
+    )
 
-    setRacePoints(Math.round(racePointsValue * 100) / 100)
-    setResult(Math.round(finalPoints * 100) / 100)
+    // 计算最终积分（比赛积分 + 罚分值）
+    const finalPoints = chinaPointsCalculator.calculateFinalPoints(
+      racePointsValue,
+      penaltyValue,
+      discipline as DisciplineCode
+    )
+
+    setRacePoints(racePointsValue)
+    setResult(finalPoints)
   }
 
   const resetForm = () => {
