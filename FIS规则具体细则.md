@@ -14,17 +14,16 @@
 ### 1. 基础计算公式
 
 #### 1.1 比赛积分计算公式
-```
-P = F × (Tx/To - 1)
-或
-P = (F × Tx/To) - F
-```
 
-**参数说明:**
-- **P**: 比赛积分 (Race Points)
-- **To**: 获胜者时间 (Winner's Time，以秒为单位)
-- **Tx**: 被排名选手时间 (Ranked Competitor's Time，以秒为单位)
-- **F**: 项目系数 (Discipline Factor)
+**积分计算方法:**
+- 比赛积分 = 项目系数 × (选手时间 ÷ 冠军时间 - 1)
+- 另一种表达: 比赛积分 = (项目系数 × 选手时间 ÷ 冠军时间) - 项目系数
+
+**计算要素说明:**
+- **比赛积分**: 选手在该场比赛中获得的积分
+- **冠军时间**: 获得第一名选手的用时(以秒为单位)
+- **选手时间**: 被计算选手的用时(以秒为单位)
+- **项目系数**: 不同滑雪项目的固定系数值
 
 #### 1.2 项目系数详表
 | 项目代码 | 项目名称 | 系数值(F) | 最大积分值 | 说明 |
@@ -35,15 +34,15 @@ P = (F × Tx/To) - F
 | SG | 超级大回转 (Super Giant Slalom) | 1190 | 270 | 速度技术项目 |
 | AC | 全能 (Alpine Combined) | 1360 | 270 | 综合技术项目 |
 
-#### 1.3 惩罚值计算公式
-```
-惩罚值 = (Sum A + Sum B - Sum C) ÷ 10
-```
+#### 1.3 惩罚值计算方法
 
-**参数详解:**
-- **Sum A**: 前10名完赛选手中最好5名的FIS积分总和
-- **Sum B**: 所有参赛选手中最好5名的FIS积分总和
-- **Sum C**: 最好5名选手的比赛积分总和
+**惩罚值计算:**
+- 惩罚值 = (第一组积分总和 + 第二组积分总和 - 第三组积分总和) ÷ 10
+
+**三组积分的含义:**
+- **第一组**: 比赛前10名完赛选手中，FIS积分最好的5名选手的积分总和
+- **第二组**: 所有参赛选手中，FIS积分最好的5名选手的积分总和
+- **第三组**: 比赛成绩最好的5名选手在这场比赛中的积分总和
 
 **特殊情况处理:**
 - 如果前10名不足5人，用最大积分值补足
@@ -62,12 +61,11 @@ P = (F × Tx/To) - F
 - 21.849 → 21.85
 - 45.995 → 46.00
 
-#### 2.2 编程实现
-```javascript
-function roundPoints(points) {
-  return Math.round(points * 100) / 100;
-}
-```
+#### 2.2 系统处理方式
+**自动舍入处理:**
+- 系统将积分数值乘以100后进行四舍五入
+- 然后再除以100得到最终结果
+- 确保所有积分都精确到小数点后两位
 
 ## 📊 积分表管理制度
 
@@ -80,29 +78,22 @@ function roundPoints(points) {
 - **有效期**: 当年7月1日至次年6月30日
 
 #### 3.2 计算方法
-**标准计算:**
-```
-BL积分 = (最好成绩1 + 最好成绩2) ÷ 2
-```
+**标准计算方法:**
+- 基础积分 = (最好成绩1 + 最好成绩2) ÷ 2
+- 取该选手前一评估期内两个最好成绩的平均值
 
 **特殊情况处理:**
-1. **单一成绩处理**
-   ```
-   BL积分 = 唯一成绩 × 1.20 (增加20%)
-   标记: (+)
-   ```
+1. **只有一次成绩的处理**
+   - 基础积分 = 唯一成绩 × 1.20 (在唯一成绩基础上增加20%)
+   - 在积分表中标记为 (+)
 
-2. **无成绩处理**
-   ```
-   BL积分 = 前一年BL积分 × 1.50 (增加50%)
-   标记: (>)
-   ```
+2. **没有成绩的处理**
+   - 基础积分 = 前一年基础积分 × 1.50 (在前一年基础上增加50%)
+   - 在积分表中标记为 (>)
 
 3. **伤病保护处理**
-   ```
-   BL积分 = 正常BL积分 × 1.10 (增加10%)
-   标记: (#)
-   ```
+   - 基础积分 = 正常基础积分 × 1.10 (在正常积分基础上增加10%)
+   - 在积分表中标记为 (#)
 
 #### 3.3 数据来源要求
 - **成绩有效期**: 前一评估期内的成绩
@@ -119,9 +110,9 @@ BL积分 = (最好成绩1 + 最好成绩2) ÷ 2
 - **生效延迟**: 发布后48小时生效
 
 #### 4.2 计算原则
-```
-NL积分 = 当前期间最好2个成绩的平均值
-```
+**常规积分计算:**
+- 常规积分 = 当前期间最好2个成绩的平均值
+- 取该选手本赛季内两个最佳比赛成绩的平均数
 
 **更新条件:**
 - 新比赛成绩优于现有积分
@@ -146,9 +137,9 @@ NL积分 = 当前期间最好2个成绩的平均值
 - **保护期限**: 最长12个月
 
 #### 5.2 保护措施
-```
-保护期积分 = 受伤前BL积分 × 1.10
-```
+**积分保护计算:**
+- 保护期积分 = 受伤前基础积分 × 1.10
+- 在原有基础积分基础上增加10%作为保护
 
 **保护规则:**
 - 在BL积分基础上增加10%
@@ -197,10 +188,9 @@ NL积分 = 当前期间最好2个成绩的平均值
 - **最终裁决**: FIS纪律委员会决定
 
 #### 8.2 积分处理
-**违规确认后:**
-```
-处理措施 = 删除所有相关FIS积分
-```
+**违规确认后的处理措施:**
+- 删除该选手所有相关的FIS积分
+- 清除违规期间的所有比赛成绩
 
 - **删除范围**: 违规期间所有积分
 - **影响比赛**: 相关比赛成绩无效
@@ -224,10 +214,9 @@ NL积分 = 当前期间最好2个成绩的平均值
 - **更新频率**: 与NL同步更新
 
 #### 9.2 排名规则
-```
-排名顺序: FIS积分从低到高排列
-并列处理: 积分相同时按字母顺序
-```
+**排名确定方法:**
+- 排名顺序: 按FIS积分从低到高进行排列(积分越低排名越高)
+- 并列处理: 积分相同时按运动员姓名字母顺序排列
 
 **特殊情况:**
 - 积分相同且姓名相同: 按FIS编码排序
@@ -235,26 +224,26 @@ NL积分 = 当前期间最好2个成绩的平均值
 - 长期缺赛: 积分过期后自动移除
 
 #### 9.3 国家排名
-```
-国家排名 = 各国最好运动员积分的平均值
-计算选手 = 每项目最多5名选手
-权重分配 = 各项目平均权重
-```
+**国家排名计算方法:**
+- 国家排名 = 各国最好运动员积分的平均值
+- 计算范围 = 每个项目最多选择5名最好选手
+- 权重分配 = 各个项目平均分配权重
 
 ### 10. 参赛配额分配
 
-#### 10.1 配额计算公式
-```javascript
-function calculateQuota(rankingPosition, qualifiedAthletes) {
-  if (rankingPosition <= 150) {
-    return Math.min(qualifiedAthletes, 10);
-  } else if (rankingPosition <= 300) {
-    return qualifiedAthletes >= 2 ? 5 : 4;
-  } else {
-    return 0; // 不符合参赛条件
-  }
-}
-```
+#### 10.1 配额计算规则
+
+**配额分配逻辑:**
+1. **顶级强国** (排名1-150位):
+   - 如果合格选手≥10人: 最大配额10人
+   - 如果合格选手<10人: 按实际合格人数分配
+
+2. **中等水平国家** (排名151-300位):
+   - 如果合格选手≥2人: 最大配额5人
+   - 如果合格选手=1人: 最大配额4人
+
+3. **其他国家** (排名300位以后):
+   - 不符合参赛条件，配额为0
 
 #### 10.2 配额分配表
 | 国家排名 | 合格选手数 | 最大配额 | 说明 |
@@ -313,30 +302,21 @@ function calculateQuota(rankingPosition, qualifiedAthletes) {
 ### 13. 数据验证规则
 
 #### 13.1 自动验证
-```javascript
-// 时间合理性检查
-function validateTime(time, winnerTime) {
-  const maxDifference = winnerTime * 0.5; // 不超过获胜者50%
-  return time > 0 && (time - winnerTime) <= maxDifference;
-}
 
-// 积分范围检查
-function validatePoints(points, discipline) {
-  const maxPoints = MAX_POINTS[discipline];
-  return points >= 0 && points <= maxPoints;
-}
+**时间合理性检查:**
+- 检查选手用时是否大于0
+- 确保选手用时与获胜者用时差距不超过50%
+- 如果超出范围则标记为异常
 
-// 排名连续性检查
-function validateRanking(results) {
-  const ranks = results.map(r => r.rank).sort((a, b) => a - b);
-  for (let i = 1; i < ranks.length; i++) {
-    if (ranks[i] - ranks[i-1] > 1) {
-      return false; // 排名不连续
-    }
-  }
-  return true;
-}
-```
+**积分范围检查:**
+- 验证积分是否在0到最大值之间
+- 不同项目有不同的最大积分限制
+- 超出范围的积分会被标记
+
+**排名连续性检查:**
+- 确保比赛排名是连续的(1,2,3,4...)
+- 检查是否有跳跃或重复的排名
+- 发现不连续排名时提示错误
 
 #### 13.2 人工审核
 - **异常成绩**: 标记异常值供人工审核
@@ -353,10 +333,9 @@ function validateRanking(results) {
 4. **系统错误**: 计算系统的错误
 
 #### 14.2 纠错程序
-```
-发现错误 → 暂停相关积分计算 → 调查错误原因 →
-修正错误数据 → 重新计算积分 → 通知相关方 → 更新排名
-```
+**错误处理流程:**
+1. 发现错误 → 2. 暂停相关积分计算 → 3. 调查错误原因
+4. 修正错误数据 → 5. 重新计算积分 → 6. 通知相关方 → 7. 更新排名
 
 #### 14.3 影响评估
 - **影响范围**: 确定错误影响的选手和比赛
@@ -369,64 +348,40 @@ function validateRanking(results) {
 ### 15. 趋势分析方法
 
 #### 15.1 个人趋势分析
-```javascript
-// 积分趋势计算
-function calculateTrend(pointsHistory) {
-  const points = pointsHistory.map(h => h.points);
-  const dates = pointsHistory.map(h => h.date);
 
-  // 线性回归分析
-  const trend = linearRegression(dates, points);
+**积分趋势计算:**
+- 提取选手历史积分数据和比赛日期
+- 使用线性回归分析方法计算趋势
+- 分析结果包括:
+  - 变化趋势(上升/下降/稳定)
+  - 数据相关性(趋势的可靠程度)
+  - 未来积分预测
 
-  return {
-    slope: trend.slope,           // 变化趋势
-    correlation: trend.r,         // 相关性
-    prediction: trend.predict     // 预测函数
-  };
-}
-
-// 一致性分析
-function calculateConsistency(results) {
-  const points = results.map(r => r.points);
-  const mean = average(points);
-  const variance = calculateVariance(points, mean);
-
-  return {
-    mean: mean,
-    variance: variance,
-    coefficient: Math.sqrt(variance) / mean
-  };
-}
-```
+**一致性分析:**
+- 统计选手所有比赛积分
+- 计算平均积分和方差
+- 分析结果包括:
+  - 平均积分水平
+  - 成绩波动程度
+  - 稳定性系数(方差开方除以平均值)
 
 #### 15.2 比赛质量评估
-```javascript
-// 比赛竞争性评估
-function assessCompetitiveness(results) {
-  const topTenTimes = results.slice(0, 10).map(r => r.time);
-  const timeSpread = Math.max(...topTenTimes) - Math.min(...topTenTimes);
-  const winnerTime = Math.min(...topTenTimes);
 
-  return {
-    timeSpread: timeSpread,
-    relativeSpread: timeSpread / winnerTime,
-    competitivenessScore: calculateScore(timeSpread, winnerTime)
-  };
-}
+**比赛竞争性评估:**
+- 提取前10名选手的用时数据
+- 计算最快与最慢时间的差值
+- 分析结果包括:
+  - 时间差值(绝对值)
+  - 相对时间差(差值除以获胜者时间)
+  - 竞争性得分(基于时间分布计算)
 
-// 参赛水平评估
-function assessParticipantLevel(participants) {
-  const fisPoints = participants.map(p => p.fisPoints).filter(p => p > 0);
-  const avgPoints = average(fisPoints);
-  const topTenAvg = average(fisPoints.slice(0, 10));
-
-  return {
-    averageLevel: avgPoints,
-    topLevel: topTenAvg,
-    depthScore: fisPoints.length / participants.length
-  };
-}
-```
+**参赛水平评估:**
+- 统计所有参赛者的FIS积分
+- 过滤掉无效积分(积分为0或负数)
+- 分析结果包括:
+  - 平均积分水平
+  - 前10名平均积分
+  - 深度得分(有效积分人数占总参赛人数比例)
 
 ## 📝 实施指南
 
