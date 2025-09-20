@@ -898,11 +898,11 @@ npm run lint
 - **用途**: 主要代码开发和备份
 
 #### GitHub 仓库 (Pages部署)
-- **仓库地址**: https://github.com/guangyikeji/ski.git
-- **克隆命令**: `git clone https://github.com/guangyikeji/ski.git`
+- **仓库地址**: https://github.com/gaohao10010111-sketch/ski.git
+- **克隆命令**: `git clone https://github.com/gaohao10010111-sketch/ski.git`
 - **主分支**: main
 - **用途**: GitHub Pages自动部署
-- **访问地址**: https://guangyikeji.github.io/ski/
+- **访问地址**: https://gaohao10010111-sketch.github.io/ski/
 
 ### 👤 Git配置
 ```bash
@@ -922,7 +922,7 @@ git config --global user.email '16161327+guangyikeji@user.noreply.gitee.com'
 git remote add origin https://guangyikeji:[GITEE_TOKEN]@gitee.com/guangyikeji/ski.git
 
 # 添加GitHub远程仓库
-git remote add github https://guangyikeji:[GITHUB_TOKEN]@github.com/guangyikeji/ski.git
+git remote add github https://gaohao10010111-sketch:[GITHUB_TOKEN]@github.com/gaohao10010111-sketch/ski.git
 
 # 推送到Gitee
 git push origin main
@@ -1092,7 +1092,7 @@ const nextConfig = {
 git remote add origin https://guangyikeji:[GITEE_TOKEN]@gitee.com/guangyikeji/ski.git
 
 # 添加GitHub远程仓库 (GitHub Pages部署)
-git remote add github https://guangyikeji:[GITHUB_TOKEN]@github.com/guangyikeji/ski.git
+git remote add github https://gaohao10010111-sketch:[GITHUB_TOKEN]@github.com/gaohao10010111-sketch/ski.git
 
 # 验证远程仓库配置
 git remote -v
@@ -1119,7 +1119,7 @@ git push origin main
 # 访问: https://github.com/guangyikeji/ski/actions
 
 # 2. 等待部署完成 (通常2-5分钟)
-# 部署成功后访问: https://guangyikeji.github.io/ski/
+# 部署成功后访问: https://gaohao10010111-sketch.github.io/ski/
 
 # 3. 本地验证构建
 npm run build:github
@@ -1159,7 +1159,7 @@ git commit -m "security: 移除敏感信息"
 
 | 平台 | 状态 | 访问地址 | 最后部署 |
 |------|------|----------|----------|
-| **GitHub Pages** | ✅ 在线 | https://guangyikeji.github.io/ski/ | 自动部署 |
+| **GitHub Pages** | ✅ 在线 | https://gaohao10010111-sketch.github.io/ski/ | 自动部署 |
 | **Vercel** | ✅ 在线 | https://alpine-ski-points.vercel.app | 自动部署 |
 | **本地开发** | ✅ 可用 | http://localhost:3000 | `npm run dev` |
 
@@ -1618,7 +1618,7 @@ git push github main && git push origin main
 ```
 
 ### 📊 部署目标
-- **GitHub**: 触发GitHub Pages自动部署 → https://guangyikeji.github.io/ski/
+- **GitHub**: 触发GitHub Pages自动部署 → https://gaohao10010111-sketch.github.io/ski/
 - **Gitee**: 代码备份和主要开发仓库
 - **Vercel**: 自动同步GitHub部署 → https://alpine-ski-points.vercel.app
 
