@@ -14,7 +14,7 @@
 
 @layer components {
   .nav-link {
-    @apply relative px-4 py-2 text-gray-700 hover:text-ski-blue transition-colors duration-200;
+    @apply relative px-4 py-2 text-gray-700 hover:text-ski-blue transition-all duration-200 rounded-md hover:bg-ski-ice/30;
   }
 
   .nav-link::after {
@@ -27,8 +27,35 @@
     @apply w-full;
   }
 
+  .nav-link:hover {
+    transform: translateY(-1px);
+  }
+
+  .nav-link.active {
+    @apply text-ski-blue bg-ski-ice/50;
+  }
+
+  .dropdown-menu {
+    @apply absolute left-0 mt-2 w-48 bg-white rounded-md shadow-lg border border-gray-100 py-1 z-50;
+    animation: dropdownFadeIn 0.2s ease-out;
+    transform-origin: top;
+  }
+
+  .dropdown-item {
+    @apply block px-4 py-2 text-sm transition-colors duration-150;
+  }
+
+  .dropdown-item:hover {
+    @apply bg-gradient-to-r from-ski-ice to-ski-blue/10;
+    transform: translateX(2px);
+  }
+
   .card {
-    @apply bg-white rounded-lg shadow-sm border border-gray-100 p-6 hover:shadow-md transition-shadow duration-300;
+    @apply bg-white rounded-lg shadow-sm border border-gray-100 p-6 hover:shadow-md transition-all duration-300;
+  }
+
+  .card:hover {
+    transform: translateY(-2px);
   }
 
   .card-disabled {
@@ -67,5 +94,68 @@
 
   .animate-pulse-slow {
     animation: pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  }
+
+  @keyframes dropdownFadeIn {
+    from {
+      opacity: 0;
+      transform: scaleY(0.95) translateY(-10px);
+    }
+    to {
+      opacity: 1;
+      transform: scaleY(1) translateY(0);
+    }
+  }
+
+  @keyframes slideInFromBottom {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .animate-slide-in {
+    animation: slideInFromBottom 0.6s ease-out;
+  }
+
+  @keyframes float {
+    0%, 100% {
+      transform: translateY(0px);
+    }
+    50% {
+      transform: translateY(-10px);
+    }
+  }
+
+  @keyframes glow {
+    0%, 100% {
+      box-shadow: 0 0 5px rgba(59, 130, 246, 0.3);
+    }
+    50% {
+      box-shadow: 0 0 20px rgba(59, 130, 246, 0.6);
+    }
+  }
+
+  .animate-float {
+    animation: float 6s ease-in-out infinite;
+  }
+
+  .animate-glow {
+    animation: glow 3s ease-in-out infinite;
+  }
+
+  .bg-gradient-ski {
+    background: linear-gradient(135deg, #1e40af 0%, #3b82f6 50%, #06b6d4 100%);
+  }
+
+  .text-gradient {
+    background: linear-gradient(135deg, #1e40af, #3b82f6, #06b6d4);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
   }
 }

@@ -173,19 +173,19 @@ export default function HomePage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <div className="text-white">
-              <div className="inline-flex items-center px-4 py-2 bg-ski-blue rounded-full text-sm font-medium mb-6">
-                <Award className="h-4 w-4 mr-2" />
+              <div className="inline-flex items-center px-4 py-2 bg-gradient-ski rounded-full text-sm font-medium mb-6 animate-glow">
+                <Award className="h-4 w-4 mr-2 animate-float" />
                 中国高山滑雪竞赛管理平台
               </div>
-              <h1 className="text-5xl md:text-7xl font-bold mb-6 leading-tight">
-                <span className="text-ski-blue">Alpine Skiing China</span>
-                <span className="block text-white">中国高山滑雪积分管理平台</span>
+              <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold mb-6 leading-tight">
+                <span className="text-gradient bg-gradient-ski">Alpine Skiing China</span>
+                <span className="block text-white text-3xl sm:text-4xl md:text-5xl lg:text-6xl">中国高山滑雪积分管理平台</span>
               </h1>
               <div className="mb-8">
-                <p className="text-2xl md:text-3xl text-gray-200 mb-6 leading-relaxed font-semibold">
+                <p className="text-lg sm:text-xl md:text-2xl lg:text-3xl text-gray-200 mb-6 leading-relaxed font-semibold">
                   传承雪山精神，追求卓越竞技
                 </p>
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-lg">
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 md:gap-4 text-sm md:text-base lg:text-lg">
                   <div className="flex items-center bg-white/10 backdrop-blur-sm rounded-lg px-4 py-3 border border-white/20">
                     <div className="w-3 h-3 bg-ski-blue rounded-full mr-3 flex-shrink-0"></div>
                     <span className="text-white font-medium">采用国际标准积分算法</span>
@@ -201,9 +201,9 @@ export default function HomePage() {
                 </div>
               </div>
             </div>
-            <div className="hidden lg:block">
+            <div className="lg:block">
               <div className="relative">
-                <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-8 border border-white/20">
+                <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-4 md:p-6 lg:p-8 border border-white/20 mt-8 lg:mt-0">
                   <div className="flex items-center justify-between mb-6">
                     <h3 className="text-2xl font-bold text-white">实时动态</h3>
                     <button
@@ -277,21 +277,21 @@ export default function HomePage() {
       {/* Stats Section */}
       <section className="py-16 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold text-ski-navy mb-4">平台数据概览</h2>
-            <p className="text-gray-600">实时更新的系统数据和运行状态</p>
+          <div className="text-center mb-8 md:mb-12">
+            <h2 className="text-2xl md:text-3xl font-bold text-ski-navy mb-4">平台数据概览</h2>
+            <p className="text-gray-600 text-sm md:text-base">实时更新的系统数据和运行状态</p>
           </div>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6 lg:gap-8">
             {stats.map((stat, index) => (
-              <div key={index} className="text-center bg-gray-50 rounded-lg p-6 hover:shadow-lg transition-shadow">
-                <div className="flex justify-center mb-4">
-                  <div className={`p-3 rounded-full ${
+              <div key={index} className="text-center bg-gray-50 rounded-lg p-4 md:p-6 hover:shadow-lg transition-shadow">
+                <div className="flex justify-center mb-3 md:mb-4">
+                  <div className={`p-2 md:p-3 rounded-full ${
                     index % 4 === 0 ? 'bg-blue-100' :
                     index % 4 === 1 ? 'bg-green-100' :
                     index % 4 === 2 ? 'bg-yellow-100' :
                     'bg-purple-100'
                   }`}>
-                    <stat.icon className={`h-6 w-6 ${
+                    <stat.icon className={`h-5 w-5 md:h-6 md:w-6 ${
                       index % 4 === 0 ? 'text-blue-600' :
                       index % 4 === 1 ? 'text-green-600' :
                       index % 4 === 2 ? 'text-yellow-600' :
@@ -299,10 +299,10 @@ export default function HomePage() {
                     }`} />
                   </div>
                 </div>
-                <div className="text-3xl font-bold text-ski-navy mb-2">
+                <div className="text-2xl md:text-3xl font-bold text-ski-navy mb-2">
                   {stat.value}
                 </div>
-                <div className="text-sm font-medium text-gray-900 mb-1">
+                <div className="text-xs md:text-sm font-medium text-gray-900 mb-1">
                   {stat.label}
                 </div>
                 {stat.description && (
@@ -319,15 +319,15 @@ export default function HomePage() {
       {/* Live Competition Results Section */}
       <section className="py-16 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold text-ski-navy mb-4">最新赛事成绩</h2>
-            <p className="text-gray-600">实时更新的竞赛结果和积分排名</p>
+          <div className="text-center mb-8 md:mb-12">
+            <h2 className="text-2xl md:text-3xl font-bold text-ski-navy mb-4">最新赛事成绩</h2>
+            <p className="text-gray-600 text-sm md:text-base">实时更新的竞赛结果和积分排名</p>
           </div>
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 md:gap-8">
             {/* Recent Competition Results */}
-            <div className="bg-white rounded-lg shadow-lg p-6">
-              <div className="flex items-center justify-between mb-6">
-                <h3 className="text-xl font-semibold text-ski-navy">最新成绩</h3>
+            <div className="bg-white rounded-lg shadow-lg p-4 md:p-6">
+              <div className="flex items-center justify-between mb-4 md:mb-6">
+                <h3 className="text-lg md:text-xl font-semibold text-ski-navy">最新成绩</h3>
                 <div className="flex items-center text-sm text-green-600">
                   <div className="w-2 h-2 bg-green-500 rounded-full mr-2 animate-pulse"></div>
                   实时更新
@@ -467,7 +467,13 @@ export default function HomePage() {
                 }`}></div>
 
                 <div className="flex items-center mb-4 relative z-10">
-                  <div className={`p-3 rounded-lg bg-gray-50 ${feature.color}`}>
+                  <div className={`p-3 rounded-lg bg-gradient-to-r ${
+                    index % 4 === 0 ? 'from-blue-50 to-blue-100 border border-blue-200' :
+                    index % 4 === 1 ? 'from-green-50 to-green-100 border border-green-200' :
+                    index % 4 === 2 ? 'from-purple-50 to-purple-100 border border-purple-200' :
+                    'from-orange-50 to-orange-100 border border-orange-200'
+                  } ${feature.color} animate-float`}
+                  style={{animationDelay: `${index * 0.2}s`}}>
                     <feature.icon className="h-6 w-6" />
                   </div>
                   <div className="ml-4 flex-1">
@@ -478,7 +484,7 @@ export default function HomePage() {
                       <span className="badge badge-coming-soon">即将上线</span>
                     )}
                     {feature.status === 'active' && (
-                      <span className="badge badge-active">已上线</span>
+                      <span className="badge badge-active animate-pulse">已上线</span>
                     )}
                   </div>
                 </div>

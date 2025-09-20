@@ -156,14 +156,14 @@ export default function Navigation() {
                     </button>
 
                     {openDropdown === item.name && item.active && (
-                      <div className="absolute left-0 mt-2 w-48 bg-white rounded-md shadow-lg border border-gray-100 py-1 z-50">
+                      <div className="dropdown-menu">
                         {item.children.map((child) => (
                           <Link
                             key={child.name}
                             href={child.href}
-                            className={`block px-4 py-2 text-sm ${
+                            className={`dropdown-item ${
                               child.active
-                                ? `text-gray-700 hover:bg-ski-ice hover:text-ski-blue ${
+                                ? `text-gray-700 hover:text-ski-blue ${
                                     pathname === child.href ? 'bg-ski-ice text-ski-blue font-medium' : ''
                                   }`
                                 : 'text-gray-400 cursor-not-allowed'
