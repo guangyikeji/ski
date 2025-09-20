@@ -175,7 +175,7 @@ export default function HomePage() {
             <div className="text-white">
               <div className="inline-flex items-center px-4 py-2 bg-ski-blue rounded-full text-sm font-medium mb-6">
                 <Award className="h-4 w-4 mr-2" />
-                FIS国际雪联官方认证平台
+                国家体育总局冬运中心指导
               </div>
               <h1 className="text-5xl md:text-7xl font-bold mb-6 leading-tight">
                 <span className="text-ski-blue">Alpine Skiing China</span>
@@ -188,15 +188,15 @@ export default function HomePage() {
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-lg">
                   <div className="flex items-center bg-white/10 backdrop-blur-sm rounded-lg px-4 py-3 border border-white/20">
                     <div className="w-3 h-3 bg-ski-blue rounded-full mr-3 flex-shrink-0"></div>
-                    <span className="text-white font-medium">FIS国际标准积分算法</span>
+                    <span className="text-white font-medium">采用国际标准积分算法</span>
                   </div>
                   <div className="flex items-center bg-white/10 backdrop-blur-sm rounded-lg px-4 py-3 border border-white/20">
                     <div className="w-3 h-3 bg-green-400 rounded-full mr-3 flex-shrink-0"></div>
-                    <span className="text-white font-medium">实时数据同步更新</span>
+                    <span className="text-white font-medium">国家级数据管理服务</span>
                   </div>
                   <div className="flex items-center bg-white/10 backdrop-blur-sm rounded-lg px-4 py-3 border border-white/20">
                     <div className="w-3 h-3 bg-yellow-400 rounded-full mr-3 flex-shrink-0"></div>
-                    <span className="text-white font-medium">权威竞赛管理平台</span>
+                    <span className="text-white font-medium">中国滑雪官方平台</span>
                   </div>
                 </div>
               </div>
@@ -512,8 +512,8 @@ export default function HomePage() {
               <h2 className="section-title">关于平台</h2>
               <div className="space-y-6 text-gray-600">
                 <p>
-                  Alpine Skiing China(中国高山滑雪)是基于FIS国际雪联标准打造的专业竞赛管理平台。
-                  采用FIS官方积分计算算法，为中国高山滑雪竞赛提供权威、准确的数据管理和积分计算服务。
+                  Alpine Skiing China(中国高山滑雪积分管理平台)是在国家体育总局冬季运动管理中心指导下打造的专业竞赛管理平台。
+                  采用符合国际标准的积分计算算法，为中国高山滑雪竞赛提供权威、准确的数据管理和积分计算服务。
                 </p>
                 <p>
                   我们致力于推动中国滑雪运动的数字化、标准化发展，为运动员、教练员、赛事组织者、竞赛裁判
@@ -521,16 +521,16 @@ export default function HomePage() {
                 </p>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6 pt-6">
                   <div className="border-l-4 border-ski-blue pl-4">
-                    <div className="font-semibold text-ski-navy">FIS国际标准</div>
-                    <div className="text-sm">符合国际雪联积分计算规则</div>
+                    <div className="font-semibold text-ski-navy">国际标准算法</div>
+                    <div className="text-sm">采用国际通用积分计算规则</div>
                   </div>
                   <div className="border-l-4 border-green-500 pl-4">
                     <div className="font-semibold text-ski-navy">实时同步</div>
                     <div className="text-sm">14天积分周期更新</div>
                   </div>
                   <div className="border-l-4 border-purple-500 pl-4">
-                    <div className="font-semibold text-ski-navy">数据权威</div>
-                    <div className="text-sm">基于FIS官方数据源</div>
+                    <div className="font-semibold text-ski-navy">权威数据</div>
+                    <div className="text-sm">国家级赛事数据管理</div>
                   </div>
                   <div className="border-l-4 border-orange-500 pl-4">
                     <div className="font-semibold text-ski-navy">全面覆盖</div>
@@ -546,7 +546,7 @@ export default function HomePage() {
                 <ul className="space-y-4">
                   <li className="flex items-center">
                     <CheckCircle className="h-5 w-5 text-green-300 mr-3 flex-shrink-0" />
-                    <span>符合FIS国际雪联积分计算标准</span>
+                    <span>采用国际通用积分计算标准</span>
                   </li>
                   <li className="flex items-center">
                     <CheckCircle className="h-5 w-5 text-green-300 mr-3 flex-shrink-0" />

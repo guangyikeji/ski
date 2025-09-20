@@ -5,33 +5,83 @@ import { getImagePath } from '@/utils/paths'
 const mockAthletes = [
   {
     id: 1,
-    name: '张三',
+    name: '张伟',
     country: 'CHN',
     fisCode: '125001',
     discipline: 'SL',
-    points: 45.67,
+    points: 0.00,
     rank: 1,
     lastUpdate: '2024-12-15'
   },
   {
     id: 2,
-    name: '李四',
+    name: '李雪',
     country: 'CHN',
     fisCode: '125002',
     discipline: 'GS',
-    points: 52.34,
+    points: 8.45,
     rank: 2,
     lastUpdate: '2024-12-15'
   },
   {
     id: 3,
-    name: '王五',
+    name: '王冰',
     country: 'CHN',
     fisCode: '125003',
     discipline: 'DH',
-    points: 78.90,
+    points: 12.30,
     rank: 3,
-    lastUpdate: '2024-12-10'
+    lastUpdate: '2024-12-15'
+  },
+  {
+    id: 4,
+    name: '刘强',
+    country: 'CHN',
+    fisCode: '125004',
+    discipline: 'SL',
+    points: 15.67,
+    rank: 4,
+    lastUpdate: '2024-12-14'
+  },
+  {
+    id: 5,
+    name: '陈美',
+    country: 'CHN',
+    fisCode: '125005',
+    discipline: 'GS',
+    points: 18.92,
+    rank: 5,
+    lastUpdate: '2024-12-14'
+  },
+  {
+    id: 6,
+    name: '赵峰',
+    country: 'CHN',
+    fisCode: '125006',
+    discipline: 'SG',
+    points: 21.45,
+    rank: 6,
+    lastUpdate: '2024-12-13'
+  },
+  {
+    id: 7,
+    name: '周雪莹',
+    country: 'CHN',
+    fisCode: '125007',
+    discipline: 'DH',
+    points: 24.78,
+    rank: 7,
+    lastUpdate: '2024-12-13'
+  },
+  {
+    id: 8,
+    name: '吴江',
+    country: 'CHN',
+    fisCode: '125008',
+    discipline: 'AC',
+    points: 27.35,
+    rank: 8,
+    lastUpdate: '2024-12-12'
   }
 ]
 
@@ -209,7 +259,7 @@ export default function FISPointsPage() {
         {/* Pagination */}
         <div className="flex items-center justify-between mt-6 pt-6 border-t border-gray-200">
           <div className="text-sm text-gray-700">
-            显示 <span className="font-medium">1</span> 到 <span className="font-medium">3</span> 条，共 <span className="font-medium">3</span> 条记录
+            显示 <span className="font-medium">1</span> 到 <span className="font-medium">8</span> 条，共 <span className="font-medium">8</span> 条记录
           </div>
           <div className="flex space-x-2">
             <button className="px-3 py-1 text-sm border border-gray-300 rounded-md hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed" disabled>
