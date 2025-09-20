@@ -1,7 +1,10 @@
 import Link from 'next/link'
-import { Mountain, Github, Mail, Phone } from 'lucide-react'
+import { Mountain, Github, Mail, Phone, Lock } from 'lucide-react'
+import { useAuth } from '@/contexts/AuthContext'
+import { Resource, Action } from '@/types/auth'
 
 export default function Footer() {
+  const { hasPermission, isAuthenticated } = useAuth()
   return (
     <footer className="bg-ski-navy text-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
@@ -44,31 +47,70 @@ export default function Footer() {
           <div>
             <h3 className="text-lg font-semibold mb-4">积分系统</h3>
             <ul className="space-y-2 text-sm">
-              <li>
-                <Link href="/points/fis" className="text-gray-300 hover:text-primary-400 transition-colors">
-                  中国积分查询
-                </Link>
-              </li>
-              <li>
-                <Link href="/points/rankings" className="text-gray-300 hover:text-primary-400 transition-colors">
-                  积分排行榜
-                </Link>
-              </li>
-              <li>
-                <Link href="/points/calculator" className="text-gray-300 hover:text-primary-400 transition-colors">
-                  积分计算器
-                </Link>
-              </li>
-              <li>
-                <Link href="/points/trends" className="text-gray-300 hover:text-primary-400 transition-colors">
-                  积分变化趋势
-                </Link>
-              </li>
-              <li>
-                <Link href="/rules/points" className="text-gray-300 hover:text-primary-400 transition-colors">
-                  积分规则详解
-                </Link>
-              </li>
+              {hasPermission(Resource.POINTS_QUERY, Action.READ) ? (
+                <li>
+                  <Link href="/points/fis" className="text-gray-300 hover:text-primary-400 transition-colors">
+                    中国积分查询
+                  </Link>
+                </li>
+              ) : (
+                <li className="flex items-center text-gray-500">
+                  <Lock className="h-3 w-3 mr-2" />
+                  <span>中国积分查询 (需要登录)</span>
+                </li>
+              )}
+
+              {hasPermission(Resource.POINTS_RANKING, Action.READ) ? (
+                <li>
+                  <Link href="/points/rankings" className="text-gray-300 hover:text-primary-400 transition-colors">
+                    积分排行榜
+                  </Link>
+                </li>
+              ) : (
+                <li className="flex items-center text-gray-500">
+                  <Lock className="h-3 w-3 mr-2" />
+                  <span>积分排行榜 (需要登录)</span>
+                </li>
+              )}
+
+              {hasPermission(Resource.POINTS_CALCULATOR, Action.READ) ? (
+                <li>
+                  <Link href="/points/calculator" className="text-gray-300 hover:text-primary-400 transition-colors">
+                    积分计算器
+                  </Link>
+                </li>
+              ) : (
+                <li className="flex items-center text-gray-500">
+                  <Lock className="h-3 w-3 mr-2" />
+                  <span>积分计算器 (需要登录)</span>
+                </li>
+              )}
+
+              {hasPermission(Resource.POINTS_TRENDS, Action.READ) ? (
+                <li>
+                  <Link href="/points/trends" className="text-gray-300 hover:text-primary-400 transition-colors">
+                    积分变化趋势
+                  </Link>
+                </li>
+              ) : (
+                <li className="flex items-center text-gray-500">
+                  <Lock className="h-3 w-3 mr-2" />
+                  <span>积分变化趋势 (需要登录)</span>
+                </li>
+              )}
+
+              {hasPermission(Resource.RULES_POINTS, Action.READ) ? (
+                <li>
+                  <Link href="/rules/points" className="text-gray-300 hover:text-primary-400 transition-colors">
+                    积分规则详解
+                  </Link>
+                </li>
+              ) : (
+                <li className="flex items-center text-gray-500">
+                  <Lock className="h-3 w-3 mr-2" />
+                  <span>积分规则详解 (需要登录)</span>
+                </li>
+              )}
             </ul>
           </div>
 
@@ -76,31 +118,70 @@ export default function Footer() {
           <div>
             <h3 className="text-lg font-semibold mb-4">赛事管理</h3>
             <ul className="space-y-2 text-sm">
-              <li>
-                <Link href="/competitions" className="text-gray-300 hover:text-primary-400 transition-colors">
-                  比赛列表
-                </Link>
-              </li>
-              <li>
-                <Link href="/competitions/schedule" className="text-gray-300 hover:text-primary-400 transition-colors">
-                  赛事日程
-                </Link>
-              </li>
-              <li>
-                <Link href="/results-import" className="text-gray-300 hover:text-primary-400 transition-colors">
-                  成绩导入
-                </Link>
-              </li>
-              <li>
-                <Link href="/results-announcement" className="text-gray-300 hover:text-primary-400 transition-colors">
-                  成绩公布
-                </Link>
-              </li>
-              <li>
-                <Link href="/registration" className="text-gray-300 hover:text-primary-400 transition-colors">
-                  在线报名
-                </Link>
-              </li>
+              {hasPermission(Resource.COMPETITIONS, Action.READ) ? (
+                <li>
+                  <Link href="/competitions" className="text-gray-300 hover:text-primary-400 transition-colors">
+                    比赛列表
+                  </Link>
+                </li>
+              ) : (
+                <li className="flex items-center text-gray-500">
+                  <Lock className="h-3 w-3 mr-2" />
+                  <span>比赛列表 (需要登录)</span>
+                </li>
+              )}
+
+              {hasPermission(Resource.COMPETITIONS_SCHEDULE, Action.READ) ? (
+                <li>
+                  <Link href="/competitions/schedule" className="text-gray-300 hover:text-primary-400 transition-colors">
+                    赛事日程
+                  </Link>
+                </li>
+              ) : (
+                <li className="flex items-center text-gray-500">
+                  <Lock className="h-3 w-3 mr-2" />
+                  <span>赛事日程 (需要登录)</span>
+                </li>
+              )}
+
+              {hasPermission(Resource.RESULTS_IMPORT, Action.READ) ? (
+                <li>
+                  <Link href="/results-import" className="text-gray-300 hover:text-primary-400 transition-colors">
+                    成绩导入
+                  </Link>
+                </li>
+              ) : (
+                <li className="flex items-center text-gray-500">
+                  <Lock className="h-3 w-3 mr-2" />
+                  <span>成绩导入 (管理员功能)</span>
+                </li>
+              )}
+
+              {hasPermission(Resource.RESULTS_ANNOUNCEMENT, Action.READ) ? (
+                <li>
+                  <Link href="/results-announcement" className="text-gray-300 hover:text-primary-400 transition-colors">
+                    成绩公布
+                  </Link>
+                </li>
+              ) : (
+                <li className="flex items-center text-gray-500">
+                  <Lock className="h-3 w-3 mr-2" />
+                  <span>成绩公布 (管理员功能)</span>
+                </li>
+              )}
+
+              {hasPermission(Resource.REGISTRATION, Action.READ) ? (
+                <li>
+                  <Link href="/registration" className="text-gray-300 hover:text-primary-400 transition-colors">
+                    在线报名
+                  </Link>
+                </li>
+              ) : (
+                <li className="flex items-center text-gray-500">
+                  <Lock className="h-3 w-3 mr-2" />
+                  <span>在线报名 (需要登录)</span>
+                </li>
+              )}
             </ul>
           </div>
         </div>

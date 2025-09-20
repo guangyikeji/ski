@@ -93,15 +93,6 @@ const stats = [
   { label: '数据来源', value: '中国', description: '官方数据', icon: Database }
 ]
 
-// 积分趋势数据 (示例)
-const pointsTrendData = [
-  { month: '10月', points: 85.2 },
-  { month: '11月', points: 82.1 },
-  { month: '12月', points: 78.9 },
-  { month: '1月', points: 75.3 },
-  { month: '2月', points: 72.8 },
-  { month: '3月', points: 70.4 }
-]
 
 // 动态新闻数据
 const newsItems = [
@@ -438,86 +429,6 @@ export default function HomePage() {
             </div>
           </div>
 
-          {/* 积分趋势图表 */}
-          <div className="mt-8">
-            <div className="bg-white rounded-lg shadow-lg p-6">
-              <div className="flex items-center justify-between mb-6">
-                <h3 className="text-xl font-semibold text-ski-navy">积分趋势</h3>
-                <div className="text-sm text-gray-500">最近6个月</div>
-              </div>
-
-              {/* 简单的SVG趋势图 */}
-              <div className="h-48 w-full">
-                <svg viewBox="0 0 600 200" className="w-full h-full">
-                  {/* 背景网格 */}
-                  <defs>
-                    <pattern id="grid" width="60" height="40" patternUnits="userSpaceOnUse">
-                      <path d="M 60 0 L 0 0 0 40" fill="none" stroke="#f3f4f6" strokeWidth="1"/>
-                    </pattern>
-                  </defs>
-                  <rect width="600" height="200" fill="url(#grid)" />
-
-                  {/* Y轴标签 */}
-                  <text x="10" y="20" className="text-xs fill-gray-500">90</text>
-                  <text x="10" y="60" className="text-xs fill-gray-500">80</text>
-                  <text x="10" y="100" className="text-xs fill-gray-500">70</text>
-                  <text x="10" y="140" className="text-xs fill-gray-500">60</text>
-                  <text x="10" y="180" className="text-xs fill-gray-500">50</text>
-
-                  {/* 趋势线 */}
-                  <polyline
-                    fill="none"
-                    stroke="#3b82f6"
-                    strokeWidth="3"
-                    points="60,60 160,75 260,95 360,115 460,130 560,145"
-                  />
-
-                  {/* 数据点 */}
-                  {pointsTrendData.map((point, index) => (
-                    <g key={index}>
-                      <circle
-                        cx={60 + index * 100}
-                        cy={200 - (point.points - 50) * 3}
-                        r="4"
-                        fill="#3b82f6"
-                        className="hover:r-6 transition-all cursor-pointer"
-                      />
-                      <text
-                        x={60 + index * 100}
-                        y={195}
-                        textAnchor="middle"
-                        className="text-xs fill-gray-600"
-                      >
-                        {point.month}
-                      </text>
-                    </g>
-                  ))}
-
-                  {/* 渐变填充 */}
-                  <defs>
-                    <linearGradient id="trendGradient" x1="0%" y1="0%" x2="0%" y2="100%">
-                      <stop offset="0%" style={{stopColor:'#3b82f6', stopOpacity:0.2}} />
-                      <stop offset="100%" style={{stopColor:'#3b82f6', stopOpacity:0}} />
-                    </linearGradient>
-                  </defs>
-                  <polygon
-                    fill="url(#trendGradient)"
-                    points="60,60 160,75 260,95 360,115 460,130 560,145 560,200 60,200"
-                  />
-                </svg>
-              </div>
-
-              <div className="mt-4 flex justify-between items-center text-sm text-gray-600">
-                <div className="flex items-center">
-                  <div className="w-3 h-3 bg-blue-500 rounded-full mr-2"></div>
-                  <span>平均积分</span>
-                </div>
-                <div className="text-green-600 font-medium">
-                  ↓ 14.8 分 (本季度改善)
-                </div>
-              </div>
-            </div>
-          </div>
         </div>
       </section>
 
