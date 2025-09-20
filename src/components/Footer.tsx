@@ -24,12 +24,8 @@ export default function Footer() {
               <span className="text-xl font-bold">Alpine Ski Points</span>
             </div>
             <p className="text-gray-300 text-sm max-w-2xl leading-relaxed">
-              Alpine Skiing China（中国高山滑雪积分管理平台）是基于中国滑雪协会标准打造的专业竞赛管理平台。
-              采用符合中国标准的积分计算算法，为中国高山滑雪竞赛提供权威、准确的数据管理和积分计算服务。
-            </p>
-            <p className="text-gray-300 text-sm max-w-2xl leading-relaxed mt-3">
-              我们致力于推动中国滑雪运动的数字化、标准化发展，为运动员、教练员、赛事组织者、竞赛裁判
-              提供现代化的数据管理、积分计算、成绩统计工具，全面提升中国高山滑雪运动的组织水平和竞技水平。
+              基于中国滑雪协会标准的专业竞赛管理平台，为中国高山滑雪运动提供权威的数据管理和积分计算服务，
+              致力于推动中国滑雪运动的数字化、标准化发展。
             </p>
             <div className="flex space-x-4 mt-6">
               <a
