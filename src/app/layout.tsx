@@ -1,5 +1,5 @@
 import './globals.css'
-import type { Metadata } from 'next'
+import type { Metadata, Viewport } from 'next'
 import { Inter } from 'next/font/google'
 import { SpeedInsights } from "@vercel/speed-insights/next"
 import Navigation from '@/components/Navigation'
@@ -9,13 +9,17 @@ import { AuthProvider } from '@/contexts/AuthContext'
 
 const inter = Inter({ subsets: ['latin'] })
 
+export const viewport: Viewport = {
+  width: 'device-width',
+  initialScale: 1,
+}
+
 export const metadata: Metadata = {
   title: 'Alpine Skiing China | 中国高山滑雪积分管理平台',
   description: '基于国际雪联(FIS)标准的专业滑雪竞赛数据管理平台，为中国高山滑雪运动提供权威积分计算、成绩管理、赛事组织等一站式解决方案',
   keywords: ['高山滑雪', 'Alpine Skiing', 'FIS积分', '滑雪竞赛', '积分计算', '滑雪管理', '中国滑雪', '国际雪联', '赛事管理', '运动员积分'],
   authors: [{ name: 'Alpine Skiing China' }],
   robots: 'index, follow',
-  viewport: 'width=device-width, initial-scale=1',
   openGraph: {
     title: 'Alpine Skiing China | 中国高山滑雪积分管理平台',
     description: '基于国际雪联(FIS)标准的专业滑雪竞赛数据管理平台',

@@ -6,13 +6,14 @@ const nextConfig = {
     trailingSlash: true,
     basePath: '/ski',
     assetPrefix: '/ski/',
+    distDir: 'out',
+    skipTrailingSlashRedirect: true,
   }),
   images: {
     unoptimized: true,
   },
   // 性能优化配置
   experimental: {
-    optimizeCss: true,
     optimizeServerReact: true,
   },
   // 压缩配置
