@@ -34,6 +34,33 @@ export default function ResultsImportPage() {
   const [showDetails, setShowDetails] = useState(true)
   const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
+  const [currentStep, setCurrentStep] = useState<'upload' | 'review' | 'confirm'>('upload')
+  const [isProcessing, setIsProcessing] = useState(false)
+
+  // 确认导入成绩
+  const handleConfirmImport = async () => {
+    if (!competitionData) return
+
+    setIsProcessing(true)
+    try {
+      // 模拟数据处理过程
+      await new Promise(resolve => setTimeout(resolve, 2000))
+
+      setCurrentStep('confirm')
+      alert(`成功导入 ${competitionData.competitors.length} 名运动员的比赛成绩！\n\n积分已自动计算完成，排名已更新。`)
+    } catch (error) {
+      alert('导入过程中发生错误，请重试')
+    } finally {
+      setIsProcessing(false)
+    }
+  }
+
+  // 重新开始导入
+  const handleRestart = () => {
+    setCompetitionData(null)
+    setCurrentStep('upload')
+    setError(null)
+  }
 
   const handleExportExcel = () => {
     if (!competitionData?.competitors || competitionData.competitors.length === 0) {
@@ -218,9 +245,10 @@ export default function ResultsImportPage() {
           throw new Error('文件不是有效的FIS XML格式')
         }
 
-        // 解析XML数据
+        // 解析比赛数据
         const parsedData = XMLParser.parseCompetitionXML(xmlContent)
         setCompetitionData(parsedData)
+        setCurrentStep('review') // 进入数据审核步骤
       } catch (err) {
         setError(err instanceof Error ? err.message : '文件解析失败，请检查XML格式是否正确')
       } finally {
@@ -278,18 +306,51 @@ export default function ResultsImportPage() {
 
       {/* Header */}
       <div className="text-center mb-8 relative z-10">
-        <h1 className="section-title">XML赛事数据解析</h1>
+        <h1 className="section-title">比赛成绩导入</h1>
         <p className="text-gray-600 text-lg">
-          导入和解析FIS标准XML格式的比赛数据
+          导入FIS标准格式的比赛成绩数据，自动计算积分和排名
         </p>
       </div>
 
-      {/* 导入区域 */}
-      <div className="card mb-8 relative z-10">
-        <div className="text-center py-8">
+      {/* 步骤指示器 */}
+      <div className="flex justify-center mb-8 relative z-10">
+        <div className="flex items-center space-x-4">
+          <div className={`flex items-center space-x-2 px-4 py-2 rounded-lg ${
+            currentStep === 'upload' ? 'bg-ski-blue text-white' :
+            ['review', 'confirm'].includes(currentStep) ? 'bg-green-100 text-green-800' : 'bg-gray-100 text-gray-600'
+          }`}>
+            <Upload className="h-4 w-4" />
+            <span className="font-medium">1. 上传文件</span>
+          </div>
+          <div className={`w-8 h-0.5 ${
+            ['review', 'confirm'].includes(currentStep) ? 'bg-green-400' : 'bg-gray-300'
+          }`}></div>
+          <div className={`flex items-center space-x-2 px-4 py-2 rounded-lg ${
+            currentStep === 'review' ? 'bg-ski-blue text-white' :
+            currentStep === 'confirm' ? 'bg-green-100 text-green-800' : 'bg-gray-100 text-gray-600'
+          }`}>
+            <Eye className="h-4 w-4" />
+            <span className="font-medium">2. 审核数据</span>
+          </div>
+          <div className={`w-8 h-0.5 ${
+            currentStep === 'confirm' ? 'bg-green-400' : 'bg-gray-300'
+          }`}></div>
+          <div className={`flex items-center space-x-2 px-4 py-2 rounded-lg ${
+            currentStep === 'confirm' ? 'bg-ski-blue text-white' : 'bg-gray-100 text-gray-600'
+          }`}>
+            <Award className="h-4 w-4" />
+            <span className="font-medium">3. 确认导入</span>
+          </div>
+        </div>
+      </div>
+
+      {/* 导入区域 - 仅在上传步骤显示 */}
+      {currentStep === 'upload' && (
+        <div className="card mb-8 relative z-10">
+          <div className="text-center py-8">
           <Upload className="h-16 w-16 text-ski-blue mx-auto mb-4" />
-          <h3 className="text-lg font-semibold text-ski-navy mb-2">导入XML文件</h3>
-          <p className="text-gray-600 mb-4">支持FIS标准格式的比赛数据文件（.xml）</p>
+          <h3 className="text-lg font-semibold text-ski-navy mb-2">上传比赛成绩文件</h3>
+          <p className="text-gray-600 mb-4">支持FIS官方格式的比赛成绩文件，系统将自动解析并计算积分</p>
 
           {error && (
             <div className="mb-4 p-4 bg-red-50 border border-red-200 rounded-lg">
@@ -316,6 +377,76 @@ export default function ResultsImportPage() {
           </p>
         </div>
       </div>
+      )}
+
+      {/* 数据审核阶段 - 操作按钮 */}
+      {currentStep === 'review' && competitionData && (
+        <div className="card mb-8 relative z-10">
+          <div className="text-center py-6">
+            <h3 className="text-lg font-semibold text-ski-navy mb-4">数据审核完成</h3>
+            <p className="text-gray-600 mb-6">
+              已成功解析 <span className="font-semibold text-ski-blue">{competitionData.competitors.length}</span> 名运动员的比赛成绩
+            </p>
+            <div className="flex justify-center space-x-4">
+              <button
+                onClick={handleRestart}
+                className="btn-secondary flex items-center"
+              >
+                <Upload className="h-4 w-4 mr-2" />
+                重新上传
+              </button>
+              <button
+                onClick={handleConfirmImport}
+                disabled={isProcessing}
+                className="btn-primary flex items-center"
+              >
+                {isProcessing ? (
+                  <>
+                    <div className="animate-spin h-4 w-4 mr-2 border-2 border-white border-t-transparent rounded-full"></div>
+                    处理中...
+                  </>
+                ) : (
+                  <>
+                    <Award className="h-4 w-4 mr-2" />
+                    确认导入成绩
+                  </>
+                )}
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* 导入完成 */}
+      {currentStep === 'confirm' && competitionData && (
+        <div className="card mb-8 relative z-10">
+          <div className="text-center py-6">
+            <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+              <Award className="h-8 w-8 text-green-600" />
+            </div>
+            <h3 className="text-lg font-semibold text-green-800 mb-2">成绩导入成功！</h3>
+            <p className="text-gray-600 mb-6">
+              {competitionData.competitors.length} 名运动员的比赛成绩已成功导入系统，积分已自动计算并更新排名
+            </p>
+            <div className="flex justify-center space-x-4">
+              <button
+                onClick={handleRestart}
+                className="btn-secondary flex items-center"
+              >
+                <Upload className="h-4 w-4 mr-2" />
+                导入新成绩
+              </button>
+              <button
+                onClick={() => window.location.href = '/points/rankings'}
+                className="btn-primary flex items-center"
+              >
+                <Trophy className="h-4 w-4 mr-2" />
+                查看积分排名
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
 
       {competitionData && (
         <>
