@@ -137,6 +137,12 @@ export default function HomePage() {
   const { hasPermission, isAuthenticated, user } = useAuth()
   const [currentNewsIndex, setCurrentNewsIndex] = useState(0)
   const [isPaused, setIsPaused] = useState(false)
+  const [isClient, setIsClient] = useState(false)
+
+  // 确保只在客户端渲染权限相关内容
+  useEffect(() => {
+    setIsClient(true)
+  }, [])
 
   // 自动轮播功能
   useEffect(() => {
@@ -323,17 +329,17 @@ export default function HomePage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-8 md:mb-12">
             <h2 className="text-2xl md:text-3xl font-bold text-ski-navy mb-4">
-              {isAuthenticated ? '最新赛事成绩' : '平台核心功能'}
+              {isClient && isAuthenticated ? '最新赛事成绩' : '平台核心功能'}
             </h2>
             <p className="text-gray-600 text-sm md:text-base">
-              {isAuthenticated
+              {isClient && isAuthenticated
                 ? '实时更新的竞赛结果和积分排名'
                 : '注册成为会员，解锁所有专业功能'
               }
             </p>
           </div>
 
-          {isAuthenticated ? (
+          {isClient && isAuthenticated ? (
             <div>
               {/* 会员个人化欢迎 */}
               <div className="bg-gradient-to-r from-ski-blue to-blue-600 rounded-lg p-6 mb-8 text-white">

@@ -1,10 +1,18 @@
+'use client'
+
 import Link from 'next/link'
 import { Mountain, Github, Mail, Phone, Lock } from 'lucide-react'
 import { useAuth } from '@/contexts/AuthContext'
 import { Resource, Action } from '@/types/auth'
+import { useState, useEffect } from 'react'
 
 export default function Footer() {
   const { hasPermission, isAuthenticated } = useAuth()
+  const [isClient, setIsClient] = useState(false)
+
+  useEffect(() => {
+    setIsClient(true)
+  }, [])
   return (
     <footer className="bg-ski-navy text-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
@@ -47,7 +55,7 @@ export default function Footer() {
           <div>
             <h3 className="text-lg font-semibold mb-4">积分系统</h3>
             <ul className="space-y-2 text-sm">
-              {hasPermission(Resource.POINTS_QUERY, Action.READ) ? (
+              {isClient && hasPermission(Resource.POINTS_QUERY, Action.READ) ? (
                 <li>
                   <Link href="/points/fis" className="text-gray-300 hover:text-primary-400 transition-colors">
                     中国积分查询
@@ -60,7 +68,7 @@ export default function Footer() {
                 </li>
               )}
 
-              {hasPermission(Resource.POINTS_RANKING, Action.READ) ? (
+              {isClient && hasPermission(Resource.POINTS_RANKING, Action.READ) ? (
                 <li>
                   <Link href="/points/rankings" className="text-gray-300 hover:text-primary-400 transition-colors">
                     积分排行榜
@@ -73,7 +81,7 @@ export default function Footer() {
                 </li>
               )}
 
-              {hasPermission(Resource.POINTS_CALCULATOR, Action.READ) ? (
+              {isClient && hasPermission(Resource.POINTS_CALCULATOR, Action.READ) ? (
                 <li>
                   <Link href="/points/calculator" className="text-gray-300 hover:text-primary-400 transition-colors">
                     积分计算器
@@ -86,7 +94,7 @@ export default function Footer() {
                 </li>
               )}
 
-              {hasPermission(Resource.POINTS_TRENDS, Action.READ) ? (
+              {isClient && hasPermission(Resource.POINTS_TRENDS, Action.READ) ? (
                 <li>
                   <Link href="/points/trends" className="text-gray-300 hover:text-primary-400 transition-colors">
                     积分变化趋势
@@ -99,7 +107,7 @@ export default function Footer() {
                 </li>
               )}
 
-              {hasPermission(Resource.RULES_POINTS, Action.READ) ? (
+              {isClient && hasPermission(Resource.RULES_POINTS, Action.READ) ? (
                 <li>
                   <Link href="/rules/points" className="text-gray-300 hover:text-primary-400 transition-colors">
                     积分规则详解
@@ -118,7 +126,7 @@ export default function Footer() {
           <div>
             <h3 className="text-lg font-semibold mb-4">赛事管理</h3>
             <ul className="space-y-2 text-sm">
-              {hasPermission(Resource.COMPETITIONS, Action.READ) ? (
+              {isClient && hasPermission(Resource.COMPETITIONS, Action.READ) ? (
                 <li>
                   <Link href="/competitions" className="text-gray-300 hover:text-primary-400 transition-colors">
                     比赛列表
@@ -131,7 +139,7 @@ export default function Footer() {
                 </li>
               )}
 
-              {hasPermission(Resource.COMPETITIONS_SCHEDULE, Action.READ) ? (
+              {isClient && hasPermission(Resource.COMPETITIONS_SCHEDULE, Action.READ) ? (
                 <li>
                   <Link href="/competitions/schedule" className="text-gray-300 hover:text-primary-400 transition-colors">
                     赛事日程
@@ -144,7 +152,7 @@ export default function Footer() {
                 </li>
               )}
 
-              {hasPermission(Resource.RESULTS_IMPORT, Action.READ) ? (
+              {isClient && hasPermission(Resource.RESULTS_IMPORT, Action.READ) ? (
                 <li>
                   <Link href="/results-import" className="text-gray-300 hover:text-primary-400 transition-colors">
                     成绩导入
@@ -157,7 +165,7 @@ export default function Footer() {
                 </li>
               )}
 
-              {hasPermission(Resource.RESULTS_ANNOUNCEMENT, Action.READ) ? (
+              {isClient && hasPermission(Resource.RESULTS_ANNOUNCEMENT, Action.READ) ? (
                 <li>
                   <Link href="/results-announcement" className="text-gray-300 hover:text-primary-400 transition-colors">
                     成绩公布
@@ -170,7 +178,7 @@ export default function Footer() {
                 </li>
               )}
 
-              {hasPermission(Resource.REGISTRATION, Action.READ) ? (
+              {isClient && hasPermission(Resource.REGISTRATION, Action.READ) ? (
                 <li>
                   <Link href="/registration" className="text-gray-300 hover:text-primary-400 transition-colors">
                     在线报名
