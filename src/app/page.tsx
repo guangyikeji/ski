@@ -178,26 +178,26 @@ export default function HomePage() {
                 FIS国际雪联官方认证平台
               </div>
               <h1 className="text-5xl md:text-7xl font-bold mb-6 leading-tight">
-                <span className="text-ski-blue">Alpine Skiing</span>
-                <span className="block text-white">中国高山滑雪</span>
+                <span className="text-ski-blue">Alpine Skiing China</span>
+                <span className="block text-white">中国高山滑雪积分管理平台</span>
               </h1>
               <div className="mb-8">
-                <p className="text-2xl md:text-3xl text-gray-200 mb-4 leading-relaxed font-semibold">
+                <p className="text-2xl md:text-3xl text-gray-200 mb-6 leading-relaxed font-semibold">
                   传承雪山精神，追求卓越竞技
                 </p>
-                <div className="flex flex-col md:flex-row md:items-center md:justify-start md:space-x-4 space-y-2 md:space-y-0 text-lg text-gray-300">
-                  <span className="flex items-center">
-                    <div className="w-2 h-2 bg-ski-blue rounded-full mr-2"></div>
-                    FIS国际标准积分算法
-                  </span>
-                  <span className="flex items-center">
-                    <div className="w-2 h-2 bg-green-400 rounded-full mr-2"></div>
-                    实时数据同步
-                  </span>
-                  <span className="flex items-center">
-                    <div className="w-2 h-2 bg-yellow-400 rounded-full mr-2"></div>
-                    权威竞赛管理平台
-                  </span>
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-lg">
+                  <div className="flex items-center bg-white/10 backdrop-blur-sm rounded-lg px-4 py-3 border border-white/20">
+                    <div className="w-3 h-3 bg-ski-blue rounded-full mr-3 flex-shrink-0"></div>
+                    <span className="text-white font-medium">FIS国际标准积分算法</span>
+                  </div>
+                  <div className="flex items-center bg-white/10 backdrop-blur-sm rounded-lg px-4 py-3 border border-white/20">
+                    <div className="w-3 h-3 bg-green-400 rounded-full mr-3 flex-shrink-0"></div>
+                    <span className="text-white font-medium">实时数据同步更新</span>
+                  </div>
+                  <div className="flex items-center bg-white/10 backdrop-blur-sm rounded-lg px-4 py-3 border border-white/20">
+                    <div className="w-3 h-3 bg-yellow-400 rounded-full mr-3 flex-shrink-0"></div>
+                    <span className="text-white font-medium">权威竞赛管理平台</span>
+                  </div>
                 </div>
               </div>
             </div>
