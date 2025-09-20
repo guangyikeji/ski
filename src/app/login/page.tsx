@@ -13,8 +13,15 @@ export default function LoginPage() {
     password: ''
   })
   const [showPassword, setShowPassword] = useState(false)
+  const [emailError, setEmailError] = useState('')
   const { login, isLoading, error, isAuthenticated, clearError } = useAuth()
   const router = useRouter()
+
+  // 邮箱验证函数
+  const validateEmail = (email: string): boolean => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+    return emailRegex.test(email)
+  }
 
   useEffect(() => {
     if (isAuthenticated) {
@@ -25,6 +32,23 @@ export default function LoginPage() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     clearError()
+    setEmailError('')
+
+    // 前端验证
+    if (!formData.email) {
+      setEmailError('请输入邮箱地址')
+      return
+    }
+
+    if (!validateEmail(formData.email)) {
+      setEmailError('请输入有效的邮箱地址')
+      return
+    }
+
+    if (!formData.password) {
+      setEmailError('请输入密码')
+      return
+    }
 
     try {
       await login(formData)
@@ -34,10 +58,18 @@ export default function LoginPage() {
   }
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target
     setFormData({
       ...formData,
-      [e.target.name]: e.target.value
+      [name]: value
     })
+
+    // 实时邮箱验证
+    if (name === 'email' && emailError) {
+      if (value && validateEmail(value)) {
+        setEmailError('')
+      }
+    }
   }
 
   return (
@@ -108,10 +140,17 @@ export default function LoginPage() {
                     required
                     value={formData.email}
                     onChange={handleChange}
-                    className="pl-10 w-full px-3 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-ski-blue focus:border-transparent"
+                    className={`pl-10 w-full px-3 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:border-transparent ${
+                      emailError
+                        ? 'border-red-300 focus:ring-red-500'
+                        : 'border-gray-300 focus:ring-ski-blue'
+                    }`}
                     placeholder="请输入您的邮箱地址"
                   />
                 </div>
+                {emailError && (
+                  <p className="mt-1 text-sm text-red-600">{emailError}</p>
+                )}
               </div>
 
               <div>
