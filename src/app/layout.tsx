@@ -16,13 +16,13 @@ export const viewport: Viewport = {
 
 export const metadata: Metadata = {
   title: 'Alpine Skiing China | 中国高山滑雪积分管理平台',
-  description: '基于国际雪联(FIS)标准的专业滑雪竞赛数据管理平台，为中国高山滑雪运动提供权威积分计算、成绩管理、赛事组织等一站式解决方案',
-  keywords: ['高山滑雪', 'Alpine Skiing', 'FIS积分', '滑雪竞赛', '积分计算', '滑雪管理', '中国滑雪', '国际雪联', '赛事管理', '运动员积分'],
+  description: '基于中国积分体系标准的专业滑雪竞赛数据管理平台，为中国高山滑雪运动提供权威积分计算、成绩管理、赛事组织等一站式解决方案',
+  keywords: ['高山滑雪', 'Alpine Skiing', '中国积分', '滑雪竞赛', '积分计算', '滑雪管理', '中国滑雪', '中国滑雪协会', '赛事管理', '运动员积分'],
   authors: [{ name: 'Alpine Skiing China' }],
   robots: 'index, follow',
   openGraph: {
     title: 'Alpine Skiing China | 中国高山滑雪积分管理平台',
-    description: '基于国际雪联(FIS)标准的专业滑雪竞赛数据管理平台',
+    description: '基于中国积分体系标准的专业滑雪竞赛数据管理平台',
     type: 'website',
     locale: 'zh_CN',
     siteName: 'Alpine Skiing China'
@@ -30,7 +30,7 @@ export const metadata: Metadata = {
   twitter: {
     card: 'summary_large_image',
     title: 'Alpine Skiing China | 中国高山滑雪积分管理平台',
-    description: '基于国际雪联(FIS)标准的专业滑雪竞赛数据管理平台'
+    description: '基于中国积分体系标准的专业滑雪竞赛数据管理平台'
   }
 }
 

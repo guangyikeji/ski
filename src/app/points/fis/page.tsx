@@ -114,9 +114,9 @@ export default function FISPointsPage() {
       </div>
       {/* Header */}
       <div className="mb-8 relative z-10">
-        <h1 className="section-title">FIS积分查询</h1>
+        <h1 className="section-title">中国积分查询</h1>
         <p className="text-gray-600 text-lg">
-          查询运动员的FIS积分和排名信息，数据每14天更新一次
+          查询运动员的中国高山滑雪积分和排名信息，数据每21天更新一次
         </p>
       </div>
 
@@ -280,9 +280,9 @@ export default function FISPointsPage() {
         <div className="card">
           <h3 className="text-lg font-semibold text-ski-navy mb-3">积分说明</h3>
           <ul className="space-y-2 text-sm text-gray-600">
-            <li>• FIS积分越低表示运动员水平越高</li>
+            <li>• 中国积分越低表示运动员水平越高</li>
             <li>• 积分基于运动员最近两个赛季的最佳成绩计算</li>
-            <li>• 数据每14天更新一次，与国际雪联保持同步</li>
+            <li>• 数据每21天更新一次，采用中国积分体系标准</li>
             <li>• 不同项目的积分不能直接比较</li>
           </ul>
         </div>

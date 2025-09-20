@@ -1,56 +1,241 @@
 'use client'
 
-import React, { createContext, useContext, useState, useEffect } from 'react'
+import { createContext, useContext, useReducer, useEffect, ReactNode } from 'react'
+import { User, UserRole, AuthState, LoginRequest, RegisterRequest, Resource, Action } from '@/types/auth'
 
-interface User {
-  id: string
-  email: string
-  name: string
-  role: string
-  fisCode?: string
-  loginTime: string
+// 权限规则配置 - 中国高山滑雪积分管理平台
+const PERMISSIONS_MAP: Record<UserRole, Record<Resource, Action[]>> = {
+  [UserRole.PUBLIC]: {
+    [Resource.HOME]: [Action.read],
+    [Resource.ABOUT]: [Action.read],
+    [Resource.NEWS]: [Action.read],
+    [Resource.CONTACT]: [Action.read],
+  } as Record<Resource, Action[]>,
+
+  [UserRole.ATHLETE]: {
+    [Resource.HOME]: [Action.read],
+    [Resource.ABOUT]: [Action.read],
+    [Resource.NEWS]: [Action.read],
+    [Resource.CONTACT]: [Action.read],
+    [Resource.PROFILE]: [Action.read, Action.UPDATE],
+    [Resource.MY_POINTS]: [Action.read],
+    [Resource.RANKING]: [Action.read],
+    [Resource.EVENTS]: [Action.read, Action.WRITE],
+  } as Record<Resource, Action[]>,
+
+  [UserRole.COACH]: {
+    [Resource.HOME]: [Action.read],
+    [Resource.ABOUT]: [Action.read],
+    [Resource.NEWS]: [Action.read],
+    [Resource.CONTACT]: [Action.read],
+    [Resource.PROFILE]: [Action.read, Action.UPDATE],
+    [Resource.MY_POINTS]: [Action.read],
+    [Resource.RANKING]: [Action.read],
+    [Resource.EVENTS]: [Action.read, Action.WRITE],
+  } as Record<Resource, Action[]>,
+
+  [UserRole.ADMIN]: {
+    [Resource.HOME]: [Action.read],
+    [Resource.ABOUT]: [Action.read, Action.UPDATE],
+    [Resource.NEWS]: [Action.read, Action.WRITE, Action.UPDATE, Action.DELETE],
+    [Resource.CONTACT]: [Action.read, Action.UPDATE],
+    [Resource.PROFILE]: [Action.read, Action.UPDATE],
+    [Resource.MY_POINTS]: [Action.read],
+    [Resource.RANKING]: [Action.read],
+    [Resource.EVENTS]: [Action.read, Action.WRITE, Action.UPDATE, Action.DELETE],
+    [Resource.ADMIN_DASHBOARD]: [Action.read],
+    [Resource.POINTS_CALCULATION]: [Action.read, Action.WRITE, Action.UPDATE],
+    [Resource.USER_MANAGEMENT]: [Action.read, Action.WRITE, Action.UPDATE, Action.DELETE],
+    [Resource.STATISTICS]: [Action.read],
+    [Resource.SYSTEM_CONFIG]: [Action.read, Action.UPDATE],
+  } as Record<Resource, Action[]>
 }
 
-interface AuthContextType {
-  user: User | null
-  login: (userData: User) => void
+// 认证状态管理
+type AuthAction =
+  | { type: 'LOGIN_SUCCESS'; payload: User }
+  | { type: 'LOGIN_FAILURE'; payload: string }
+  | { type: 'LOGOUT' }
+  | { type: 'SET_LOADING'; payload: boolean }
+  | { type: 'CLEAR_ERROR' }
+
+const authReducer = (state: AuthState, action: AuthAction): AuthState => {
+  switch (action.type) {
+    case 'LOGIN_SUCCESS':
+      return {
+        ...state,
+        user: action.payload,
+        isAuthenticated: true,
+        isLoading: false,
+        error: null
+      }
+    case 'LOGIN_FAILURE':
+      return {
+        ...state,
+        user: null,
+        isAuthenticated: false,
+        isLoading: false,
+        error: action.payload
+      }
+    case 'LOGOUT':
+      return {
+        ...state,
+        user: null,
+        isAuthenticated: false,
+        isLoading: false,
+        error: null
+      }
+    case 'SET_LOADING':
+      return {
+        ...state,
+        isLoading: action.payload
+      }
+    case 'CLEAR_ERROR':
+      return {
+        ...state,
+        error: null
+      }
+    default:
+      return state
+  }
+}
+
+const initialState: AuthState = {
+  user: null,
+  isAuthenticated: false,
+  isLoading: false,
+  error: null
+}
+
+interface AuthContextType extends AuthState {
+  login: (credentials: LoginRequest) => Promise<void>
+  register: (data: RegisterRequest) => Promise<void>
   logout: () => void
-  isLoading: boolean
+  hasPermission: (resource: Resource, action: Action) => boolean
+  clearError: () => void
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined)
 
-export function AuthProvider({ children }: { children: React.ReactNode }) {
-  const [user, setUser] = useState<User | null>(null)
-  const [isLoading, setIsLoading] = useState(true)
+export function AuthProvider({ children }: { children: ReactNode }) {
+  const [state, dispatch] = useReducer(authReducer, initialState)
 
-  useEffect(() => {
-    // 检查localStorage中的用户session
-    const session = localStorage.getItem('ski_user_session')
-    if (session) {
-      try {
-        const userData = JSON.parse(session)
-        setUser(userData)
-      } catch (error) {
-        console.error('Error parsing user session:', error)
-        localStorage.removeItem('ski_user_session')
-      }
+  // 权限检查函数
+  const hasPermission = (resource: Resource, action: Action): boolean => {
+    if (!state.user) {
+      // 未登录用户默认为公众角色
+      const publicPermissions = PERMISSIONS_MAP[UserRole.PUBLIC]
+      return publicPermissions[resource]?.includes(action) || false
     }
-    setIsLoading(false)
-  }, [])
 
-  const login = (userData: User) => {
-    setUser(userData)
-    localStorage.setItem('ski_user_session', JSON.stringify(userData))
+    const userPermissions = PERMISSIONS_MAP[state.user.role]
+    return userPermissions[resource]?.includes(action) || false
   }
 
-  const logout = () => {
-    setUser(null)
-    localStorage.removeItem('ski_user_session')
+  // 登录函数
+  const login = async (credentials: LoginRequest): Promise<void> => {
+    dispatch({ type: 'SET_LOADING', payload: true })
+
+    try {
+      // 模拟API调用
+      await new Promise(resolve => setTimeout(resolve, 1000))
+
+      // 模拟登录验证
+      if (credentials.email === 'admin@ski.com' && credentials.password === 'admin123') {
+        const user: User = {
+          id: '1',
+          username: 'admin',
+          email: credentials.email,
+          role: UserRole.ADMIN,
+          status: 'active',
+          createdAt: new Date(),
+          lastLoginAt: new Date()
+        }
+        dispatch({ type: 'LOGIN_SUCCESS', payload: user })
+        localStorage.setItem('auth_user', JSON.stringify(user))
+      } else if (credentials.email === 'athlete@ski.com' && credentials.password === 'athlete123') {
+        const user: User = {
+          id: '2',
+          username: 'athlete_user',
+          email: credentials.email,
+          role: UserRole.ATHLETE,
+          status: 'active',
+          athleteId: 'ATH001',
+          createdAt: new Date(),
+          lastLoginAt: new Date()
+        }
+        dispatch({ type: 'LOGIN_SUCCESS', payload: user })
+        localStorage.setItem('auth_user', JSON.stringify(user))
+      } else {
+        throw new Error('邮箱或密码错误')
+      }
+    } catch (error) {
+      dispatch({ type: 'LOGIN_FAILURE', payload: error instanceof Error ? error.message : '登录失败' })
+    }
+  }
+
+  // 注册函数
+  const register = async (data: RegisterRequest): Promise<void> => {
+    dispatch({ type: 'SET_LOADING', payload: true })
+
+    try {
+      // 模拟API调用
+      await new Promise(resolve => setTimeout(resolve, 1500))
+
+      // 模拟注册成功
+      const user: User = {
+        id: Date.now().toString(),
+        username: data.username,
+        email: data.email,
+        role: data.userType === 'athlete' ? UserRole.ATHLETE : UserRole.COACH,
+        status: 'pending',
+        athleteId: data.userType === 'athlete' ? `ATH${Date.now()}` : undefined,
+        coachId: data.userType === 'coach' ? `COACH${Date.now()}` : undefined,
+        createdAt: new Date()
+      }
+
+      dispatch({ type: 'LOGIN_SUCCESS', payload: user })
+      localStorage.setItem('auth_user', JSON.stringify(user))
+    } catch (error) {
+      dispatch({ type: 'LOGIN_FAILURE', payload: error instanceof Error ? error.message : '注册失败' })
+    }
+  }
+
+  // 登出函数
+  const logout = (): void => {
+    localStorage.removeItem('auth_user')
+    dispatch({ type: 'LOGOUT' })
+  }
+
+  // 清除错误
+  const clearError = (): void => {
+    dispatch({ type: 'CLEAR_ERROR' })
+  }
+
+  // 初始化时检查本地存储
+  useEffect(() => {
+    const savedUser = localStorage.getItem('auth_user')
+    if (savedUser) {
+      try {
+        const user = JSON.parse(savedUser)
+        dispatch({ type: 'LOGIN_SUCCESS', payload: user })
+      } catch (error) {
+        localStorage.removeItem('auth_user')
+      }
+    }
+  }, [])
+
+  const value: AuthContextType = {
+    ...state,
+    login,
+    register,
+    logout,
+    hasPermission,
+    clearError
   }
 
   return (
-    <AuthContext.Provider value={{ user, login, logout, isLoading }}>
+    <AuthContext.Provider value={value}>
       {children}
     </AuthContext.Provider>
   )

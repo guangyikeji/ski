@@ -35,7 +35,7 @@ const availableCompetitions = [
     deadline: '2024-12-18',
     maxParticipants: 150,
     currentParticipants: 87,
-    requirements: ['FIS积分小于100', '年满18周岁', '有效保险'],
+    requirements: ['中国积分小于100', '年满18周岁', '有效保险'],
     status: 'open',
     image: '/images/ski-bg.jpg'
   },
@@ -65,7 +65,7 @@ const availableCompetitions = [
     deadline: '2024-12-28',
     maxParticipants: 80,
     currentParticipants: 76,
-    requirements: ['邀请函', 'FIS积分证明', '专业装备'],
+    requirements: ['邀请函', '中国积分证明', '专业装备'],
     status: 'almost_full',
     image: '/images/ski-action-2.jpg'
   }

@@ -96,7 +96,7 @@ export default function AthleteDashboard() {
     },
     {
       id: '3',
-      competition: '2024年FIS积分赛',
+      competition: '2024年中国积分赛',
       discipline: 'SG',
       date: '2024-01-20',
       rank: 12,

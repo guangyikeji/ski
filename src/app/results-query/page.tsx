@@ -266,7 +266,7 @@ export default function ResultsQueryPage() {
               <p className="font-medium mb-1">成绩说明</p>
               <ul className="space-y-1 text-xs">
                 <li>• 成绩按照总用时排序，用时越短排名越靠前</li>
-                <li>• 积分根据FIS积分规则计算</li>
+                <li>• 积分根据中国积分规则计算</li>
                 <li>• 前三名将获得奖牌，分别为金牌、银牌、铜牌</li>
               </ul>
             </div>

@@ -33,7 +33,7 @@ export interface Athlete {
 export interface Competition {
   id: string
   name: string
-  type: 'World Cup' | 'Continental Cup' | 'FIS Race' | 'National Championship' | 'Regional'
+  type: 'National Championship' | 'Regional Championship' | 'China Cup' | 'Provincial Championship' | 'Training Race'
   disciplines: string[]
   startDate: string
   endDate: string
@@ -45,7 +45,7 @@ export interface Competition {
   status: 'upcoming' | 'ongoing' | 'completed' | 'cancelled'
   participants: number
   organizer: string
-  fisCode?: string
+  chinaCode?: string
   resultsPublished: boolean
 }
 
@@ -293,44 +293,44 @@ export const mockCompetitions: Competition[] = [
   },
   {
     id: 'COMP002',
-    name: '2024年亚洲杯高山滑雪赛',
-    type: 'Continental Cup',
+    name: '2024年全国青少年滑雪锦标赛',
+    type: 'Regional Championship',
     disciplines: ['SL', 'GS'],
     startDate: '2024-02-01',
     endDate: '2024-02-03',
     location: {
-      venue: '志贺高原',
-      country: '日本',
-      city: '长野'
+      venue: '万龙滑雪场',
+      country: '中国',
+      city: '张家口'
     },
     status: 'completed',
     participants: 89,
-    organizer: '亚洲滑雪联合会',
-    fisCode: 'JPN2024002',
+    organizer: '中国滑雪协会',
+    chinaCode: 'CHN2024002',
     resultsPublished: true
   },
   {
     id: 'COMP003',
-    name: '2024年世界杯高山滑雪赛（奥地利站）',
-    type: 'World Cup',
+    name: '2024年中国高山滑雪巡回赛（北京站）',
+    type: 'China Cup',
     disciplines: ['SL', 'GS'],
     startDate: '2024-03-15',
     endDate: '2024-03-17',
     location: {
-      venue: '索尔登滑雪场',
-      country: '奥地利',
-      city: '索尔登'
+      venue: '南山滑雪场',
+      country: '中国',
+      city: '北京'
     },
     status: 'upcoming',
     participants: 120,
-    organizer: 'FIS',
-    fisCode: 'AUT2024003',
+    organizer: '北京滑雪协会',
+    chinaCode: 'CHN2024003',
     resultsPublished: false
   },
   {
     id: 'COMP004',
-    name: '2024年崇礼FIS积分赛',
-    type: 'FIS Race',
+    name: '2024年崇礼中国积分赛',
+    type: 'Provincial Championship',
     disciplines: ['SG', 'DH'],
     startDate: '2024-01-20',
     endDate: '2024-01-21',
@@ -342,13 +342,13 @@ export const mockCompetitions: Competition[] = [
     status: 'completed',
     participants: 67,
     organizer: '河北省滑雪协会',
-    fisCode: 'CHN2024004',
+    chinaCode: 'CHN2024004',
     resultsPublished: true
   },
   {
     id: 'COMP005',
     name: '2024年春季训练赛',
-    type: 'Regional',
+    type: 'Training Race',
     disciplines: ['SL', 'GS'],
     startDate: '2024-03-25',
     endDate: '2024-03-26',
@@ -467,7 +467,7 @@ export const mockResults: Result[] = [
     dsq: false,
     date: '2024-02-02'
   },
-  // 2024年崇礼FIS积分赛
+  // 2024年崇礼中国积分赛
   {
     id: 'RES008',
     competitionId: 'COMP004',

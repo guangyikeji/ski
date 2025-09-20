@@ -202,7 +202,7 @@ export default function ResultsImportPage() {
 
           <div class="footer">
             <p>本报告由高山滑雪竞赛管理系统自动生成</p>
-            <p>符合国际雪联(FIS)标准 | 官方认证</p>
+            <p>符合中国滑雪协会(FIS)标准 | 官方认证</p>
           </div>
         </div>
       </body>

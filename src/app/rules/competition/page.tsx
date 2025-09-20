@@ -370,8 +370,8 @@ export default function CompetitionRulesPage() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-8">
             <div className="card text-center hover:shadow-lg transition-shadow duration-200 cursor-pointer">
               <Trophy className="h-12 w-12 text-ski-blue mx-auto mb-4" />
-              <h3 className="text-lg font-semibold text-ski-navy mb-2">FIS积分规则</h3>
-              <p className="text-sm text-gray-600">了解国际雪联积分计算规则</p>
+              <h3 className="text-lg font-semibold text-ski-navy mb-2">中国积分规则</h3>
+              <p className="text-sm text-gray-600">了解中国滑雪协会积分计算规则</p>
             </div>
 
             <div className="card text-center hover:shadow-lg transition-shadow duration-200 cursor-pointer">

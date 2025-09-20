@@ -10,11 +10,11 @@ const disciplineFactors = [
 ]
 
 const maxPoints = [
-  { discipline: '速降 (DH)', maxPoints: 330, usage: '缺乏足够FIS积分选手时使用' },
-  { discipline: '超级大回转 (SG)', maxPoints: 270, usage: '缺乏足够FIS积分选手时使用' },
-  { discipline: '回转 (SL)', maxPoints: 165, usage: '缺乏足够FIS积分选手时使用' },
-  { discipline: '大回转 (GS)', maxPoints: 220, usage: '缺乏足够FIS积分选手时使用' },
-  { discipline: '全能 (AC)', maxPoints: 270, usage: '缺乏足够FIS积分选手时使用' }
+  { discipline: '速降 (DH)', maxPoints: 330, usage: '缺乏足够中国积分选手时使用' },
+  { discipline: '超级大回转 (SG)', maxPoints: 270, usage: '缺乏足够中国积分选手时使用' },
+  { discipline: '回转 (SL)', maxPoints: 165, usage: '缺乏足够中国积分选手时使用' },
+  { discipline: '大回转 (GS)', maxPoints: 220, usage: '缺乏足够中国积分选手时使用' },
+  { discipline: '全能 (AC)', maxPoints: 270, usage: '缺乏足够中国积分选手时使用' }
 ]
 
 const calculationSteps = [
@@ -70,7 +70,7 @@ export default function PointsRulesPage() {
       <div className="mb-8 relative z-10">
         <h1 className="section-title">积分规则详解</h1>
         <p className="text-gray-600 text-lg">
-          详细解读FIS积分计算规则，包括公式说明、计算步骤和特殊情况处理
+          详细解读中国积分计算规则，包括公式说明、计算步骤和特殊情况处理
         </p>
       </div>
 
@@ -168,7 +168,7 @@ export default function PointsRulesPage() {
         <h2 className="text-2xl font-bold text-ski-navy mb-6">最大积分值限制</h2>
         <div className="card">
           <p className="text-gray-600 mb-6">
-            当缺乏足够FIS积分的选手参赛时，使用以下最大值进行计算：
+            当缺乏足够中国积分的选手参赛时，使用以下最大值进行计算：
           </p>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
             {maxPoints.map((item, index) => (
@@ -204,10 +204,10 @@ export default function PointsRulesPage() {
               </div>
               <div className="space-y-3 text-sm">
                 <div>
-                  <span className="font-semibold">Sum A:</span> 前10名中最好5名选手的FIS积分总和
+                  <span className="font-semibold">Sum A:</span> 前10名中最好5名选手的中国积分总和
                 </div>
                 <div>
-                  <span className="font-semibold">Sum B:</span> 所有参赛选手中最好5名的FIS积分总和
+                  <span className="font-semibold">Sum B:</span> 所有参赛选手中最好5名的中国积分总和
                 </div>
                 <div>
                   <span className="font-semibold">Sum C:</span> 最好5名选手的比赛积分总和
@@ -294,7 +294,7 @@ export default function PointsRulesPage() {
                 所有并列选手都参与惩罚值计算
               </div>
               <div>
-                <span className="font-semibold">第5好FIS积分并列：</span>
+                <span className="font-semibold">第5好中国积分并列：</span>
                 选择比赛积分更高者参与计算
               </div>
               <div>

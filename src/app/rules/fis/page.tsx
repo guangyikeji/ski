@@ -5,7 +5,7 @@ const ruleCategories = [
   {
     title: '积分计算规则',
     icon: Calculator,
-    description: '详细的FIS积分计算公式和方法',
+    description: '详细的中国积分计算公式和方法',
     rules: [
       { name: '基础积分公式', description: 'P = F × (Tx/To - 1)', status: 'active' },
       { name: '项目系数表', description: '各项目的F系数值', status: 'active' },
@@ -39,8 +39,8 @@ const ruleCategories = [
 
 const downloadableRules = [
   {
-    title: 'FIS积分规则2024-2025版',
-    description: '完整的FIS积分计算规则文档',
+    title: '中国积分规则2024-2025版',
+    description: '完整的中国积分计算规则文档',
     size: '2.3 MB',
     format: 'PDF',
     language: '中英对照',
@@ -48,7 +48,7 @@ const downloadableRules = [
   },
   {
     title: '高山滑雪竞赛规则',
-    description: '国际雪联高山滑雪竞赛规则',
+    description: '中国滑雪协会高山滑雪竞赛规则',
     size: '5.8 MB',
     format: 'PDF',
     language: '中英对照',
@@ -71,7 +71,7 @@ export default function FISRulesPage() {
       <div className="mb-8">
         <h1 className="section-title">FIS规则文档</h1>
         <p className="text-gray-600 text-lg">
-          查看国际雪联官方规则文档和积分计算规则，确保比赛的公平性和准确性
+          查看中国滑雪协会官方规则文档和积分计算规则，确保比赛的公平性和准确性
         </p>
       </div>
 
@@ -96,7 +96,7 @@ export default function FISRulesPage() {
         <div className="card text-center">
           <ExternalLink className="h-12 w-12 text-purple-600 mx-auto mb-4" />
           <h3 className="text-lg font-semibold text-ski-navy mb-2">FIS官网</h3>
-          <p className="text-gray-600 text-sm mb-4">访问国际雪联官网</p>
+          <p className="text-gray-600 text-sm mb-4">访问中国滑雪协会官网</p>
           <a
             href="https://www.fis-ski.com"
             target="_blank"
@@ -197,10 +197,10 @@ export default function FISRulesPage() {
         <div className="space-y-6">
           <div>
             <h3 className="font-semibold text-gray-900 mb-2">
-              Q: FIS积分是如何计算的？
+              Q: 中国积分是如何计算的？
             </h3>
             <p className="text-gray-600">
-              A: FIS积分使用公式 P = F × (Tx/To - 1) 计算，其中P是积分，F是项目系数，
+              A: 中国积分使用公式 P = F × (Tx/To - 1) 计算，其中P是积分，F是项目系数，
               Tx是选手时间，To是获胜者时间。不同项目有不同的F系数。
             </p>
           </div>
@@ -210,7 +210,7 @@ export default function FISRulesPage() {
               Q: 积分多长时间更新一次？
             </h3>
             <p className="text-gray-600">
-              A: FIS积分每14天更新一次。基础积分表(BL)每年6月发布一次，
+              A: 中国积分每14天更新一次。基础积分表(BL)每年6月发布一次，
               常规积分表(NL)在赛季期间定期更新。
             </p>
           </div>
@@ -230,7 +230,7 @@ export default function FISRulesPage() {
               Q: 如何获得参赛资格？
             </h3>
             <p className="text-gray-600">
-              A: 参赛资格基于运动员的FIS积分和各国配额。不同级别的比赛有不同的积分门槛要求，
+              A: 参赛资格基于运动员的中国积分和各国配额。不同级别的比赛有不同的积分门槛要求，
               具体要求请参考竞赛规则文档。
             </p>
           </div>

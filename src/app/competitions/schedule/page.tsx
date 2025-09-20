@@ -80,7 +80,7 @@ const mockSchedule = [
     registrationDeadline: '2025-01-05',
     participants: 45,
     maxParticipants: 80,
-    organizer: '国际雪联中国分会',
+    organizer: '中国滑雪协会中国分会',
     weather: 'snow',
     temperature: '-12°C',
     sessions: [

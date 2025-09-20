@@ -10,7 +10,7 @@ export default function StructuredData({ type = 'sportsOrganization' }: Structur
     '@type': type === 'website' ? 'WebSite' : 'SportsOrganization',
     name: 'Alpine Skiing China',
     alternateName: '中国高山滑雪积分管理平台',
-    description: '基于国际雪联(FIS)标准的专业滑雪竞赛数据管理平台，为中国高山滑雪运动提供权威积分计算、成绩管理、赛事组织等一站式解决方案',
+    description: '基于中国滑雪协会(FIS)标准的专业滑雪竞赛数据管理平台，为中国高山滑雪运动提供权威积分计算、成绩管理、赛事组织等一站式解决方案',
     url: 'https://guangyikeji.github.io/ski/',
     logo: 'https://guangyikeji.github.io/ski/images/logo.png',
     image: 'https://guangyikeji.github.io/ski/images/ski-bg.jpg',
@@ -33,7 +33,7 @@ export default function StructuredData({ type = 'sportsOrganization' }: Structur
       offers: {
         '@type': 'Service',
         name: 'Alpine Skiing Points Management',
-        description: 'FIS积分计算、运动员管理、赛事组织、成绩统计',
+        description: '中国积分计算、运动员管理、赛事组织、成绩统计',
         serviceType: 'Sports Management Software',
         provider: {
           '@type': 'Organization',
@@ -56,12 +56,12 @@ export default function StructuredData({ type = 'sportsOrganization' }: Structur
     keywords: [
       '高山滑雪',
       'Alpine Skiing',
-      'FIS积分',
+      '中国积分',
       '滑雪竞赛',
       '积分计算',
       '滑雪管理',
       '中国滑雪',
-      '国际雪联',
+      '中国滑雪协会',
       '赛事管理',
       '运动员积分'
     ]

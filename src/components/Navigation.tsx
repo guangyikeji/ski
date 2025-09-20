@@ -37,7 +37,7 @@ const navigationItems = [
     icon: Calculator,
     active: true,
     children: [
-      { name: 'FIS积分查询', href: '/points/fis', active: true },
+      { name: '中国积分查询', href: '/points/fis', active: true },
       { name: '积分计算器', href: '/points/calculator', active: true },
       { name: '积分排行榜', href: '/points/rankings', active: true },
       { name: '积分变化趋势', href: '/points/trends', active: true }
@@ -86,7 +86,7 @@ const navigationItems = [
     icon: FileText,
     active: true,
     children: [
-      { name: 'FIS积分规则', href: '/rules/points', active: true },
+      { name: '中国积分规则', href: '/rules/points', active: true },
       { name: '竞赛规则', href: '/rules/competition', active: true },
       { name: '技术规范', href: '/rules/technical', active: true },
       { name: '中英对照', href: '/rules/bilingual', active: true }
@@ -210,16 +210,16 @@ export default function Navigation() {
                   className="flex items-center space-x-2 text-gray-700 hover:text-ski-blue px-3 py-2 rounded-md text-sm font-medium"
                 >
                   <div className="w-8 h-8 bg-ski-blue text-white rounded-full flex items-center justify-center text-sm font-semibold">
-                    {user.name.charAt(0).toUpperCase()}
+                    {user.username.charAt(0).toUpperCase()}
                   </div>
-                  <span>{user.name}</span>
+                  <span>{user.username}</span>
                   <ChevronDown className="h-4 w-4" />
                 </button>
 
                 {userMenuOpen && (
                   <div className="absolute right-0 mt-2 w-56 bg-white rounded-md shadow-lg border border-gray-100 py-1 z-50">
                     <div className="px-4 py-2 border-b border-gray-100">
-                      <div className="text-sm font-medium text-gray-900">{user.name}</div>
+                      <div className="text-sm font-medium text-gray-900">{user.username}</div>
                       <div className="text-xs text-gray-500">{user.email}</div>
                       <div className="text-xs text-ski-blue">{getRoleDisplayName(user.role)}</div>
                     </div>
@@ -248,14 +248,14 @@ export default function Navigation() {
             ) : (
               <>
                 <Link
-                  href="/auth/login"
+                  href="/login"
                   className="flex items-center space-x-1 text-gray-700 hover:text-ski-blue px-3 py-2 rounded-md text-sm font-medium whitespace-nowrap"
                 >
                   <LogIn className="h-4 w-4" />
                   <span>登录</span>
                 </Link>
                 <Link
-                  href="/auth/register"
+                  href="/register"
                   className="flex items-center space-x-1 bg-ski-blue text-white hover:bg-ski-blue/90 px-3 py-2 rounded-md text-sm font-medium whitespace-nowrap"
                 >
                   <User className="h-4 w-4" />

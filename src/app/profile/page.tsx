@@ -1,262 +1,208 @@
 'use client'
 
-import { useState, useEffect } from 'react'
-import { useAuth } from '@/contexts/AuthContext'
-import { useRouter } from 'next/navigation'
+import { useState } from 'react'
 import {
   User,
-  Mail,
-  Shield,
-  Edit,
-  Save,
-  Key,
-  Bell,
-  Settings,
-  Award,
+  Trophy,
   Calendar,
-  MapPin
+  Settings,
+  LogOut,
+  Download
 } from 'lucide-react'
-import { getImagePath } from '@/utils/paths'
 
 export default function ProfilePage() {
-  const { user, logout } = useAuth()
-  const router = useRouter()
-  const [isEditing, setIsEditing] = useState(false)
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    fisCode: '',
-    bio: ''
-  })
+  const [activeTab, setActiveTab] = useState('overview')
 
-  useEffect(() => {
-    if (!user) {
-      router.push('/auth/login')
-      return
-    }
-
-    setFormData({
-      name: user.name || '',
-      email: user.email || '',
-      fisCode: user.fisCode || '',
-      bio: ''
-    })
-  }, [user, router])
-
-  const handleSave = () => {
-    // 模拟保存功能
-    alert('个人信息已保存')
-    setIsEditing(false)
+  // 模拟用户数据
+  const userData = {
+    name: '张伟',
+    username: 'zhangwei_ski',
+    email: 'zhangwei@example.com',
+    phone: '138****8888',
+    userType: 'athlete',
+    currentPoints: {
+      DH: 45.67,  // 滑降
+      SL: 32.45,  // 回转
+      GS: 38.90,  // 大回转
+      SG: 52.30,  // 超级大回转
+    },
+    bestResults: [
+      { event: '2024全国锦标赛', discipline: '大回转', rank: 3, points: 38.90, date: '2024-03-15' },
+      { event: '2024冬季联赛第三站', discipline: '回转', rank: 5, points: 32.45, date: '2024-02-20' },
+      { event: '2024青少年杯', discipline: '滑降', rank: 2, points: 45.67, date: '2024-01-25' }
+    ]
   }
 
-  if (!user) {
-    return <div>Loading...</div>
-  }
-
-  const getRoleDisplayName = (role: string) => {
-    const roleMap: { [key: string]: string } = {
-      admin: '管理员',
-      coach: '教练员',
-      athlete: '运动员',
-      user: '用户'
-    }
-    return roleMap[role] || '用户'
-  }
+  const tabs = [
+    { id: 'overview', name: '概览', icon: User },
+    { id: 'points', name: '我的积分', icon: Trophy },
+    { id: 'events', name: '赛事记录', icon: Calendar },
+    { id: 'settings', name: '账户设置', icon: Settings }
+  ]
 
   return (
-    <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-      {/* 背景装饰 */}
-      <div className="absolute top-0 right-0 w-40 h-40 opacity-10 rounded-full overflow-hidden">
-        <img
-          src={getImagePath("/images/ski-action-2.jpg")}
-          alt=""
-          className="w-full h-full object-cover"
-        />
-      </div>
+    <div className="min-h-screen bg-gray-50">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <div className="mb-8">
+          <h1 className="text-3xl font-bold text-gray-900">会员中心</h1>
+          <p className="text-gray-600 mt-2">管理您的个人信息和积分记录</p>
+        </div>
 
-      {/* Header */}
-      <div className="text-center mb-8">
-        <h1 className="section-title">个人设置</h1>
-        <p className="text-gray-600">管理您的账户信息和偏好设置</p>
-      </div>
+        <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
+          {/* 左侧导航 */}
+          <div className="lg:col-span-1">
+            <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
+              <div className="text-center mb-6">
+                <div className="w-20 h-20 bg-ski-blue rounded-full flex items-center justify-center text-white text-2xl font-bold mx-auto">
+                  {userData.name[0]}
+                </div>
+                <h3 className="mt-3 text-lg font-semibold text-gray-900">{userData.name}</h3>
+                <p className="text-sm text-gray-600">@{userData.username}</p>
+                <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800 mt-2">
+                  运动员
+                </span>
+              </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-        {/* 左侧个人信息卡片 */}
-        <div className="lg:col-span-1">
-          <div className="card text-center">
-            <div className="w-24 h-24 bg-ski-blue text-white rounded-full flex items-center justify-center text-2xl font-bold mx-auto mb-4">
-              {user.name.charAt(0).toUpperCase()}
+              <nav className="space-y-2">
+                {tabs.map((tab) => {
+                  const Icon = tab.icon
+                  return (
+                    <button
+                      key={tab.id}
+                      onClick={() => setActiveTab(tab.id)}
+                      className={`w-full flex items-center px-3 py-2 text-sm font-medium rounded-lg transition-colors ${
+                        activeTab === tab.id
+                          ? 'bg-ski-blue text-white'
+                          : 'text-gray-700 hover:bg-gray-100'
+                      }`}
+                    >
+                      <Icon className="w-4 h-4 mr-3" />
+                      {tab.name}
+                    </button>
+                  )
+                })}
+              </nav>
+
+              <div className="mt-6 pt-6 border-t border-gray-200">
+                <button className="w-full flex items-center px-3 py-2 text-sm font-medium text-red-600 hover:bg-red-50 rounded-lg transition-colors">
+                  <LogOut className="w-4 h-4 mr-3" />
+                  退出登录
+                </button>
+              </div>
             </div>
-            <h3 className="text-xl font-bold text-ski-navy mb-2">{user.name}</h3>
-            <p className="text-sm text-gray-600 mb-1">{user.email}</p>
-            <div className="inline-flex items-center px-3 py-1 bg-ski-blue/10 text-ski-blue rounded-full text-sm">
-              <Shield className="h-4 w-4 mr-1" />
-              {getRoleDisplayName(user.role)}
-            </div>
+          </div>
 
-            {user.fisCode && (
-              <div className="mt-4 p-3 bg-yellow-50 rounded-lg">
-                <div className="flex items-center justify-center text-sm">
-                  <Award className="h-4 w-4 text-yellow-600 mr-1" />
-                  <span className="text-yellow-800">FIS码: {user.fisCode}</span>
+          {/* 右侧内容区域 */}
+          <div className="lg:col-span-3">
+            {/* 概览 */}
+            {activeTab === 'overview' && (
+              <div className="space-y-6">
+                <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
+                  <h3 className="text-lg font-semibold text-gray-900 mb-4">积分概览</h3>
+                  <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                    {[
+                      { label: '滑降', value: userData.currentPoints.DH },
+                      { label: '回转', value: userData.currentPoints.SL },
+                      { label: '大回转', value: userData.currentPoints.GS },
+                      { label: '超级大回转', value: userData.currentPoints.SG }
+                    ].map((item, index) => (
+                      <div key={index} className="text-center p-4 bg-gray-50 rounded-lg">
+                        <div className="text-2xl font-bold text-ski-navy">
+                          {item.value.toFixed(2)}
+                        </div>
+                        <div className="text-sm text-gray-600 mt-1">{item.label}</div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
+                  <h3 className="text-lg font-semibold text-gray-900 mb-4">最佳成绩</h3>
+                  <div className="space-y-3">
+                    {userData.bestResults.map((result, index) => (
+                      <div key={index} className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
+                        <div className="flex items-center">
+                          <div className={`w-8 h-8 rounded-full flex items-center justify-center text-white text-sm font-bold mr-3 ${
+                            result.rank === 1 ? 'bg-yellow-500' :
+                            result.rank === 2 ? 'bg-gray-400' :
+                            result.rank === 3 ? 'bg-orange-500' : 'bg-gray-300'
+                          }`}>
+                            {result.rank}
+                          </div>
+                          <div>
+                            <div className="font-medium text-gray-900">{result.event}</div>
+                            <div className="text-sm text-gray-600">{result.discipline} · {result.date}</div>
+                          </div>
+                        </div>
+                        <div className="text-right">
+                          <div className="font-semibold text-ski-navy">{result.points}</div>
+                          <div className="text-xs text-gray-500">中国积分</div>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
                 </div>
               </div>
             )}
 
-            <div className="mt-4 text-xs text-gray-500">
-              注册时间: {new Date(user.loginTime).toLocaleDateString()}
-            </div>
-          </div>
-        </div>
-
-        {/* 右侧设置表单 */}
-        <div className="lg:col-span-2 space-y-6">
-          {/* 基本信息 */}
-          <div className="card">
-            <div className="flex items-center justify-between mb-6">
-              <h3 className="text-lg font-semibold text-ski-navy">基本信息</h3>
-              <button
-                onClick={() => setIsEditing(!isEditing)}
-                className="flex items-center space-x-1 text-ski-blue hover:text-ski-blue/80"
-              >
-                <Edit className="h-4 w-4" />
-                <span>{isEditing ? '取消' : '编辑'}</span>
-              </button>
-            </div>
-
-            <div className="space-y-4">
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
-                  姓名
-                </label>
-                <div className="relative">
-                  <User className="h-5 w-5 text-gray-400 absolute left-3 top-1/2 transform -translate-y-1/2" />
-                  <input
-                    type="text"
-                    value={formData.name}
-                    onChange={(e) => setFormData({...formData, name: e.target.value})}
-                    disabled={!isEditing}
-                    className="w-full pl-10 pr-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-ski-blue focus:border-transparent disabled:bg-gray-50"
-                  />
-                </div>
-              </div>
-
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
-                  邮箱地址
-                </label>
-                <div className="relative">
-                  <Mail className="h-5 w-5 text-gray-400 absolute left-3 top-1/2 transform -translate-y-1/2" />
-                  <input
-                    type="email"
-                    value={formData.email}
-                    onChange={(e) => setFormData({...formData, email: e.target.value})}
-                    disabled={!isEditing}
-                    className="w-full pl-10 pr-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-ski-blue focus:border-transparent disabled:bg-gray-50"
-                  />
-                </div>
-              </div>
-
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
-                  FIS码
-                </label>
-                <div className="relative">
-                  <Award className="h-5 w-5 text-gray-400 absolute left-3 top-1/2 transform -translate-y-1/2" />
-                  <input
-                    type="text"
-                    value={formData.fisCode}
-                    onChange={(e) => setFormData({...formData, fisCode: e.target.value})}
-                    disabled={!isEditing}
-                    placeholder="输入您的FIS码"
-                    className="w-full pl-10 pr-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-ski-blue focus:border-transparent disabled:bg-gray-50"
-                  />
-                </div>
-              </div>
-
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
-                  个人简介
-                </label>
-                <textarea
-                  value={formData.bio}
-                  onChange={(e) => setFormData({...formData, bio: e.target.value})}
-                  disabled={!isEditing}
-                  rows={3}
-                  placeholder="介绍一下您的滑雪经历..."
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-ski-blue focus:border-transparent disabled:bg-gray-50"
-                />
-              </div>
-
-              {isEditing && (
-                <div className="flex space-x-3">
-                  <button
-                    onClick={handleSave}
-                    className="flex items-center space-x-1 px-4 py-2 bg-ski-blue text-white rounded-lg hover:bg-ski-blue/90"
-                  >
-                    <Save className="h-4 w-4" />
-                    <span>保存</span>
-                  </button>
-                  <button
-                    onClick={() => setIsEditing(false)}
-                    className="px-4 py-2 border border-gray-300 rounded-lg hover:bg-gray-50"
-                  >
-                    取消
+            {/* 我的积分 */}
+            {activeTab === 'points' && (
+              <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
+                <div className="flex items-center justify-between mb-6">
+                  <h3 className="text-lg font-semibold text-gray-900">我的积分</h3>
+                  <button className="flex items-center px-4 py-2 text-sm font-medium text-ski-blue border border-ski-blue rounded-lg hover:bg-ski-blue hover:text-white transition-colors">
+                    <Download className="w-4 h-4 mr-2" />
+                    导出积分证书
                   </button>
                 </div>
-              )}
-            </div>
-          </div>
 
-          {/* 账户安全 */}
-          <div className="card">
-            <h3 className="text-lg font-semibold text-ski-navy mb-6">账户安全</h3>
-            <div className="space-y-4">
-              <button className="w-full flex items-center justify-between p-4 border border-gray-200 rounded-lg hover:bg-gray-50">
-                <div className="flex items-center">
-                  <Key className="h-5 w-5 text-gray-400 mr-3" />
-                  <div>
-                    <div className="text-sm font-medium text-gray-900">修改密码</div>
-                    <div className="text-xs text-gray-500">定期更新密码以保护账户安全</div>
-                  </div>
+                <div className="overflow-x-auto">
+                  <table className="min-w-full divide-y divide-gray-200">
+                    <thead className="bg-gray-50">
+                      <tr>
+                        <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">项目</th>
+                        <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">当前积分</th>
+                        <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">排名</th>
+                        <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">最后更新</th>
+                      </tr>
+                    </thead>
+                    <tbody className="bg-white divide-y divide-gray-200">
+                      {[
+                        { name: '滑降(DH)', points: userData.currentPoints.DH, rank: 15, updated: '2024-03-20' },
+                        { name: '回转(SL)', points: userData.currentPoints.SL, rank: 8, updated: '2024-03-18' },
+                        { name: '大回转(GS)', points: userData.currentPoints.GS, rank: 12, updated: '2024-03-15' },
+                        { name: '超级大回转(SG)', points: userData.currentPoints.SG, rank: 22, updated: '2024-03-10' }
+                      ].map((item, index) => (
+                        <tr key={index}>
+                          <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                            {item.name}
+                          </td>
+                          <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                            {item.points.toFixed(2)}
+                          </td>
+                          <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                            #{item.rank}
+                          </td>
+                          <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                            {item.updated}
+                          </td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
                 </div>
-                <span className="text-gray-400">›</span>
-              </button>
-            </div>
-          </div>
-
-          {/* 通知设置 */}
-          <div className="card">
-            <h3 className="text-lg font-semibold text-ski-navy mb-6">通知设置</h3>
-            <div className="space-y-4">
-              <div className="flex items-center justify-between">
-                <div className="flex items-center">
-                  <Bell className="h-5 w-5 text-gray-400 mr-3" />
-                  <div>
-                    <div className="text-sm font-medium text-gray-900">成绩通知</div>
-                    <div className="text-xs text-gray-500">比赛成绩公布时通知我</div>
-                  </div>
-                </div>
-                <label className="relative inline-flex items-center cursor-pointer">
-                  <input type="checkbox" className="sr-only peer" defaultChecked />
-                  <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-ski-blue/25 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-ski-blue"></div>
-                </label>
               </div>
+            )}
 
-              <div className="flex items-center justify-between">
-                <div className="flex items-center">
-                  <Calendar className="h-5 w-5 text-gray-400 mr-3" />
-                  <div>
-                    <div className="text-sm font-medium text-gray-900">赛事提醒</div>
-                    <div className="text-xs text-gray-500">比赛报名和开始提醒</div>
-                  </div>
-                </div>
-                <label className="relative inline-flex items-center cursor-pointer">
-                  <input type="checkbox" className="sr-only peer" defaultChecked />
-                  <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-ski-blue/25 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-ski-blue"></div>
-                </label>
+            {/* 其他标签页内容 */}
+            {(activeTab === 'events' || activeTab === 'settings') && (
+              <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
+                <h3 className="text-lg font-semibold text-gray-900 mb-4">
+                  {activeTab === 'events' ? '赛事记录' : '账户设置'}
+                </h3>
+                <p className="text-gray-600">此功能正在开发中...</p>
               </div>
-            </div>
+            )}
           </div>
         </div>
       </div>

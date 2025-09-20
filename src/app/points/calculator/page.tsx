@@ -71,9 +71,9 @@ export default function CalculatorPage() {
 
       {/* Header */}
       <div className="text-center mb-8 relative z-10">
-        <h1 className="section-title">积分计算器</h1>
+        <h1 className="section-title">中国积分计算器</h1>
         <p className="text-gray-600 text-lg">
-          根据FIS标准公式计算高山滑雪比赛积分
+          根据中国高山滑雪积分体系标准计算比赛积分
         </p>
       </div>
 
@@ -151,7 +151,7 @@ export default function CalculatorPage() {
                 className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-ski-blue focus:border-transparent"
               />
               <p className="text-xs text-gray-500 mt-1">
-                基于参赛选手实力计算的比赛难度系数
+                基于参赛选手中国积分实力计算的比赛难度系数（采用÷12计算方法）
               </p>
             </div>
 
@@ -237,8 +237,8 @@ export default function CalculatorPage() {
                   <div className="flex items-start">
                     <Info className="h-5 w-5 text-blue-600 mr-2 mt-0.5 flex-shrink-0" />
                     <div className="text-sm text-blue-800">
-                      <p className="font-semibold mb-1">积分说明：</p>
-                      <p>积分越低代表成绩越好。0分为该项目世界最佳水平，积分值代表与世界最佳的差距。</p>
+                      <p className="font-semibold mb-1">中国积分说明：</p>
+                      <p>积分越低代表成绩越好。0分为该项目中国最佳水平，积分值代表与中国最佳的差距。积分每21天更新一次。</p>
                     </div>
                   </div>
                 </div>

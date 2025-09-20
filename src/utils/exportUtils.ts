@@ -180,7 +180,7 @@ export function formatRankingsForExport(rankings: any[]): ExportData {
     '运动员': item.name,
     '国家/地区': item.nationality,
     '项目': item.discipline,
-    'FIS积分': item.points,
+    '中国积分': item.points,
     '趋势': item.trend === 'up' ? '上升' : item.trend === 'down' ? '下降' : '稳定',
     '最近比赛': item.lastRace,
     '参赛次数': item.totalRaces,
@@ -188,9 +188,9 @@ export function formatRankingsForExport(rankings: any[]): ExportData {
   }));
 
   return {
-    filename: `FIS积分排行榜_${new Date().toISOString().split('T')[0]}`,
+    filename: `中国积分排行榜_${new Date().toISOString().split('T')[0]}`,
     data,
-    title: 'FIS积分排行榜'
+    title: '中国积分排行榜'
   };
 }
 
@@ -227,7 +227,7 @@ export function formatCompetitionResultsForExport(results: any[], competitionNam
     '国家/地区': item.country,
     '成绩': item.time,
     '差距': item.gap,
-    'FIS积分': item.fisPoints
+    '中国积分': item.fisPoints
   }));
 
   return {

@@ -114,9 +114,9 @@ export default function TrendsPage() {
 
       {/* Header */}
       <div className="mb-8 relative z-10">
-        <h1 className="section-title">积分变化趋势</h1>
+        <h1 className="section-title">中国积分变化趋势</h1>
         <p className="text-gray-600 text-lg">
-          跟踪运动员的积分变化趋势，分析训练和比赛效果
+          跟踪运动员的中国积分变化趋势，分析训练和比赛效果
         </p>
       </div>
 
@@ -390,9 +390,9 @@ export default function TrendsPage() {
         <div className="card">
           <h3 className="text-lg font-semibold text-ski-navy mb-3">数据更新</h3>
           <ul className="space-y-2 text-sm text-gray-600">
-            <li>• 积分数据每14天更新一次</li>
+            <li>• 中国积分数据每21天更新一次</li>
             <li>• 趋势分析基于最近的有效成绩</li>
-            <li>• 数据来源：官方比赛结果</li>
+            <li>• 数据来源：中国国内官方比赛结果</li>
             <li>• 最后更新：2024-12-15</li>
           </ul>
         </div>

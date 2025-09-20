@@ -21,33 +21,33 @@ import { getImagePath } from '@/utils/paths'
 
 const features = [
   {
-    title: 'FIS积分查询',
-    description: '查询运动员FIS积分和排名信息',
-    icon: Calculator,
-    href: '/points/fis',
+    title: '平台介绍',
+    description: '了解中国高山滑雪积分体系',
+    icon: FileText,
+    href: '/about',
     status: 'active',
     color: 'text-blue-600'
   },
   {
-    title: '积分计算器',
-    description: '根据比赛成绩实时计算滑雪积分',
-    icon: TrendingUp,
-    href: '/points/calculator',
+    title: '会员注册',
+    description: '注册成为平台会员，查看个人积分',
+    icon: UserPlus,
+    href: '/register',
     status: 'active',
     color: 'text-green-600'
   },
   {
-    title: '积分排行榜',
-    description: '实时更新的运动员积分排名',
-    icon: Trophy,
-    href: '/points/rankings',
+    title: '赛事公告',
+    description: '查看最新的赛事安排和公告',
+    icon: Pin,
+    href: '/events',
     status: 'active',
     color: 'text-yellow-600'
   },
   {
-    title: '积分规则文档',
-    description: '查看详细的FIS积分计算规则',
-    icon: FileText,
+    title: '积分规则',
+    description: '查看中国高山滑雪积分计算规则',
+    icon: Calculator,
     href: '/rules/points',
     status: 'active',
     color: 'text-purple-600'
@@ -184,7 +184,7 @@ export default function HomePage() {
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 md:gap-4 text-sm md:text-base lg:text-lg">
                   <div className="flex items-center bg-white/10 backdrop-blur-sm rounded-lg px-4 py-3 border border-white/20">
                     <div className="w-3 h-3 bg-ski-blue rounded-full mr-3 flex-shrink-0"></div>
-                    <span className="text-white font-medium">采用国际标准积分算法</span>
+                    <span className="text-white font-medium">中国积分体系标准</span>
                   </div>
                   <div className="flex items-center bg-white/10 backdrop-blur-sm rounded-lg px-4 py-3 border border-white/20">
                     <div className="w-3 h-3 bg-green-400 rounded-full mr-3 flex-shrink-0"></div>
@@ -383,7 +383,7 @@ export default function HomePage() {
                   </div>
                   <div className="text-right">
                     <div className="font-semibold text-ski-navy">0.00</div>
-                    <div className="text-xs text-gray-500">FIS积分</div>
+                    <div className="text-xs text-gray-500">中国积分</div>
                   </div>
                 </div>
                 <div className="flex items-center p-4 bg-gradient-to-r from-gray-50 to-gray-100 rounded-lg border border-gray-200">
@@ -394,7 +394,7 @@ export default function HomePage() {
                   </div>
                   <div className="text-right">
                     <div className="font-semibold text-ski-navy">8.45</div>
-                    <div className="text-xs text-gray-500">FIS积分</div>
+                    <div className="text-xs text-gray-500">中国积分</div>
                   </div>
                 </div>
                 <div className="flex items-center p-4 bg-gradient-to-r from-orange-50 to-orange-100 rounded-lg border border-orange-200">
@@ -405,7 +405,7 @@ export default function HomePage() {
                   </div>
                   <div className="text-right">
                     <div className="font-semibold text-ski-navy">12.30</div>
-                    <div className="text-xs text-gray-500">FIS积分</div>
+                    <div className="text-xs text-gray-500">中国积分</div>
                   </div>
                 </div>
                 <div className="flex items-center p-4 bg-gray-50 rounded-lg">
@@ -416,7 +416,7 @@ export default function HomePage() {
                   </div>
                   <div className="text-right">
                     <div className="font-semibold text-ski-navy">15.67</div>
-                    <div className="text-xs text-gray-500">FIS积分</div>
+                    <div className="text-xs text-gray-500">中国积分</div>
                   </div>
                 </div>
               </div>
@@ -441,7 +441,7 @@ export default function HomePage() {
           <div className="text-center mb-16">
             <h2 className="section-title">核心功能</h2>
             <p className="text-lg text-gray-600 max-w-3xl mx-auto">
-              基于FIS国际雪联标准的完整滑雪竞赛管理解决方案，从积分计算、运动员管理到赛事组织，
+              基于FIS中国滑雪协会标准的完整滑雪竞赛管理解决方案，从积分计算、运动员管理到赛事组织，
               覆盖高山滑雪运动的所有核心环节，为中国滑雪运动数字化发展提供强有力支持
             </p>
           </div>
@@ -514,8 +514,8 @@ export default function HomePage() {
               <h2 className="section-title">关于平台</h2>
               <div className="space-y-6 text-gray-600">
                 <p>
-                  Alpine Skiing China(中国高山滑雪积分管理平台)是基于FIS国际雪联标准打造的专业竞赛管理平台。
-                  采用符合国际标准的积分计算算法，为中国高山滑雪竞赛提供权威、准确的数据管理和积分计算服务。
+                  Alpine Skiing China(中国高山滑雪积分管理平台)是基于FIS中国滑雪协会标准打造的专业竞赛管理平台。
+                  采用符合中国标准的积分计算算法，为中国高山滑雪竞赛提供权威、准确的数据管理和积分计算服务。
                 </p>
                 <p>
                   我们致力于推动中国滑雪运动的数字化、标准化发展，为运动员、教练员、赛事组织者、竞赛裁判
@@ -523,7 +523,7 @@ export default function HomePage() {
                 </p>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6 pt-6">
                   <div className="border-l-4 border-ski-blue pl-4">
-                    <div className="font-semibold text-ski-navy">国际标准算法</div>
+                    <div className="font-semibold text-ski-navy">中国标准算法</div>
                     <div className="text-sm">采用国际通用积分计算规则</div>
                   </div>
                   <div className="border-l-4 border-green-500 pl-4">
@@ -595,11 +595,11 @@ export default function HomePage() {
                 <div className="bg-white/20 backdrop-blur-sm rounded-2xl p-6 mb-4 hover:bg-white/30 transition-all duration-300 border border-white/20">
                   <Calculator className="h-10 w-10 text-white mx-auto mb-3" />
                   <h3 className="text-white font-semibold text-lg mb-2">积分查询</h3>
-                  <p className="text-blue-100 text-sm">查看FIS积分排名</p>
+                  <p className="text-blue-100 text-sm">查看中国积分排名</p>
                 </div>
                 <div className="space-y-2">
                   <Link href="/points/fis" className="block text-blue-100 hover:text-white text-sm transition-colors">
-                    • FIS积分查询
+                    • 中国积分查询
                   </Link>
                   <Link href="/points/rankings" className="block text-blue-100 hover:text-white text-sm transition-colors">
                     • 积分排行榜

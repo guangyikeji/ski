@@ -13,7 +13,7 @@ export default function Footer() {
               <span className="text-xl font-bold">Alpine Ski Points</span>
             </div>
             <p className="text-gray-300 text-sm max-w-md">
-              基于国际雪联(FIS)规则的高山滑雪竞赛数据管理和积分计算系统，
+              基于中国滑雪协会(FIS)规则的高山滑雪竞赛数据管理和积分计算系统，
               为滑雪运动提供专业的数据分析和管理服务。
             </p>
             <div className="flex space-x-4 mt-6">
@@ -46,7 +46,7 @@ export default function Footer() {
             <ul className="space-y-2 text-sm">
               <li>
                 <Link href="/points/fis" className="text-gray-300 hover:text-primary-400 transition-colors">
-                  FIS积分查询
+                  中国积分查询
                 </Link>
               </li>
               <li>
