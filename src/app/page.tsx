@@ -512,7 +512,7 @@ export default function HomePage() {
               <h2 className="section-title">关于平台</h2>
               <div className="space-y-6 text-gray-600">
                 <p>
-                  Alpine Skiing China(中国高山滑雪积分管理平台)是在国家体育总局冬季运动管理中心指导下打造的专业竞赛管理平台。
+                  Alpine Skiing China(中国高山滑雪积分管理平台)是基于FIS国际雪联标准打造的专业竞赛管理平台。
                   采用符合国际标准的积分计算算法，为中国高山滑雪竞赛提供权威、准确的数据管理和积分计算服务。
                 </p>
                 <p>
