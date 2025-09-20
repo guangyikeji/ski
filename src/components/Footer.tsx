@@ -167,7 +167,7 @@ export default function Footer() {
         <div className="border-t border-gray-700 mt-12 pt-8">
           <div className="flex flex-col md:flex-row justify-between items-start md:items-center">
             <div className="text-sm text-gray-300 mb-4 md:mb-0">
-              © 2024 Alpine Ski Points. 参照国际雪联(FIS)标准开发的中国高山滑雪积分管理平台.
+              © 2024 Alpine Skiing China 中国高山滑雪管理平台. 参照国际雪联(FIS)标准开发.
             </div>
             <div className="flex flex-wrap gap-6 text-sm">
               <a href="#" className="text-gray-300 hover:text-primary-400 transition-colors">
