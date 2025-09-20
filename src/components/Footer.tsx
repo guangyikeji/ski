@@ -5,9 +5,9 @@ export default function Footer() {
   return (
     <footer className="bg-ski-navy text-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {/* Logo and Description */}
-          <div className="col-span-1 md:col-span-2">
+          <div className="col-span-1">
             <div className="flex items-center space-x-2 mb-4">
               <Mountain className="h-8 w-8 text-primary-400" />
               <span className="text-xl font-bold">Alpine Ski Points</span>
@@ -40,50 +40,66 @@ export default function Footer() {
             </div>
           </div>
 
-          {/* Contact Info */}
+          {/* 积分系统 */}
           <div>
-            <h3 className="text-lg font-semibold mb-4">联系方式</h3>
+            <h3 className="text-lg font-semibold mb-4">积分系统</h3>
             <ul className="space-y-2 text-sm">
-              <li className="text-gray-300">
-                📧 contact@alpine-ski-points.com
-              </li>
-              <li className="text-gray-300">
-                📞 +86-400-123-4567
-              </li>
-              <li className="text-gray-300">
-                📍 北京市朝阳区体育中心
+              <li>
+                <Link href="/points/fis" className="text-gray-300 hover:text-primary-400 transition-colors">
+                  中国积分查询
+                </Link>
               </li>
               <li>
-                <Link href="/about" className="text-gray-300 hover:text-primary-400 transition-colors">
-                  关于我们
+                <Link href="/points/rankings" className="text-gray-300 hover:text-primary-400 transition-colors">
+                  积分排行榜
+                </Link>
+              </li>
+              <li>
+                <Link href="/points/calculator" className="text-gray-300 hover:text-primary-400 transition-colors">
+                  积分计算器
+                </Link>
+              </li>
+              <li>
+                <Link href="/points/trends" className="text-gray-300 hover:text-primary-400 transition-colors">
+                  积分变化趋势
+                </Link>
+              </li>
+              <li>
+                <Link href="/rules/points" className="text-gray-300 hover:text-primary-400 transition-colors">
+                  积分规则详解
                 </Link>
               </li>
             </ul>
           </div>
 
-          {/* Support */}
+          {/* 赛事管理 */}
           <div>
-            <h3 className="text-lg font-semibold mb-4">技术支持</h3>
+            <h3 className="text-lg font-semibold mb-4">赛事管理</h3>
             <ul className="space-y-2 text-sm">
               <li>
-                <a href="#" className="text-gray-300 hover:text-primary-400 transition-colors">
-                  使用指南
-                </a>
+                <Link href="/competitions" className="text-gray-300 hover:text-primary-400 transition-colors">
+                  比赛列表
+                </Link>
               </li>
               <li>
-                <a href="#" className="text-gray-300 hover:text-primary-400 transition-colors">
-                  API文档
-                </a>
+                <Link href="/competitions/schedule" className="text-gray-300 hover:text-primary-400 transition-colors">
+                  赛事日程
+                </Link>
               </li>
               <li>
-                <a href="#" className="text-gray-300 hover:text-primary-400 transition-colors">
-                  常见问题
-                </a>
+                <Link href="/results-import" className="text-gray-300 hover:text-primary-400 transition-colors">
+                  成绩导入
+                </Link>
               </li>
               <li>
-                <a href="#" className="text-gray-300 hover:text-primary-400 transition-colors">
-                  联系我们
-                </a>
+                <Link href="/results-announcement" className="text-gray-300 hover:text-primary-400 transition-colors">
+                  成绩公布
+                </Link>
+              </li>
+              <li>
+                <Link href="/registration" className="text-gray-300 hover:text-primary-400 transition-colors">
+                  在线报名
+                </Link>
               </li>
             </ul>
           </div>
