@@ -13,8 +13,8 @@ export default function Footer() {
               <span className="text-xl font-bold">Alpine Ski Points</span>
             </div>
             <p className="text-gray-300 text-sm max-w-md">
-              基于中国滑雪协会(FIS)规则的高山滑雪竞赛数据管理和积分计算系统，
-              为滑雪运动提供专业的数据分析和管理服务。
+              参照国际雪联(FIS)积分体系的中国高山滑雪竞赛数据管理和积分计算系统，
+              为中国滑雪运动提供专业的数据分析和管理服务。
             </p>
             <div className="flex space-x-4 mt-6">
               <a
@@ -40,30 +40,23 @@ export default function Footer() {
             </div>
           </div>
 
-          {/* Quick Links */}
+          {/* Contact Info */}
           <div>
-            <h3 className="text-lg font-semibold mb-4">快速链接</h3>
+            <h3 className="text-lg font-semibold mb-4">联系方式</h3>
             <ul className="space-y-2 text-sm">
+              <li className="text-gray-300">
+                📧 contact@alpine-ski-points.com
+              </li>
+              <li className="text-gray-300">
+                📞 +86-400-123-4567
+              </li>
+              <li className="text-gray-300">
+                📍 北京市朝阳区体育中心
+              </li>
               <li>
-                <Link href="/points/fis" className="text-gray-300 hover:text-primary-400 transition-colors">
-                  中国积分查询
+                <Link href="/about" className="text-gray-300 hover:text-primary-400 transition-colors">
+                  关于我们
                 </Link>
-              </li>
-              <li>
-                <Link href="/rules/fis" className="text-gray-300 hover:text-primary-400 transition-colors">
-                  FIS规则
-                </Link>
-              </li>
-              <li>
-                <Link href="/rules/points" className="text-gray-300 hover:text-primary-400 transition-colors">
-                  积分规则
-                </Link>
-              </li>
-              <li>
-                <span className="text-gray-500 cursor-not-allowed">竞赛管理 (即将上线)</span>
-              </li>
-              <li>
-                <span className="text-gray-500 cursor-not-allowed">报名系统 (即将上线)</span>
               </li>
             </ul>
           </div>
