@@ -40,7 +40,7 @@ const navigationItems = [
       { name: 'FIS积分查询', href: '/points/fis', active: true },
       { name: '积分计算器', href: '/points/calculator', active: true },
       { name: '积分排行榜', href: '/points/rankings', active: true },
-      { name: '积分变化趋势', href: '/points/trends', active: false }
+      { name: '积分变化趋势', href: '/points/trends', active: true }
     ]
   },
   {
@@ -49,7 +49,7 @@ const navigationItems = [
     icon: Trophy,
     active: true,
     children: [
-      { name: '赛事日程', href: '/competitions/schedule', active: false },
+      { name: '赛事日程', href: '/competitions/schedule', active: true },
       { name: '比赛列表', href: '/competitions', active: true },
       { name: '成绩导入', href: '/results-import', active: true },
       { name: '成绩公布', href: '/results-announcement', active: true },
@@ -64,8 +64,8 @@ const navigationItems = [
     children: [
       { name: '运动员档案', href: '/athletes', active: true },
       { name: '成绩历史', href: '/athletes/history', active: true },
-      { name: '积分排名', href: '/athletes/rankings', active: false },
-      { name: '成绩统计', href: '/athletes/stats', active: false }
+      { name: '积分排名', href: '/athletes/rankings', active: true },
+      { name: '成绩统计', href: '/athletes/stats', active: true }
     ]
   },
   {
@@ -75,9 +75,9 @@ const navigationItems = [
     active: true,
     children: [
       { name: '在线报名', href: '/registration', active: true },
-      { name: '报名管理', href: '/registration/manage', active: false },
-      { name: '资格审查', href: '/registration/verification', active: false },
-      { name: '费用管理', href: '/registration/fees', active: false }
+      { name: '报名管理', href: '/registration/manage', active: true },
+      { name: '资格审查', href: '/registration/verification', active: true },
+      { name: '费用管理', href: '/registration/fees', active: true }
     ]
   },
   {
@@ -87,9 +87,9 @@ const navigationItems = [
     active: true,
     children: [
       { name: 'FIS积分规则', href: '/rules/points', active: true },
-      { name: '竞赛规则', href: '/rules/competition', active: false },
-      { name: '技术规范', href: '/rules/technical', active: false },
-      { name: '中英对照', href: '/rules/bilingual', active: false }
+      { name: '竞赛规则', href: '/rules/competition', active: true },
+      { name: '技术规范', href: '/rules/technical', active: true },
+      { name: '中英对照', href: '/rules/bilingual', active: true }
     ]
   }
 ]

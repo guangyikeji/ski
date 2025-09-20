@@ -175,7 +175,7 @@ export default function HomePage() {
             <div className="text-white">
               <div className="inline-flex items-center px-4 py-2 bg-ski-blue rounded-full text-sm font-medium mb-6">
                 <Award className="h-4 w-4 mr-2" />
-                国家体育总局冬运中心指导
+                中国高山滑雪竞赛管理平台
               </div>
               <h1 className="text-5xl md:text-7xl font-bold mb-6 leading-tight">
                 <span className="text-ski-blue">Alpine Skiing China</span>
