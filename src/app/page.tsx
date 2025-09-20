@@ -173,13 +173,9 @@ export default function HomePage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <div className="text-white">
-              <div className="inline-flex items-center px-4 py-2 bg-gradient-ski rounded-full text-sm font-medium mb-6 animate-glow">
-                <Award className="h-4 w-4 mr-2 animate-float" />
-                中国高山滑雪竞赛管理平台
-              </div>
-              <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold mb-6 leading-tight">
+              <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold mb-8 leading-tight">
                 <span className="text-gradient bg-gradient-ski">Alpine Skiing China</span>
-                <span className="block text-white text-3xl sm:text-4xl md:text-5xl lg:text-6xl">中国高山滑雪积分管理平台</span>
+                <span className="block text-white text-3xl sm:text-4xl md:text-5xl lg:text-6xl">中国高山滑雪管理平台</span>
               </h1>
               <div className="mb-8">
                 <p className="text-lg sm:text-xl md:text-2xl lg:text-3xl text-gray-200 mb-6 leading-relaxed font-semibold">
