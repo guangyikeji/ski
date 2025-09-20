@@ -174,4 +174,4 @@ npm run lint
 
 - 邮箱: contact@alpine-ski-points.com
 - 项目地址: https://github.com/alpine-ski-points
-- 国际雪联官网: https://www.fis-ski.com
+- 国际雪联官网: https://www.fis-ski.com# GitHub Pages部署测试
