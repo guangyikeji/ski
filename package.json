@@ -1,0 +1,40 @@
+{
+  "name": "alpine-ski-points",
+  "version": "1.0.0",
+  "description": "高山滑雪竞赛管理和积分计算系统",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "build:github": "NODE_ENV=production next build",
+    "export": "next export",
+    "deploy:github": "npm run build:github && touch out/.nojekyll",
+    "start": "next start",
+    "lint": "next lint",
+    "typecheck": "tsc --noEmit",
+    "demo": "bash scripts/quick-demo.sh",
+    "share:vercel": "bash scripts/deploy-vercel.sh",
+    "share:ngrok": "bash scripts/ngrok-share.sh"
+  },
+  "dependencies": {
+    "@types/node": "^20.0.0",
+    "@types/react": "^18.0.0",
+    "@types/react-dom": "^18.0.0",
+    "@vercel/speed-insights": "^1.2.0",
+    "autoprefixer": "^10.4.0",
+    "clsx": "^2.0.0",
+    "date-fns": "^2.30.0",
+    "lucide-react": "^0.292.0",
+    "next": "^14.0.0",
+    "postcss": "^8.4.0",
+    "react": "^18.0.0",
+    "react-dom": "^18.0.0",
+    "tailwindcss": "^3.3.0",
+    "typescript": "^5.0.0"
+  },
+  "devDependencies": {
+    "@tailwindcss/typography": "^0.5.10",
+    "eslint": "^8.0.0",
+    "eslint-config-next": "^14.0.0"
+  }
+}
