@@ -1,384 +1,357 @@
 'use client'
 
-import { useState } from 'react'
-import { getImagePath } from '@/utils/paths'
-import {
-  BookOpen,
-  Search,
-  ChevronDown,
-  ChevronRight,
-  Users,
-  Trophy,
-  Clock,
-  AlertTriangle,
-  FileText,
-  CheckCircle,
-  Download
-} from 'lucide-react'
+import { Trophy, Users, Clock, Shield, Award, CheckCircle, AlertTriangle, FileText } from 'lucide-react'
 
-interface RuleSection {
-  id: string
-  title: string
-  content: string
-  subsections?: RuleSection[]
-}
-
-const competitionRules: RuleSection[] = [
+// 比赛项目介绍
+const projectIntroductions = [
   {
-    id: '100',
-    title: '总则',
-    content: '本规则适用于所有高山滑雪竞赛活动，包括但不限于全国锦标赛、地区性比赛、青少年比赛等。',
-    subsections: [
-      {
-        id: '101',
-        title: '规则适用范围',
-        content: '本规则适用于中华人民共和国境内举办的所有高山滑雪竞赛活动，包括全国性比赛、地区性比赛、俱乐部比赛以及青少年比赛。'
-      },
-      {
-        id: '102',
-        title: '组织机构',
-        content: '中国滑雪协会为国内高山滑雪竞赛的最高管理机构，负责制定竞赛规则、认证裁判员、管理运动员注册等工作。'
-      },
-      {
-        id: '103',
-        title: '规则修订',
-        content: '本规则每两年修订一次，由技术委员会提出修订草案，经中国滑雪协会理事会审议通过后实施。'
-      }
-    ]
+    name: '回转(SL)',
+    description: '技术性项目，考验选手精准转弯技巧',
+    features: [
+      '密集旗门设置，要求快速反应',
+      '分两轮比赛，综合成绩排名',
+      '最能体现滑雪技术水平',
+      '适合技术型选手参与'
+    ],
+    icon: Trophy,
+    color: 'text-blue-600',
+    bgColor: 'bg-blue-50'
   },
   {
-    id: '200',
-    title: '参赛资格',
-    content: '参赛运动员必须满足年龄、技术水平、健康状况等基本要求。',
-    subsections: [
-      {
-        id: '201',
-        title: '年龄分组',
-        content: '运动员按以下年龄分组：\n• 少年乙组：14-15岁\n• 少年甲组：16-17岁\n• 青年组：18-20岁\n• 成年组：21岁及以上\n• 老将组：40岁及以上'
-      },
-      {
-        id: '202',
-        title: '技术等级要求',
-        content: '参加全国性比赛的运动员必须达到相应的技术等级：\n• 全国锦标赛：运动健将及以上\n• 全国冠军赛：一级运动员及以上\n• 地区性比赛：二级运动员及以上'
-      },
-      {
-        id: '203',
-        title: '健康证明',
-        content: '所有参赛运动员必须提供一年内的体检证明，确认身体健康，适合参加高山滑雪运动。未满18岁的运动员还需提供监护人同意书。'
-      },
-      {
-        id: '204',
-        title: '注册要求',
-        content: '参赛运动员必须在中国滑雪协会注册，持有有效的运动员证。外籍运动员需要通过其所在国家的滑雪协会申请参赛。'
-      }
-    ]
+    name: '大回转(GS)',
+    description: '速度与技术并重的经典项目',
+    features: [
+      '旗门间距适中，节奏感强',
+      '需要良好的技术基础',
+      '比赛观赏性较高',
+      '新手进阶的理想选择'
+    ],
+    icon: Award,
+    color: 'text-green-600',
+    bgColor: 'bg-green-50'
   },
   {
-    id: '300',
-    title: '比赛项目',
-    content: '高山滑雪比赛包括回转、大回转、超级大回转、速降和全能等项目。',
-    subsections: [
-      {
-        id: '301',
-        title: '回转(SL)',
-        content: '回转是技术性最强的项目，要求运动员在密集的旗门间快速转弯。比赛分两轮进行，以两轮成绩之和排名。旗门数：男子55-75个，女子45-65个。'
-      },
-      {
-        id: '302',
-        title: '大回转(GS)',
-        content: '大回转是速度与技术的结合，旗门间距较回转更大。比赛分两轮进行，赛道垂直落差：男子250-400米，女子250-350米。'
-      },
-      {
-        id: '303',
-        title: '超级大回转(SG)',
-        content: '超级大回转强调高速滑行能力，只进行一轮比赛。赛道设置要求有节奏变化，包括跳跃、压缩和方向变化等元素。'
-      },
-      {
-        id: '304',
-        title: '速降(DH)',
-        content: '速降是最具挑战性的项目，追求极限速度。比赛只进行一轮，赛道垂直落差：男子800-1100米，女子500-800米。'
-      },
-      {
-        id: '305',
-        title: '全能(AC)',
-        content: '全能比赛包括一个速度项目(速降或超级大回转)和一个技术项目(回转或大回转)，以两个项目成绩之和排名。'
-      }
-    ]
+    name: '超级大回转(SG)',
+    description: '高速大转弯技术项目',
+    features: [
+      '强调高速滑行能力',
+      '赛道变化丰富多样',
+      '考验选手适应能力',
+      '单轮决胜负'
+    ],
+    icon: Clock,
+    color: 'text-purple-600',
+    bgColor: 'bg-purple-50'
   },
   {
-    id: '400',
-    title: '赛道要求',
-    content: '比赛赛道必须符合安全性、技术性和挑战性的要求。',
-    subsections: [
-      {
-        id: '401',
-        title: '赛道认证',
-        content: '承办重要比赛的雪场赛道必须通过中国滑雪协会认证。认证内容包括：雪道等级、安全措施、救援设施、计时设备等。'
-      },
-      {
-        id: '402',
-        title: '安全防护',
-        content: '赛道必须设置充足的防护网、防护垫等安全设施。危险区域需要设置明显的警示标志，并配备专业救援人员。'
-      },
-      {
-        id: '403',
-        title: '雪况要求',
-        content: '比赛要求雪况良好，雪面坚实。如遇恶劣天气，技术代表有权推迟或取消比赛。雪道宽度：回转最少30米，大回转最少40米。'
-      }
-    ]
-  },
-  {
-    id: '500',
-    title: '裁判与仲裁',
-    content: '比赛设置技术代表、裁判长、计时长等关键岗位。',
-    subsections: [
-      {
-        id: '501',
-        title: '裁判员资质',
-        content: '担任全国性比赛的裁判员必须持有中国滑雪协会颁发的相应等级裁判员证书，并参加年度培训和考核。'
-      },
-      {
-        id: '502',
-        title: '技术代表职责',
-        content: '技术代表负责比赛的技术组织工作，包括：检查赛道条件、审核参赛资格、监督比赛进行、处理技术争议等。'
-      },
-      {
-        id: '503',
-        title: '申诉程序',
-        content: '对比赛结果有异议的，可在成绩公布后30分钟内向仲裁委员会提出书面申诉，并缴纳申诉费。申诉处理需在1小时内完成。'
-      }
-    ]
-  },
-  {
-    id: '600',
-    title: '违规与处罚',
-    content: '对违反竞赛规则的行为，将根据情节轻重给予相应处罚。',
-    subsections: [
-      {
-        id: '601',
-        title: '技术违规',
-        content: '漏门、撞门、不按规定路线滑行等技术违规将被取消成绩。恶意违规或危及他人安全的行为将面临更严厉的处罚。'
-      },
-      {
-        id: '602',
-        title: '纪律违规',
-        content: '对裁判员无礼、干扰比赛进行、违反体育道德等行为，将给予警告、禁赛或取消参赛资格等处罚。'
-      },
-      {
-        id: '603',
-        title: '兴奋剂违规',
-        content: '严禁使用兴奋剂。一经查实，将取消所有成绩，并按照反兴奋剂条例给予禁赛处罚。'
-      }
-    ]
+    name: '速降(DH)',
+    description: '极限速度挑战项目',
+    features: [
+      '追求极限速度体验',
+      '最具挑战性和刺激感',
+      '对勇气和技术要求极高',
+      '滑雪运动的巅峰挑战'
+    ],
+    icon: Shield,
+    color: 'text-red-600',
+    bgColor: 'bg-red-50'
   }
 ]
 
-export default function CompetitionRulesPage() {
-  const [searchTerm, setSearchTerm] = useState('')
-  const [expandedSections, setExpandedSections] = useState<string[]>(['100'])
-
-  const toggleSection = (sectionId: string) => {
-    setExpandedSections(prev =>
-      prev.includes(sectionId)
-        ? prev.filter(id => id !== sectionId)
-        : [...prev, sectionId]
-    )
+// 参赛指南
+const participationGuide = [
+  {
+    title: '报名参赛',
+    steps: [
+      '在线注册平台账号',
+      '完善个人基本信息',
+      '上传健康证明文件',
+      '选择合适的比赛项目',
+      '缴纳相应报名费用'
+    ],
+    icon: Users,
+    color: 'text-blue-600'
+  },
+  {
+    title: '技术准备',
+    steps: [
+      '提升个人滑雪技术水平',
+      '熟悉比赛项目特点',
+      '参加训练营或培训',
+      '准备合规的装备器材',
+      '了解安全注意事项'
+    ],
+    icon: Trophy,
+    color: 'text-green-600'
+  },
+  {
+    title: '比赛当天',
+    steps: [
+      '提前到达比赛现场',
+      '完成装备检查登记',
+      '参加赛前技术说明',
+      '按序号完成比赛',
+      '关注成绩公布情况'
+    ],
+    icon: Clock,
+    color: 'text-purple-600'
+  },
+  {
+    title: '赛后流程',
+    steps: [
+      '查看个人比赛成绩',
+      '了解积分变化情况',
+      '参加颁奖仪式',
+      '总结比赛经验心得',
+      '规划下次参赛计划'
+    ],
+    icon: Award,
+    color: 'text-orange-600'
   }
+]
 
-  const filteredRules = competitionRules.filter(rule => {
-    const searchLower = searchTerm.toLowerCase()
-    return rule.title.toLowerCase().includes(searchLower) ||
-           rule.content.toLowerCase().includes(searchLower) ||
-           rule.subsections?.some(sub =>
-             sub.title.toLowerCase().includes(searchLower) ||
-             sub.content.toLowerCase().includes(searchLower)
-           )
-  })
+// 年龄分组说明
+const ageGroups = [
+  { group: 'U15组别', age: '13-15岁', description: '青少年入门级别，重点培养兴趣和基础技能' },
+  { group: 'U18组别', age: '16-18岁', description: '青少年提高级别，注重技术规范和竞技能力' },
+  { group: '青年组', age: '19-25岁', description: '年轻选手组别，展现活力和潜力的舞台' },
+  { group: '成年组', age: '26-39岁', description: '成年选手主力组别，技术成熟竞争激烈' },
+  { group: '大师组', age: '40岁以上', description: '资深滑雪爱好者组别，享受运动乐趣' }
+]
 
+export default function CompetitionRulesPage() {
   return (
-    <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8 relative">
-      {/* 背景装饰 */}
-      <div className="absolute top-0 right-0 w-40 h-40 opacity-15 rounded-full overflow-hidden">
-        <img src={getImagePath("/images/ski-action-2.jpg")} alt="" className="w-full h-full object-cover" />
-      </div>
-      <div className="absolute bottom-20 left-10 w-32 h-32 opacity-15 rounded-full overflow-hidden">
-        <img src={getImagePath("/images/giant-slalom.jpg")} alt="" className="w-full h-full object-cover" />
-      </div>
-
+    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
       {/* Header */}
-      <div className="text-center mb-8 relative z-10">
-        <h1 className="section-title">竞赛规则</h1>
-        <p className="text-gray-600 text-lg">
-          高山滑雪竞赛组织管理和执行规范
+      <div className="text-center mb-12">
+        <h1 className="text-4xl font-bold text-ski-navy mb-4">竞赛规则说明</h1>
+        <p className="text-lg text-gray-600 max-w-3xl mx-auto leading-relaxed">
+          了解高山滑雪竞赛的基本规则和参赛要求，为您的滑雪竞赛之旅提供完整指导
         </p>
       </div>
 
-      {/* 快速导航和统计 */}
-      <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8 relative z-10">
-        <div className="card text-center">
-          <FileText className="h-8 w-8 text-ski-blue mx-auto mb-2" />
-          <div className="text-2xl font-bold text-ski-navy">6</div>
-          <div className="text-sm text-gray-600">主要章节</div>
-        </div>
-        <div className="card text-center">
-          <Users className="h-8 w-8 text-green-600 mx-auto mb-2" />
-          <div className="text-2xl font-bold text-ski-navy">5</div>
-          <div className="text-sm text-gray-600">比赛项目</div>
-        </div>
-        <div className="card text-center">
-          <Trophy className="h-8 w-8 text-yellow-600 mx-auto mb-2" />
-          <div className="text-2xl font-bold text-ski-navy">4</div>
-          <div className="text-sm text-gray-600">年龄组别</div>
-        </div>
-        <div className="card text-center">
-          <CheckCircle className="h-8 w-8 text-purple-600 mx-auto mb-2" />
-          <div className="text-2xl font-bold text-ski-navy">2024</div>
-          <div className="text-sm text-gray-600">当前版本</div>
-        </div>
-      </div>
-
-      {/* 搜索功能 */}
-      <div className="card mb-8 relative z-10">
-        <div className="flex items-center space-x-4">
-          <div className="relative flex-1 max-w-md">
-            <Search className="h-5 w-5 text-gray-400 absolute left-3 top-1/2 transform -translate-y-1/2" />
-            <input
-              type="text"
-              placeholder="搜索规则内容..."
-              value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)}
-              className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-ski-blue"
-            />
+      {/* 赛事概览 */}
+      <div className="bg-gradient-to-r from-ski-blue to-primary-700 text-white rounded-lg p-8 mb-12">
+        <div className="text-center">
+          <h2 className="text-3xl font-bold mb-4">高山滑雪竞赛项目</h2>
+          <p className="text-xl mb-6 text-gray-100">
+            包含技术项目和速度项目，满足不同水平选手的参赛需求
+          </p>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-sm">
+            <div className="bg-white/20 rounded-lg p-3">
+              <div className="font-bold text-lg">回转(SL)</div>
+              <div>技术项目</div>
+            </div>
+            <div className="bg-white/20 rounded-lg p-3">
+              <div className="font-bold text-lg">大回转(GS)</div>
+              <div>技术项目</div>
+            </div>
+            <div className="bg-white/20 rounded-lg p-3">
+              <div className="font-bold text-lg">超大(SG)</div>
+              <div>速度项目</div>
+            </div>
+            <div className="bg-white/20 rounded-lg p-3">
+              <div className="font-bold text-lg">速降(DH)</div>
+              <div>速度项目</div>
+            </div>
           </div>
-          <button className="btn-secondary flex items-center">
-            <Download className="h-4 w-4 mr-2" />
-            下载PDF
-          </button>
         </div>
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-4 gap-8 relative z-10">
-        {/* 目录导航 */}
-        <div className="lg:col-span-1">
-          <div className="card sticky top-8">
-            <h3 className="text-lg font-semibold text-ski-navy mb-4 flex items-center">
-              <BookOpen className="h-5 w-5 mr-2" />
-              规则目录
-            </h3>
-            <nav className="space-y-2">
-              {competitionRules.map((section) => (
-                <div key={section.id}>
-                  <button
-                    onClick={() => toggleSection(section.id)}
-                    className="w-full text-left p-2 rounded hover:bg-gray-50 flex items-center justify-between"
-                  >
-                    <span className="text-sm font-medium text-gray-700">
-                      {section.id}. {section.title}
+      {/* 比赛项目详解 */}
+      <div className="mb-12">
+        <h2 className="text-3xl font-bold text-ski-navy mb-8 text-center">比赛项目介绍</h2>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          {projectIntroductions.map((project, index) => (
+            <div key={index} className={`bg-white rounded-lg shadow-lg p-6 border-l-4 border-${project.color.split('-')[1]}-500`}>
+              <div className="flex items-center mb-4">
+                <div className={`w-12 h-12 ${project.bgColor} rounded-lg flex items-center justify-center mr-4`}>
+                  <project.icon className={`h-6 w-6 ${project.color}`} />
+                </div>
+                <div>
+                  <h3 className="text-xl font-bold text-ski-navy">{project.name}</h3>
+                  <p className="text-gray-600">{project.description}</p>
+                </div>
+              </div>
+              <ul className="space-y-2">
+                {project.features.map((feature, featureIndex) => (
+                  <li key={featureIndex} className="flex items-center text-sm text-gray-700">
+                    <CheckCircle className="h-4 w-4 text-green-500 mr-2 flex-shrink-0" />
+                    {feature}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* 参赛指南 */}
+      <div className="mb-12">
+        <h2 className="text-3xl font-bold text-ski-navy mb-8 text-center">参赛指南</h2>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          {participationGuide.map((guide, index) => (
+            <div key={index} className="bg-white rounded-lg shadow-lg p-6">
+              <div className="flex items-center mb-4">
+                <div className="w-12 h-12 bg-gray-100 rounded-lg flex items-center justify-center mr-3">
+                  <guide.icon className={`h-6 w-6 ${guide.color}`} />
+                </div>
+                <h3 className="text-lg font-semibold text-ski-navy">{guide.title}</h3>
+              </div>
+              <ol className="space-y-2">
+                {guide.steps.map((step, stepIndex) => (
+                  <li key={stepIndex} className="flex items-start text-sm text-gray-700">
+                    <span className={`inline-block w-5 h-5 rounded-full text-xs text-white flex items-center justify-center mr-2 mt-0.5 flex-shrink-0 ${guide.color.replace('text-', 'bg-')}`}>
+                      {stepIndex + 1}
                     </span>
-                    {expandedSections.includes(section.id) ? (
-                      <ChevronDown className="h-4 w-4 text-gray-400" />
-                    ) : (
-                      <ChevronRight className="h-4 w-4 text-gray-400" />
-                    )}
-                  </button>
-                  {expandedSections.includes(section.id) && section.subsections && (
-                    <div className="ml-4 mt-2 space-y-1">
-                      {section.subsections.map((subsection) => (
-                        <a
-                          key={subsection.id}
-                          href={`#section-${subsection.id}`}
-                          className="block p-1 text-xs text-gray-600 hover:text-ski-blue rounded hover:bg-gray-50"
-                        >
-                          {subsection.id}. {subsection.title}
-                        </a>
-                      ))}
-                    </div>
-                  )}
-                </div>
+                    {step}
+                  </li>
+                ))}
+              </ol>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* 年龄分组 */}
+      <div className="bg-white rounded-lg shadow-lg p-8 mb-12">
+        <h2 className="text-2xl font-bold text-ski-navy mb-6 text-center">年龄分组说明</h2>
+        <div className="overflow-x-auto">
+          <table className="w-full">
+            <thead className="bg-gray-50">
+              <tr>
+                <th className="text-left py-4 px-6 font-semibold text-gray-700">组别名称</th>
+                <th className="text-center py-4 px-6 font-semibold text-gray-700">年龄范围</th>
+                <th className="text-left py-4 px-6 font-semibold text-gray-700">组别特点</th>
+              </tr>
+            </thead>
+            <tbody>
+              {ageGroups.map((group, index) => (
+                <tr key={index} className="border-b border-gray-100 hover:bg-gray-50">
+                  <td className="py-4 px-6 font-medium text-gray-900">{group.group}</td>
+                  <td className="py-4 px-6 text-center">
+                    <span className="text-lg font-bold text-ski-blue">{group.age}</span>
+                  </td>
+                  <td className="py-4 px-6 text-gray-600">{group.description}</td>
+                </tr>
               ))}
-            </nav>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      {/* 安全与规范 */}
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
+        <div className="bg-white rounded-lg shadow-lg p-6">
+          <div className="flex items-center mb-4">
+            <Shield className="h-8 w-8 text-red-600 mr-3" />
+            <h3 className="text-xl font-semibold text-ski-navy">安全要求</h3>
           </div>
+          <ul className="space-y-3 text-gray-700">
+            <li className="flex items-start">
+              <CheckCircle className="h-5 w-5 text-green-500 mr-2 mt-0.5 flex-shrink-0" />
+              <span>佩戴合规的滑雪头盔和护具</span>
+            </li>
+            <li className="flex items-start">
+              <CheckCircle className="h-5 w-5 text-green-500 mr-2 mt-0.5 flex-shrink-0" />
+              <span>使用检验合格的滑雪板和固定器</span>
+            </li>
+            <li className="flex items-start">
+              <CheckCircle className="h-5 w-5 text-green-500 mr-2 mt-0.5 flex-shrink-0" />
+              <span>提供有效的健康体检证明</span>
+            </li>
+            <li className="flex items-start">
+              <CheckCircle className="h-5 w-5 text-green-500 mr-2 mt-0.5 flex-shrink-0" />
+              <span>购买合适的运动意外保险</span>
+            </li>
+            <li className="flex items-start">
+              <CheckCircle className="h-5 w-5 text-green-500 mr-2 mt-0.5 flex-shrink-0" />
+              <span>遵守赛场纪律和安全规定</span>
+            </li>
+          </ul>
         </div>
 
-        {/* 规则内容 */}
-        <div className="lg:col-span-3">
-          <div className="space-y-8">
-            {filteredRules.map((section) => (
-              <div key={section.id} className="card">
-                <div
-                  id={`section-${section.id}`}
-                  className="flex items-center mb-4 cursor-pointer"
-                  onClick={() => toggleSection(section.id)}
-                >
-                  <h2 className="text-2xl font-bold text-ski-navy">
-                    {section.id}. {section.title}
-                  </h2>
-                  {expandedSections.includes(section.id) ? (
-                    <ChevronDown className="h-6 w-6 text-gray-400 ml-2" />
-                  ) : (
-                    <ChevronRight className="h-6 w-6 text-gray-400 ml-2" />
-                  )}
-                </div>
+        <div className="bg-white rounded-lg shadow-lg p-6">
+          <div className="flex items-center mb-4">
+            <FileText className="h-8 w-8 text-blue-600 mr-3" />
+            <h3 className="text-xl font-semibold text-ski-navy">技术规范</h3>
+          </div>
+          <ul className="space-y-3 text-gray-700">
+            <li className="flex items-start">
+              <CheckCircle className="h-5 w-5 text-green-500 mr-2 mt-0.5 flex-shrink-0" />
+              <span>按照指定路线完成滑行</span>
+            </li>
+            <li className="flex items-start">
+              <CheckCircle className="h-5 w-5 text-green-500 mr-2 mt-0.5 flex-shrink-0" />
+              <span>不得漏门或故意撞门</span>
+            </li>
+            <li className="flex items-start">
+              <CheckCircle className="h-5 w-5 text-green-500 mr-2 mt-0.5 flex-shrink-0" />
+              <span>尊重裁判员的现场判决</span>
+            </li>
+            <li className="flex items-start">
+              <CheckCircle className="h-5 w-5 text-green-500 mr-2 mt-0.5 flex-shrink-0" />
+              <span>展现良好的体育道德风尚</span>
+            </li>
+            <li className="flex items-start">
+              <CheckCircle className="h-5 w-5 text-green-500 mr-2 mt-0.5 flex-shrink-0" />
+              <span>服从赛事组织管理安排</span>
+            </li>
+          </ul>
+        </div>
+      </div>
 
-                {expandedSections.includes(section.id) && (
-                  <div>
-                    <p className="text-gray-700 mb-6 leading-relaxed">
-                      {section.content}
-                    </p>
+      {/* 常见问题 */}
+      <div className="bg-gradient-to-r from-ski-navy to-gray-800 text-white rounded-lg p-8 mb-12">
+        <h2 className="text-3xl font-bold mb-8 text-center">常见问题解答</h2>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <div>
+            <h3 className="text-xl font-semibold mb-4">Q: 如何选择适合的比赛项目？</h3>
+            <p className="text-gray-300 text-sm mb-6">
+              根据个人技术水平和兴趣选择。新手建议从大回转开始，技术型选手可尝试回转，喜欢速度感的选手可选择速降项目。
+            </p>
 
-                    {section.subsections && (
-                      <div className="space-y-6">
-                        {section.subsections.map((subsection) => (
-                          <div
-                            key={subsection.id}
-                            id={`section-${subsection.id}`}
-                            className="border-l-4 border-ski-blue pl-6"
-                          >
-                            <h3 className="text-lg font-semibold text-ski-navy mb-3">
-                              {subsection.id}. {subsection.title}
-                            </h3>
-                            <div className="text-gray-700 leading-relaxed whitespace-pre-line">
-                              {subsection.content}
-                            </div>
-                          </div>
-                        ))}
-                      </div>
-                    )}
-                  </div>
-                )}
-              </div>
-            ))}
+            <h3 className="text-xl font-semibold mb-4">Q: 参赛需要哪些基本条件？</h3>
+            <p className="text-gray-300 text-sm">
+              需要具备基本的滑雪技能，通过平台注册认证，提供健康证明，购买保险，并缴纳相应的报名费用。
+            </p>
           </div>
 
-          {/* 重要提醒 */}
-          <div className="card mt-8 bg-yellow-50 border border-yellow-200">
-            <div className="flex items-start">
-              <AlertTriangle className="h-6 w-6 text-yellow-600 mr-3 mt-0.5 flex-shrink-0" />
-              <div>
-                <h3 className="font-semibold text-yellow-800 mb-2">重要提醒</h3>
-                <ul className="text-sm text-yellow-700 space-y-1">
-                  <li>• 本规则为2024年版本，如有更新请以最新版本为准</li>
-                  <li>• 参赛前请仔细阅读相关规则，确保符合参赛要求</li>
-                  <li>• 如有疑问请联系中国滑雪协会技术委员会</li>
-                  <li>• 所有参赛者必须严格遵守竞赛规则和体育道德</li>
-                </ul>
-              </div>
-            </div>
+          <div>
+            <h3 className="text-xl font-semibold mb-4">Q: 比赛成绩如何计算积分？</h3>
+            <p className="text-gray-300 text-sm mb-6">
+              比赛成绩将根据专业的积分计算规则转换为积分，用于排名和后续比赛的资格认定。具体可查看积分规则详解。
+            </p>
+
+            <h3 className="text-xl font-semibold mb-4">Q: 如何提升竞技水平？</h3>
+            <p className="text-gray-300 text-sm">
+              建议多参加训练营，观摩高水平比赛，加强体能训练，并在实战中不断积累经验和改进技术。
+            </p>
           </div>
+        </div>
+      </div>
 
-          {/* 相关链接 */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-8">
-            <div className="card text-center hover:shadow-lg transition-shadow duration-200 cursor-pointer">
-              <Trophy className="h-12 w-12 text-ski-blue mx-auto mb-4" />
-              <h3 className="text-lg font-semibold text-ski-navy mb-2">中国积分规则</h3>
-              <p className="text-sm text-gray-600">了解中国滑雪协会积分计算规则</p>
-            </div>
-
-            <div className="card text-center hover:shadow-lg transition-shadow duration-200 cursor-pointer">
-              <Users className="h-12 w-12 text-green-600 mx-auto mb-4" />
-              <h3 className="text-lg font-semibold text-ski-navy mb-2">运动员注册</h3>
-              <p className="text-sm text-gray-600">查看运动员注册要求和流程</p>
-            </div>
+      {/* 联系方式 */}
+      <div className="bg-blue-50 border border-blue-200 rounded-lg p-6">
+        <h3 className="text-lg font-semibold text-blue-800 mb-4">需要帮助？</h3>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm text-blue-700">
+          <div>
+            <h4 className="font-semibold mb-2">技术咨询</h4>
+            <ul className="space-y-1">
+              <li>• 比赛规则解读</li>
+              <li>• 技术要求说明</li>
+              <li>• 装备规范指导</li>
+              <li>• 安全注意事项</li>
+            </ul>
+          </div>
+          <div>
+            <h4 className="font-semibold mb-2">报名服务</h4>
+            <ul className="space-y-1">
+              <li>• 在线报名指导</li>
+              <li>• 资格审查流程</li>
+              <li>• 费用缴纳方式</li>
+              <li>• 赛程安排查询</li>
+            </ul>
           </div>
         </div>
       </div>
