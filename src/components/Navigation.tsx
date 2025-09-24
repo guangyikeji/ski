@@ -141,6 +141,16 @@ export default function Navigation() {
       // 首页始终显示
       if (item.name === '首页') return true
 
+      // 检查是否包含公开的子菜单项
+      const hasPublicChildren = item.children?.some(child =>
+        ['积分排行榜', '中国积分规则', '竞赛规则', '赛事日程'].includes(child.name)
+      )
+
+      // 如果包含公开子菜单或用户有权限，则显示主菜单
+      if (hasPublicChildren || (item.resource && item.action && hasPermission(item.resource, item.action))) {
+        return true
+      }
+
       // 对于其他项目，检查权限
       if (item.resource && item.action) {
         return hasPermission(item.resource, item.action)
@@ -162,7 +172,9 @@ export default function Navigation() {
         needsAuth: !isAuthenticated && child.resource && child.action &&
                   !['积分排行榜', '中国积分规则', '竞赛规则', '赛事日程'].includes(child.name)
       })) : undefined,
-      needsAuth: !isAuthenticated && item.resource && item.action && item.name !== '首页'
+      // 如果包含公开子菜单，主菜单也不需要认证标记
+      needsAuth: !isAuthenticated && item.resource && item.action && item.name !== '首页' &&
+                !item.children?.some(child => ['积分排行榜', '中国积分规则', '竞赛规则', '赛事日程'].includes(child.name))
     }))
   }
 
