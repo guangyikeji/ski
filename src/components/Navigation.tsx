@@ -158,7 +158,9 @@ export default function Navigation() {
         return true
       }).map(child => ({
         ...child,
-        needsAuth: !isAuthenticated && child.resource && child.action
+        // 公开页面不需要登录 - 积分排名、积分规则、赛事日程
+        needsAuth: !isAuthenticated && child.resource && child.action &&
+                  !['积分排行榜', '中国积分规则', '竞赛规则', '赛事日程'].includes(child.name)
       })) : undefined,
       needsAuth: !isAuthenticated && item.resource && item.action && item.name !== '首页'
     }))
