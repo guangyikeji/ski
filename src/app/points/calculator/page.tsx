@@ -451,7 +451,7 @@ export default function CalculatorPage() {
               </div>
               <div>
                 <p className="font-medium mb-1">• 赛事系数：</p>
-                <p>A级(1.0) > B级(0.6) > C级(0.3)</p>
+                <p>A级(1.0) &gt; B级(0.6) &gt; C级(0.3)</p>
               </div>
             </div>
           </div>
