@@ -2,7 +2,7 @@ name: Auto Deploy to GitHub Pages
 
 on:
   push:
-    branches: [ development ]
+    branches: [ main, development ]
     paths:
       - 'alpine-ski-points/**'
       - '.github/workflows/**'
@@ -74,6 +74,6 @@ jobs:
 🤖 Generated with [Claude Code](https://claude.ai/code)
 
 Co-Authored-By: Claude <noreply@anthropic.com>"
-            git push origin development
+            git push origin main
             echo "✅ Successfully pushed updated docs to development branch"
           fi
