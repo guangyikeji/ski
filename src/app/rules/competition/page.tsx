@@ -110,13 +110,12 @@ const participationGuide = [
   }
 ]
 
-// 年龄分组说明 (v4.0扩展体系)
+// 年龄分组说明 (扩展青少年体系)
 const ageGroups = [
-  { group: 'U10组别', age: '10岁以下', description: '启蒙阶段，重在兴趣培养和基础技能学习' },
-  { group: 'U12组别', age: '12岁以下', description: '基础阶段，技术动作学习和规范化训练' },
-  { group: 'U15组别', age: '15岁以下', description: '发展阶段，竞技意识培养和技能提升' },
-  { group: 'U18组别', age: '18岁以下', description: '提高阶段，专项技能强化和技术完善' },
-  { group: 'U21组别', age: '21岁以下', description: '成熟阶段，向成年组过渡和适应高水平竞技' },
+  { group: 'U12组别', age: '12岁以下', description: '基础阶段，技术动作学习和规范化训练（发展积分）' },
+  { group: 'U15组别', age: '15岁以下', description: '发展阶段，竞技意识培养和技能提升（正式积分）' },
+  { group: 'U18组别', age: '18岁以下', description: '提高阶段，专项技能强化和技术完善（正式积分）' },
+  { group: 'U21组别', age: '21岁以下', description: '成熟阶段，向成年组过渡和适应高水平竞技（正式积分）' },
   { group: '成年组', age: '22岁以上', description: '最高竞技水平，技术成熟竞争激烈' }
 ]
 
@@ -125,9 +124,9 @@ export default function CompetitionRulesPage() {
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
       {/* Header */}
       <div className="text-center mb-12">
-        <h1 className="text-4xl font-bold text-ski-navy mb-4">中国高山滑雪竞赛规则 v4.0</h1>
+        <h1 className="text-4xl font-bold text-ski-navy mb-4">中国高山滑雪竞赛规则</h1>
         <p className="text-lg text-gray-600 max-w-3xl mx-auto leading-relaxed">
-          了解v4.0新版竞赛规则和扩展青少年体系，为您的滑雪竞赛之旅提供最新指导
+          了解最新竞赛规则和扩展青少年体系，为您的滑雪竞赛之旅提供官方指导
         </p>
       </div>
 
@@ -216,7 +215,7 @@ export default function CompetitionRulesPage() {
 
       {/* 年龄分组 */}
       <div className="bg-white rounded-lg shadow-lg p-8 mb-12">
-        <h2 className="text-2xl font-bold text-ski-navy mb-6 text-center">v4.0扩展青少年体系</h2>
+        <h2 className="text-2xl font-bold text-ski-navy mb-6 text-center">扩展青少年体系</h2>
         <div className="overflow-x-auto">
           <table className="w-full">
             <thead className="bg-gray-50">
@@ -319,9 +318,9 @@ export default function CompetitionRulesPage() {
           </div>
 
           <div>
-            <h3 className="text-xl font-semibold mb-4">Q: v4.0积分是如何计算的？</h3>
+            <h3 className="text-xl font-semibold mb-4">Q: 积分是如何计算的？</h3>
             <p className="text-gray-300 text-sm mb-6">
-              v4.0采用简化的三步计算公式：最终积分 = (基础积分 + 判罚分) × 赛事系数。去除了复杂的质量系数和人数系数。
+              采用简化的三步计算公式：最终积分 = (基础积分 + 判罚分) × 赛事系数。去除了复杂的质量系数和人数系数。
             </p>
 
             <h3 className="text-xl font-semibold mb-4">Q: 如何提升竞技水平？</h3>
