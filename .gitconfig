@@ -1,0 +1,73 @@
+# 项目Git配置文件
+# 高山滑雪竞赛管理系统
+
+[core]
+    # 文件权限模式
+    filemode = false
+    # 忽略大小写
+    ignorecase = true
+    # 启用自动换行转换
+    autocrlf = true
+    # 设置编辑器
+    editor = code --wait
+    # 启用颜色输出
+    ui = auto
+
+[pull]
+    # 使用rebase而不是merge
+    rebase = true
+
+[push]
+    # 推送时只推送当前分支
+    default = current
+    # 自动设置上游分支
+    autoSetupRemote = true
+
+[branch]
+    # 自动设置跟踪分支
+    autoSetupMerge = always
+    # 显示远程分支状态
+    autoSetupRebase = always
+
+[merge]
+    # 使用更好的合并工具
+    tool = vscode
+    # 保留原始冲突标记
+    conflictstyle = diff3
+
+[mergetool "vscode"]
+    cmd = code --wait $MERGED
+
+[diff]
+    # 使用更好的diff算法
+    algorithm = histogram
+    # 显示更多上下文
+    context = 5
+
+[alias]
+    # 常用别名
+    st = status -s
+    br = branch
+    co = checkout
+    cm = commit -m
+    pl = pull
+    ps = push
+    lg = log --oneline --graph --decorate --all
+    last = log -1 HEAD
+    unstage = reset HEAD --
+    visual = !gitk
+    
+    # 推送到两个远程仓库
+    push-all = !git push origin && git push gitee
+    
+    # 创建功能分支
+    feature = checkout -b
+    
+    # 删除已合并的分支
+    clean-merged = !git branch --merged | grep -v \"\\*\\|main\\|develop\" | xargs -n 1 git branch -d
+    
+    # 漂亮的日志显示
+    tree = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
+    
+    # 显示文件变更统计
+    stat = !git --no-pager diff --stat

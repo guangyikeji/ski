@@ -68,3 +68,60 @@ ecosystem.config.js.backup
 
 # Docker
 .dockerignore
+docker-compose.override.yml
+
+# Git相关
+*.orig
+*.rej
+.git-rewrite/
+.gitconfig.local
+
+# 备份文件
+*.bak
+*.backup
+*.tmp
+*~
+
+# 压缩文件
+*.zip
+*.tar.gz
+*.rar
+*.7z
+
+# 数据库文件
+*.sqlite
+*.db
+*.sqlite3
+
+# 缓存目录
+.cache/
+.temp/
+.tmp/
+
+# 测试覆盖率报告
+coverage/
+.nyc_output/
+.coverage/
+
+# 错误日志
+error.log
+access.log
+*.log
+
+# 安全文件
+*.key
+*.pem
+*.p12
+*.pfx
+.ssh/
+secrets/
+
+# 本地配置
+config.local.js
+config.local.json
+local.properties
+
+# 工具生成的文件
+.eslintcache
+.stylelintcache
+.parcel-cache/
