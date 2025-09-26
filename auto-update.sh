@@ -77,7 +77,14 @@ if ! git diff-index --quiet HEAD --; then
     log_info "推送到远程仓库..."
 
     # 推送到GitHub
-    if git remote | grep -q "origin"; then
+    if git remote | grep -q "github"; then
+        log_info "推送到GitHub..."
+        if git push github "$CURRENT_BRANCH"; then
+            log_success "成功推送到GitHub $CURRENT_BRANCH"
+        else
+            log_warning "推送到GitHub失败，可能需要检查网络连接或权限"
+        fi
+    elif git remote | grep -q "origin"; then
         log_info "推送到GitHub origin..."
         if git push origin "$CURRENT_BRANCH"; then
             log_success "成功推送到GitHub origin/$CURRENT_BRANCH"
@@ -104,7 +111,14 @@ else
         log_info "本地有未推送的提交，推送到远程仓库..."
 
         # 推送到GitHub
-        if git remote | grep -q "origin"; then
+        if git remote | grep -q "github"; then
+            log_info "推送到GitHub..."
+            if git push github "$CURRENT_BRANCH"; then
+                log_success "成功推送到GitHub $CURRENT_BRANCH"
+            else
+                log_warning "推送到GitHub失败"
+            fi
+        elif git remote | grep -q "origin"; then
             log_info "推送到GitHub origin..."
             if git push origin "$CURRENT_BRANCH"; then
                 log_success "成功推送到GitHub origin/$CURRENT_BRANCH"
@@ -129,7 +143,10 @@ fi
 
 # 显示远程仓库链接
 log_info "远程仓库链接:"
-if git remote | grep -q "origin"; then
+if git remote | grep -q "github"; then
+    GITHUB_URL=$(git remote get-url github)
+    log_info "📱 GitHub: $GITHUB_URL"
+elif git remote | grep -q "origin"; then
     GITHUB_URL=$(git remote get-url origin)
     log_info "📱 GitHub: $GITHUB_URL"
 fi
