@@ -1,14 +1,15 @@
 /** @type {import('next').NextConfig} */
 const isGitHubPages = process.env.GITHUB_PAGES === 'true';
+const isDirectDeploy = process.env.DIRECT_DEPLOY === 'true';
 
 const nextConfig = {
   // 根据环境决定是否静态导出
-  ...(isGitHubPages && {
+  ...((isGitHubPages || isDirectDeploy) && {
     output: 'export',
     trailingSlash: true,
-    basePath: '/ski',
-    assetPrefix: '/ski/',
-    distDir: 'out',
+    basePath: isDirectDeploy ? '' : '/ski',
+    assetPrefix: isDirectDeploy ? '' : '/ski/',
+    distDir: isDirectDeploy ? '../docs' : 'out',
     skipTrailingSlashRedirect: true,
   }),
   images: {

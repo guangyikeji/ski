@@ -6,9 +6,11 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "build:github": "NODE_ENV=production next build",
+    "build:github": "GITHUB_PAGES=true npm run build",
+    "build:direct": "DIRECT_DEPLOY=true npm run build",
     "export": "next export",
     "deploy:github": "npm run build:github && touch out/.nojekyll",
+    "deploy:pages": "cd .. && ./deploy-github-pages.sh",
     "start": "next start",
     "lint": "next lint",
     "typecheck": "tsc --noEmit",
