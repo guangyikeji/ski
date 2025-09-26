@@ -67,4 +67,4 @@ pids/
 ecosystem.config.js.backup
 
 # Docker
-.dockerignore
+.dockerignoretemp_venv/
