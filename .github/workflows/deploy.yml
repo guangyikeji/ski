@@ -1,28 +1,30 @@
-name: Deploy to GitHub Pages
+name: Auto Deploy to GitHub Pages
 
 on:
   push:
-    branches: [ develop ]
-  pull_request:
-    branches: [ develop ]
+    branches: [ development ]
+    paths:
+      - 'alpine-ski-points/**'
+      - '.github/workflows/**'
 
 permissions:
-  contents: read
+  contents: write
   pages: write
   id-token: write
 
 concurrency:
-  group: "pages"
+  group: "auto-deploy"
   cancel-in-progress: false
 
 jobs:
-  build:
+  auto-build-and-commit:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
+          token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
@@ -36,31 +38,42 @@ jobs:
           cd alpine-ski-points
           npm ci
 
-      - name: Build project
+      - name: Build for direct deployment
         run: |
           cd alpine-ski-points
-          npm run build
+          rm -rf ../docs/*
+          DIRECT_DEPLOY=true npm run build
         env:
           NODE_ENV: production
-          GITHUB_PAGES: true
 
-      - name: Setup Pages
-        uses: actions/configure-pages@v4
-        with:
-          static_site_generator: next
+      - name: Check if docs folder has content
+        run: |
+          if [ ! -f "docs/index.html" ]; then
+            echo "❌ Build failed: No index.html found in docs"
+            exit 1
+          fi
+          echo "✅ Build successful: $(find docs -name "*.html" | wc -l) HTML pages generated"
 
-      - name: Upload artifact
-        uses: actions/upload-pages-artifact@v3
-        with:
-          path: alpine-ski-points/out
+      - name: Configure Git
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
 
-  deploy:
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    runs-on: ubuntu-latest
-    needs: build
-    steps:
-      - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v4
+      - name: Commit and push changes
+        run: |
+          git add docs/
+          if git diff --staged --quiet; then
+            echo "📝 No changes to commit"
+          else
+            git commit -m "🚀 Auto-deploy: Update GitHub Pages
+
+- Generated $(find docs -name "*.html" | wc -l) static pages
+- Built from commit: ${{ github.sha }}
+- Triggered by: ${{ github.actor }}
+
+🤖 Generated with [Claude Code](https://claude.ai/code)
+
+Co-Authored-By: Claude <noreply@anthropic.com>"
+            git push origin development
+            echo "✅ Successfully pushed updated docs to development branch"
+          fi
