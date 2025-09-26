@@ -387,7 +387,7 @@ export class VenueStandardsManager {
     // 验证坡面障碍技巧规格
     if (actualSpecs.slopestyle && standard.slopestyle) {
       const slopestyleChecks = this.validateSlopestyleSpecs(actualSpecs.slopestyle, standard.slopestyle);
-      nonCompliantItems.push(...bigAirChecks.nonCompliant);
+      nonCompliantItems.push(...slopestyleChecks.nonCompliant);
       recommendations.push(...slopestyleChecks.recommendations);
     }
 
@@ -642,7 +642,7 @@ export const VenueUtils = {
    * 获取项目类型描述
    */
   getDisciplineDescription(discipline: SkiDiscipline): string {
-    const descriptions = {
+    const descriptions: Partial<Record<SkiDiscipline, string>> = {
       [SkiDiscipline.FREESTYLE_BA]: '自由式滑雪大跳台',
       [SkiDiscipline.FREESTYLE_SS]: '自由式滑雪坡面障碍技巧',
       [SkiDiscipline.FREESTYLE_HP]: '自由式滑雪U型场地',

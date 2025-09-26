@@ -129,8 +129,8 @@ export class MultiSportPointsCalculator {
     const distribution = POINTS_DISTRIBUTION[pointsCategory];
 
     // 直接查表获取积分，如果名次超出表格范围则使用递减公式
-    if (distribution.distribution[rank]) {
-      return distribution.distribution[rank];
+    if (distribution.distribution[rank as keyof typeof distribution.distribution]) {
+      return distribution.distribution[rank as keyof typeof distribution.distribution];
     }
 
     // 第11名及以后按递减公式计算
