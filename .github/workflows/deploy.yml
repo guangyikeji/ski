@@ -28,17 +28,14 @@ jobs:
         with:
           node-version: '18'
           cache: 'npm'
-          cache-dependency-path: 'alpine-ski-points/package-lock.json'
+          cache-dependency-path: 'package-lock.json'
 
       - name: Install dependencies
-        run: |
-          cd alpine-ski-points
-          npm ci
+        run: npm ci
 
       - name: Build for direct deployment
         run: |
-          cd alpine-ski-points
-          rm -rf ../docs/*
+          rm -rf docs/*
           DIRECT_DEPLOY=true npm run build
         env:
           NODE_ENV: production

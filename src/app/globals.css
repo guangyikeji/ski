@@ -1,0 +1,161 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-ski-snow text-gray-900 antialiased;
+  }
+}
+
+@layer components {
+  .nav-link {
+    @apply relative px-4 py-2 text-gray-700 hover:text-ski-blue transition-all duration-200 rounded-md hover:bg-ski-ice/30;
+  }
+
+  .nav-link::after {
+    @apply absolute bottom-0 left-0 w-0 h-0.5 bg-ski-blue transition-all duration-300;
+    content: '';
+  }
+
+  .nav-link:hover::after,
+  .nav-link.active::after {
+    @apply w-full;
+  }
+
+  .nav-link:hover {
+    transform: translateY(-1px);
+  }
+
+  .nav-link.active {
+    @apply text-ski-blue bg-ski-ice/50;
+  }
+
+  .dropdown-menu {
+    @apply absolute left-0 mt-2 w-48 bg-white rounded-md shadow-lg border border-gray-100 py-1 z-50;
+    animation: dropdownFadeIn 0.2s ease-out;
+    transform-origin: top;
+  }
+
+  .dropdown-item {
+    @apply block px-4 py-2 text-sm transition-colors duration-150;
+  }
+
+  .dropdown-item:hover {
+    @apply bg-gradient-to-r from-ski-ice to-ski-blue/10;
+    transform: translateX(2px);
+  }
+
+  .card {
+    @apply bg-white rounded-lg shadow-sm border border-gray-100 p-6 hover:shadow-md transition-all duration-300;
+  }
+
+  .card:hover {
+    transform: translateY(-2px);
+  }
+
+  .card-disabled {
+    @apply bg-gray-50 border-gray-200 opacity-60 cursor-not-allowed;
+  }
+
+  .btn-primary {
+    @apply bg-ski-blue text-white px-6 py-3 rounded-lg font-medium hover:bg-primary-700 transition-colors duration-200 disabled:opacity-50 disabled:cursor-not-allowed;
+  }
+
+  .btn-secondary {
+    @apply bg-white text-ski-blue border-2 border-ski-blue px-6 py-3 rounded-lg font-medium hover:bg-ski-ice transition-colors duration-200;
+  }
+
+  .section-title {
+    @apply text-2xl md:text-3xl font-bold text-ski-navy mb-6;
+  }
+
+  .badge {
+    @apply inline-flex items-center px-3 py-1 rounded-full text-sm font-medium;
+  }
+
+  .badge-coming-soon {
+    @apply bg-gray-100 text-gray-600;
+  }
+
+  .badge-active {
+    @apply bg-green-100 text-green-800;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  .animate-pulse-slow {
+    animation: pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  }
+
+  @keyframes dropdownFadeIn {
+    from {
+      opacity: 0;
+      transform: scaleY(0.95) translateY(-10px);
+    }
+    to {
+      opacity: 1;
+      transform: scaleY(1) translateY(0);
+    }
+  }
+
+  @keyframes slideInFromBottom {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .animate-slide-in {
+    animation: slideInFromBottom 0.6s ease-out;
+  }
+
+  @keyframes float {
+    0%, 100% {
+      transform: translateY(0px);
+    }
+    50% {
+      transform: translateY(-10px);
+    }
+  }
+
+  @keyframes glow {
+    0%, 100% {
+      box-shadow: 0 0 5px rgba(59, 130, 246, 0.3);
+    }
+    50% {
+      box-shadow: 0 0 20px rgba(59, 130, 246, 0.6);
+    }
+  }
+
+  .animate-float {
+    animation: float 6s ease-in-out infinite;
+  }
+
+  .animate-glow {
+    animation: glow 3s ease-in-out infinite;
+  }
+
+  .bg-gradient-ski {
+    background: linear-gradient(135deg, #1e40af 0%, #3b82f6 50%, #06b6d4 100%);
+  }
+
+  .text-gradient {
+    background: linear-gradient(135deg, #1e40af, #3b82f6, #06b6d4);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+}// Force trigger deployment Sat Sep 27 05:00:14 +08 2025
