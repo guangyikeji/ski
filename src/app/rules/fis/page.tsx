@@ -14,13 +14,13 @@ const ruleCategories = [
     ]
   },
   {
-    title: '青少年体系 v4.0',
+    title: '青少年体系 (根据v4.docx)',
     icon: Clock,
-    description: '扩展青少年年龄组別，完善人才培养体系',
+    description: 'U12-U21四个年龄组，完善人才培养体系',
     rules: [
-      { name: 'U10组别', description: '10岁以下组，启蒙阶段培养', status: 'active' },
-      { name: 'U12组别', description: '12岁以下组，基础技能学习', status: 'active' },
-      { name: 'U15-U21组别', description: '逐步过渡到成年组水平', status: 'active' },
+      { name: 'U12组别', description: '12岁以下，发展积分，仅作记录和比较', status: 'active' },
+      { name: 'U15组别', description: '15岁以下，正式积分计算', status: 'active' },
+      { name: 'U18/U21组别', description: '正式积分，逐步过渡到成年组', status: 'active' },
       { name: '分阶段培养', description: '尊重青少年发展规律', status: 'active' }
     ]
   },

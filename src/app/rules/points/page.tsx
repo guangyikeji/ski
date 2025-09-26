@@ -18,15 +18,14 @@ const eventLevels = [
   { level: 'C级', name: '地市级赛事等', coefficient: 0.3, color: 'text-yellow-600', bgColor: 'bg-yellow-50', description: '基层赛事，培养新人' }
 ]
 
-// v4.0青少年年龄组体系
+// 青少年年龄组体系（根据v4.docx官方文档）
 const youthGroups = [
-  { group: 'U10', name: '10岁以下组', color: 'text-purple-600', description: '启蒙阶段，重在兴趣培养和基础技能' },
-  { group: 'U12', name: '12岁以下组', color: 'text-indigo-600', description: '基础阶段，技术动作学习和规范化' },
-  { group: 'U15', name: '15岁以下组', color: 'text-blue-600', description: '发展阶段，竞技意识培养和提升' },
-  { group: 'U18', name: '18岁以下组', color: 'text-cyan-600', description: '提高阶段，专项技能强化和完善' },
-  { group: 'U21', name: '21岁以下组', color: 'text-teal-600', description: '成熟阶段，向成年组过渡和适应' },
-  { group: '成年', name: '成年组', color: 'text-gray-600', description: '最高竞技水平，完整积分计算' }
-]
+  { group: 'U12', name: '12岁以下组', color: 'text-indigo-600', description: '基础阶段，发展积分，仅作记录和比较' },
+  { group: 'U15', name: '15岁以下组', color: 'text-blue-600', description: '发展阶段，正式积分计算，竞技意识培养' },
+  { group: 'U18', name: '18岁以下组', color: 'text-cyan-600', description: '提高阶段，正式积分计算，专项技能强化' },
+  { group: 'U21', name: '21岁以下组', color: 'text-teal-600', description: '成熟阶段，正式积分计算，向成年组过渡' },
+  { group: '成年', name: '成年组', color: 'text-gray-600', description: '最高竞技水平，完整积分计算体系' }
+}
 
 // v4.0基础公式组件
 const formulaComponents = [

@@ -30,11 +30,10 @@ const eventLevels = {
 
 const ageGroups = {
   [AgeGroupV4.ADULT]: { name: '成年组', description: '成年运动员' },
-  [AgeGroupV4.U21]: { name: 'U21组', description: '21岁以下' },
-  [AgeGroupV4.U18]: { name: 'U18组', description: '18岁以下' },
-  [AgeGroupV4.U15]: { name: 'U15组', description: '15岁以下' },
-  [AgeGroupV4.U12]: { name: 'U12组', description: '12岁以下（发展积分）' },
-  [AgeGroupV4.U10]: { name: 'U10组', description: '10岁以下（发展积分）' }
+  [AgeGroupV4.U21]: { name: 'U21组', description: '21岁以下（正式积分）' },
+  [AgeGroupV4.U18]: { name: 'U18组', description: '18岁以下（正式积分）' },
+  [AgeGroupV4.U15]: { name: 'U15组', description: '15岁以下（正式积分）' },
+  [AgeGroupV4.U12]: { name: 'U12组', description: '12岁以下（发展积分）' }
 }
 
 export default function CalculatorPage() {
