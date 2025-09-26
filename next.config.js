@@ -9,7 +9,7 @@ const nextConfig = {
     trailingSlash: true,
     basePath: isDirectDeploy ? '' : '/ski',
     assetPrefix: isDirectDeploy ? '' : '/ski/',
-    distDir: isDirectDeploy ? '../docs' : 'out',
+    distDir: isDirectDeploy ? 'docs' : 'out',
     skipTrailingSlashRedirect: true,
   }),
   images: {
