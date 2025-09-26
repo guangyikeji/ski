@@ -196,8 +196,8 @@ export default function HomePage() {
               <div className="mb-8">
                 <p className="text-lg sm:text-xl md:text-2xl lg:text-3xl text-gray-200 mb-6 leading-relaxed font-semibold">
                   传承雪山精神，追求卓越竞技
-                  <span className="inline-block ml-3 px-3 py-1 bg-green-500/20 text-green-300 text-sm rounded-full border border-green-400/30">
-                    🚀 自动部署测试
+                  <span className="inline-block ml-3 px-3 py-1 bg-blue-500/20 text-blue-300 text-sm rounded-full border border-blue-400/30">
+                    ✨ 自动部署演示 - {new Date().toLocaleTimeString('zh-CN')}
                   </span>
                 </p>
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 md:gap-4 text-sm md:text-base lg:text-lg">
