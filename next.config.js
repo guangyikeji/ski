@@ -1,7 +1,9 @@
 /** @type {import('next').NextConfig} */
+const isGitHubPages = process.env.GITHUB_PAGES === 'true';
+
 const nextConfig = {
   // 根据环境决定是否静态导出
-  ...(process.env.GITHUB_PAGES === 'true' && {
+  ...(isGitHubPages && {
     output: 'export',
     trailingSlash: true,
     basePath: '/ski',
@@ -24,32 +26,34 @@ const nextConfig = {
   swcMinify: true,
   // PWA和缓存优化
   poweredByHeader: false,
-  // 自定义头部优化
-  async headers() {
-    return [
-      {
-        source: '/(.*)',
-        headers: [
-          {
-            key: 'X-Content-Type-Options',
-            value: 'nosniff',
-          },
-          {
-            key: 'X-Frame-Options',
-            value: 'DENY',
-          },
-          {
-            key: 'X-XSS-Protection',
-            value: '1; mode=block',
-          },
-          {
-            key: 'Cache-Control',
-            value: 'public, max-age=31536000, stale-while-revalidate=86400',
-          },
-        ],
-      },
-    ]
-  },
+  // 自定义头部优化（仅在非静态导出时启用）
+  ...(!isGitHubPages && {
+    async headers() {
+      return [
+        {
+          source: '/(.*)',
+          headers: [
+            {
+              key: 'X-Content-Type-Options',
+              value: 'nosniff',
+            },
+            {
+              key: 'X-Frame-Options',
+              value: 'DENY',
+            },
+            {
+              key: 'X-XSS-Protection',
+              value: '1; mode=block',
+            },
+            {
+              key: 'Cache-Control',
+              value: 'public, max-age=31536000, stale-while-revalidate=86400',
+            },
+          ],
+        },
+      ]
+    },
+  }),
 }
 
 module.exports = nextConfig
