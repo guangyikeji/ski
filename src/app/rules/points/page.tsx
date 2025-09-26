@@ -74,7 +74,7 @@ export default function PointsRulesPage() {
       {/* Header */}
       <div className="text-center mb-12">
         <h1 className="text-4xl font-bold text-ski-navy mb-4">
-          中国高山滑雪赛事积分规则 v4.0
+          中国高山滑雪赛事积分规则
         </h1>
         <p className="text-lg text-gray-600 max-w-4xl mx-auto leading-relaxed">
           全新简化的积分计算体系，基于国际先进经验，结合中国实际情况，
@@ -83,7 +83,7 @@ export default function PointsRulesPage() {
         <div className="flex justify-center items-center space-x-4 mt-4 text-sm text-gray-500">
           <span className="flex items-center">
             <Award className="h-4 w-4 mr-1" />
-            官方v4.0标准
+官方最新标准
           </span>
           <span className="flex items-center">
             <Users className="h-4 w-4 mr-1" />
@@ -99,7 +99,7 @@ export default function PointsRulesPage() {
       {/* v4.0核心公式展示 */}
       <div className="bg-gradient-to-r from-ski-blue to-primary-700 text-white rounded-lg p-8 mb-12">
         <div className="text-center">
-          <h2 className="text-3xl font-bold mb-4">v4.0简化积分计算公式</h2>
+          <h2 className="text-3xl font-bold mb-4">简化积分计算公式</h2>
           <div className="text-2xl font-mono font-bold mb-6 bg-white/20 rounded-lg py-4">
             最终积分 = (基础比赛积分 + 判罚分) × 赛事系数
           </div>
@@ -128,10 +128,10 @@ export default function PointsRulesPage() {
 
       {/* v4.0青少年体系说明 */}
       <div className="bg-gradient-to-r from-green-600 to-teal-600 text-white rounded-lg p-6 mb-12">
-        <h3 className="text-2xl font-bold mb-4 text-center">v4.0扩展青少年体系</h3>
+        <h3 className="text-2xl font-bold mb-4 text-center">扩展青少年体系</h3>
         <div className="text-center">
           <p className="text-lg opacity-90 mb-3">
-            v4.0规则扩展了青少年年龄组别，增加了U10、U12、U21组别
+最新规则扩展了青少年年龄组别，增加了U10、U12、U21组别
           </p>
           <p className="text-base opacity-80">
             完整年龄组：U10 → U12 → U15 → U18 → U21 → 成年组
@@ -196,7 +196,7 @@ export default function PointsRulesPage() {
           </div>
         </div>
         <div className="mt-6 p-4 bg-blue-50 rounded-lg">
-          <h4 className="font-semibold text-blue-800 mb-2">v4.0青少年体系特点</h4>
+          <h4 className="font-semibold text-blue-800 mb-2">青少年体系特点</h4>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm text-blue-700">
             <div>• 扩展至U10-U21全年龄段覆盖</div>
             <div>• 分阶段培养，尊重发展规律</div>
@@ -318,7 +318,7 @@ export default function PointsRulesPage() {
 
       {/* v4.0核心特点 */}
       <div className="mb-12">
-        <h2 className="text-3xl font-bold text-ski-navy mb-8 text-center">v4.0规则特点</h2>
+        <h2 className="text-3xl font-bold text-ski-navy mb-8 text-center">最新规则特点</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           <div className="bg-white rounded-lg shadow-lg p-6 text-center">
             <Calculator className="h-12 w-12 text-blue-600 mx-auto mb-4" />
@@ -353,13 +353,13 @@ export default function PointsRulesPage() {
 
       {/* 积分应用场景 */}
       <div className="bg-gradient-to-r from-ski-navy to-gray-800 text-white rounded-lg p-8 mb-12">
-        <h2 className="text-3xl font-bold mb-8 text-center">v4.0积分应用</h2>
+        <h2 className="text-3xl font-bold mb-8 text-center">积分应用场景</h2>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           <div className="text-center">
             <Trophy className="h-12 w-12 mx-auto mb-4" />
             <h3 className="text-xl font-semibold mb-3">参赛资格认定</h3>
             <p className="text-gray-300 text-sm">
-              基于v4.0积分确定重要赛事参赛资格，青少年享受扩展政策支持
+基于最新积分规则确定重要赛事参赛资格，青少年享受扩展政策支持
             </p>
           </div>
           <div className="text-center">
@@ -381,7 +381,7 @@ export default function PointsRulesPage() {
 
       {/* 重要规则说明 */}
       <div className="bg-blue-50 border border-blue-200 rounded-lg p-6">
-        <h3 className="text-lg font-semibold text-blue-800 mb-4">v4.0规则要点</h3>
+        <h3 className="text-lg font-semibold text-blue-800 mb-4">规则要点</h3>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 text-sm text-blue-700">
           <div>
             <h4 className="font-semibold mb-2">🎯 计算原则</h4>
@@ -413,9 +413,9 @@ export default function PointsRulesPage() {
         </div>
         <div className="mt-6 p-4 bg-blue-100 rounded-lg">
           <p className="text-blue-800 text-sm">
-            <strong>🚀 v4.0升级亮点：</strong>
-            相比复杂的v2.0体系，v4.0简化了计算流程，去除了质量系数、人数系数、附加分等复杂要素，
-            采用"三步计算法"，同时扩展了青少年年龄组体系，为中国高山滑雪运动发展提供更加高效、透明的技术支撑。
+            <strong>🚀 亮点介绍：</strong>
+            相比以前复杂的体系，最新规则简化了计算流程，去除了质量系数、人数系数、附加分等复杂要素，
+            采用三步计算法，同时扩展了青少年年龄组体系，为中国高山滑雪运动发展提供更加高效、透明的技术支撑。
           </p>
         </div>
       </div>
