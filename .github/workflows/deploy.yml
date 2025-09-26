@@ -3,9 +3,6 @@ name: Auto Deploy to GitHub Pages
 on:
   push:
     branches: [ main, development ]
-    paths:
-      - 'alpine-ski-points/**'
-      - '.github/workflows/**'
 
 permissions:
   contents: write
