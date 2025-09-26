@@ -68,7 +68,7 @@ const v4Features = [
   },
   {
     title: '扩展青少年',
-    description: 'U10-U21完整年龄段覆盖，全程培养支持',
+    description: 'U15-U18核心年龄段，精准培养支持',
     icon: Users,
     color: 'text-purple-600'
   },

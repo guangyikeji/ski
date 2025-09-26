@@ -30,10 +30,8 @@ const eventLevels = {
 
 const ageGroups = {
   [AgeGroupV4.ADULT]: { name: '成年组', description: '成年运动员' },
-  [AgeGroupV4.U21]: { name: 'U21组', description: '21岁以下（正式积分）' },
   [AgeGroupV4.U18]: { name: 'U18组', description: '18岁以下（正式积分）' },
-  [AgeGroupV4.U15]: { name: 'U15组', description: '15岁以下（正式积分）' },
-  [AgeGroupV4.U12]: { name: 'U12组', description: '12岁以下（发展积分）' }
+  [AgeGroupV4.U15]: { name: 'U15组', description: '15岁以下（正式积分）' }
 }
 
 export default function CalculatorPage() {
@@ -272,9 +270,9 @@ export default function CalculatorPage() {
             <div className="bg-blue-50 p-3 rounded-lg">
               <h4 className="text-sm font-semibold text-blue-800 mb-2">v4.0 简化说明</h4>
               <ul className="text-xs text-blue-700 space-y-1">
-                <li>• U15/U18/U21：使用正式积分计算</li>
-                <li>• U12/U10：使用发展积分，不计入正式排名</li>
-                <li>• 满13岁后U12发展积分可转为正式积分</li>
+                <li>• U15/U18：使用正式积分计算</li>
+                <li>• 简化为两个主要青少年组别</li>
+                <li>• 所有组别均使用统一正式积分计算</li>
               </ul>
             </div>
           </div>
@@ -387,7 +385,7 @@ export default function CalculatorPage() {
                     </div>
                     <div>
                       <p className="font-medium mb-1">👶 扩展U系列体系</p>
-                      <p className="text-xs text-gray-600">新增U21和U12组别，独立积分排名</p>
+                      <p className="text-xs text-gray-600">精简为U15和U18两个核心组别</p>
                     </div>
                     <div>
                       <p className="font-medium mb-1">⚖️ 完善判罚机制</p>

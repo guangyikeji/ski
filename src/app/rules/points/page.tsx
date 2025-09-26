@@ -20,12 +20,10 @@ const eventLevels = [
 
 // 青少年年龄组体系（根据v4.docx官方文档）
 const youthGroups = [
-  { group: 'U12', name: '12岁以下组', color: 'text-indigo-600', description: '基础阶段，发展积分，仅作记录和比较' },
   { group: 'U15', name: '15岁以下组', color: 'text-blue-600', description: '发展阶段，正式积分计算，竞技意识培养' },
   { group: 'U18', name: '18岁以下组', color: 'text-cyan-600', description: '提高阶段，正式积分计算，专项技能强化' },
-  { group: 'U21', name: '21岁以下组', color: 'text-teal-600', description: '成熟阶段，正式积分计算，向成年组过渡' },
   { group: '成年', name: '成年组', color: 'text-gray-600', description: '最高竞技水平，完整积分计算体系' }
-}
+]
 
 // v4.0基础公式组件
 const formulaComponents = [
@@ -130,10 +128,10 @@ export default function PointsRulesPage() {
         <h3 className="text-2xl font-bold mb-4 text-center">扩展青少年体系</h3>
         <div className="text-center">
           <p className="text-lg opacity-90 mb-3">
-最新规则扩展了青少年年龄组别，增加了U10、U12、U21组别
+最新规则精简了青少年年龄组别，聘焦U15、U18两个核心组别
           </p>
           <p className="text-base opacity-80">
-            完整年龄组：U10 → U12 → U15 → U18 → U21 → 成年组
+            精简年龄组：U15 → U18 → 成年组
           </p>
         </div>
       </div>
@@ -197,7 +195,7 @@ export default function PointsRulesPage() {
         <div className="mt-6 p-4 bg-blue-50 rounded-lg">
           <h4 className="font-semibold text-blue-800 mb-2">青少年体系特点</h4>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm text-blue-700">
-            <div>• 扩展至U10-U21全年龄段覆盖</div>
+            <div>• 精简至U15-U18核心年龄段</div>
             <div>• 分阶段培养，尊重发展规律</div>
             <div>• 简化管理，提高参与积极性</div>
           </div>
@@ -330,7 +328,7 @@ export default function PointsRulesPage() {
             <Users className="h-12 w-12 text-green-600 mx-auto mb-4" />
             <h3 className="text-lg font-semibold text-ski-navy mb-3">扩展体系</h3>
             <p className="text-sm text-gray-600">
-              U10-U21完整年龄组覆盖，为青少年发展提供全程支持
+              U15-U18精简年龄组，为青少年发展提供精准支持
             </p>
           </div>
           <div className="bg-white rounded-lg shadow-lg p-6 text-center">
@@ -403,7 +401,7 @@ export default function PointsRulesPage() {
           <div>
             <h4 className="font-semibold mb-2">👶 青少年支持</h4>
             <ul className="space-y-1">
-              <li>• U10-U21全年龄段覆盖</li>
+              <li>• U15-U18核心年龄段</li>
               <li>• 分阶段培养目标设定</li>
               <li>• 简化参赛流程和要求</li>
               <li>• 鼓励青少年积极参与</li>

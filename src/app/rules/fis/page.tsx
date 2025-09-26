@@ -16,11 +16,11 @@ const ruleCategories = [
   {
     title: '青少年体系 (根据v4.docx)',
     icon: Clock,
-    description: 'U12-U21四个年龄组，完善人才培养体系',
+    description: 'U15/U18两个年龄组，完善人才培养体系',
     rules: [
-      { name: 'U12组别', description: '12岁以下，发展积分，仅作记录和比较', status: 'active' },
       { name: 'U15组别', description: '15岁以下，正式积分计算', status: 'active' },
-      { name: 'U18/U21组别', description: '正式积分，逐步过渡到成年组', status: 'active' },
+      { name: 'U18组别', description: '18岁以下，正式积分计算', status: 'active' },
+      { name: '正式积分体系', description: '两个组别均使用正式积分计算', status: 'active' },
       { name: '分阶段培养', description: '尊重青少年发展规律', status: 'active' }
     ]
   },
@@ -220,8 +220,8 @@ export default function ChinaSkiRulesPage() {
               Q: v4.0青少年体系有什么特点？
             </h3>
             <p className="text-gray-600">
-              A: v4.0扩展了青少年年龄组别，新增了U10、U12、U21组别，
-              实现U10-U21全年龄段覆盖，为青少年发展提供更好的支持。
+              A: v4.0精简了青少年年龄组别，聚焦U15、U18两个核心组别，
+              所有组别均使用正式积分计算，为青少年发展提供更精准的支持。
             </p>
           </div>
 

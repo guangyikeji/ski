@@ -28,10 +28,8 @@ export const DISCIPLINE_FACTORS_V4 = {
 
 // 青少年年龄组（根据v4.docx官方文档）
 export enum AgeGroupV4 {
-  U12 = 'U12',  // 12岁以下（发展积分）
   U15 = 'U15',  // 15岁以下（正式积分）
   U18 = 'U18',  // 18岁以下（正式积分）
-  U21 = 'U21',  // 21岁以下（正式积分）
   ADULT = 'ADULT'
 }
 

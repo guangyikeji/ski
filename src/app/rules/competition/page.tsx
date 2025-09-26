@@ -112,11 +112,9 @@ const participationGuide = [
 
 // 年龄分组说明 (扩展青少年体系)
 const ageGroups = [
-  { group: 'U12组别', age: '12岁以下', description: '基础阶段，技术动作学习和规范化训练（发展积分）' },
   { group: 'U15组别', age: '15岁以下', description: '发展阶段，竞技意识培养和技能提升（正式积分）' },
   { group: 'U18组别', age: '18岁以下', description: '提高阶段，专项技能强化和技术完善（正式积分）' },
-  { group: 'U21组别', age: '21岁以下', description: '成熟阶段，向成年组过渡和适应高水平竞技（正式积分）' },
-  { group: '成年组', age: '22岁以上', description: '最高竞技水平，技术成熟竞争激烈' }
+  { group: '成年组', age: '18岁以上', description: '最高竞技水平，技术成熟竞争激烈' }
 ]
 
 export default function CompetitionRulesPage() {
