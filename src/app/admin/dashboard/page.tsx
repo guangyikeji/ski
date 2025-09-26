@@ -126,7 +126,7 @@ export default function AdminDashboard() {
     {
       id: '2',
       type: 'info',
-      title: 'FIS规则更新',
+      title: 'v4.0规则更新',
       message: '中国滑雪协会发布新的积分计算规则',
       timestamp: '2024-02-19 14:20',
       resolved: false

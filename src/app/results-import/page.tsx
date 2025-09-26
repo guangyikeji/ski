@@ -242,7 +242,7 @@ export default function ResultsImportPage() {
 
         // 简单验证XML格式
         if (!xmlContent.includes('<Fisresults>') || !xmlContent.includes('</Fisresults>')) {
-          throw new Error('文件不是有效的FIS XML格式')
+          throw new Error('文件不是有效的XML格式')
         }
 
         // 解析比赛数据
@@ -308,7 +308,7 @@ export default function ResultsImportPage() {
       <div className="text-center mb-8 relative z-10">
         <h1 className="section-title">比赛成绩导入</h1>
         <p className="text-gray-600 text-lg">
-          导入FIS标准格式的比赛成绩数据，自动计算积分和排名
+          导入中国标准格式的比赛成绩数据，使用v4.0公式自动计算积分和排名
         </p>
       </div>
 
@@ -350,7 +350,7 @@ export default function ResultsImportPage() {
           <div className="text-center py-8">
           <Upload className="h-16 w-16 text-ski-blue mx-auto mb-4" />
           <h3 className="text-lg font-semibold text-ski-navy mb-2">上传比赛成绩文件</h3>
-          <p className="text-gray-600 mb-4">支持FIS官方格式的比赛成绩文件，系统将自动解析并计算积分</p>
+          <p className="text-gray-600 mb-4">支持国际标准格式的比赛成绩文件，系统将使用v4.0简化公式自动解析并计算积分</p>
 
           {error && (
             <div className="mb-4 p-4 bg-red-50 border border-red-200 rounded-lg">
@@ -373,7 +373,7 @@ export default function ResultsImportPage() {
           </div>
 
           <p className="text-xs text-gray-500 mt-2">
-            请上传符合FIS标准的XML格式比赛数据文件
+            请上传符合国际标准的XML格式比赛数据文件
           </p>
         </div>
       </div>

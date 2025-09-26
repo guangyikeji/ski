@@ -3,45 +3,45 @@ import { getImagePath } from '@/utils/paths'
 
 const ruleCategories = [
   {
-    title: '积分计算规则',
+    title: '中国高山滑雪积分规则 v4.0',
     icon: Calculator,
-    description: '详细的中国积分计算公式和方法',
+    description: '简化的v4.0积分计算体系，去除复杂系数，提高透明度',
     rules: [
-      { name: '基础积分公式', description: 'P = F × (Tx/To - 1)', status: 'active' },
-      { name: '项目系数表', description: '各项目的F系数值', status: 'active' },
-      { name: '惩罚值计算', description: '比赛难度系数计算方法', status: 'active' },
-      { name: '特殊情况处理', description: '并列、缺席等情况的处理', status: 'active' }
+      { name: '简化计算公式', description: '最终积分 = (基础积分 + 判罚分) × 赛事系数', status: 'active' },
+      { name: '项目系数表', description: '各项目的F系数值（v4.0标准）', status: 'active' },
+      { name: '判罚分计算', description: '(Sum A + Sum B - Sum C) ÷ 10', status: 'active' },
+      { name: '赛事级别系数', description: 'A级1.0、B级0.6、C级0.3', status: 'active' }
     ]
   },
   {
-    title: '积分更新机制',
+    title: '青少年体系 v4.0',
     icon: Clock,
-    description: '积分表更新周期和规则',
+    description: '扩展青少年年龄组別，完善人才培养体系',
     rules: [
-      { name: '基础积分表(BL)', description: '每年6月发布的基础积分', status: 'active' },
-      { name: '常规积分表(NL)', description: '赛季期间定期更新', status: 'active' },
-      { name: '评估周期', description: '北半球和南半球的赛季周期', status: 'active' },
-      { name: '伤病保护', description: '运动员伤病期间的积分保护', status: 'active' }
+      { name: 'U10组别', description: '10岁以下组，启蒙阶段培养', status: 'active' },
+      { name: 'U12组别', description: '12岁以下组，基础技能学习', status: 'active' },
+      { name: 'U15-U21组别', description: '逐步过渡到成年组水平', status: 'active' },
+      { name: '分阶段培养', description: '尊重青少年发展规律', status: 'active' }
     ]
   },
   {
-    title: '参赛资格',
+    title: '赛事管理 v4.0',
     icon: Award,
-    description: '运动员参赛资格和配额规则',
+    description: '简化的赛事分级和管理流程',
     rules: [
-      { name: '配额分配', description: '各国运动员参赛配额计算', status: 'coming-soon' },
-      { name: '年龄限制', description: '不同级别比赛的年龄要求', status: 'coming-soon' },
-      { name: '积分门槛', description: '参加不同级别比赛的积分要求', status: 'coming-soon' },
-      { name: '资格确认', description: '参赛资格的确认程序', status: 'coming-soon' }
+      { name: '三级赛事体系', description: 'A/B/C三级赛事分类体系', status: 'active' },
+      { name: '赛事系数设定', description: 'A级(1.0)、B级(0.6)、C级(0.3)', status: 'active' },
+      { name: '积分有效期', description: '积分的有效期管理', status: 'active' },
+      { name: '最大积分值', description: '各项目最大积分保护值', status: 'active' }
     ]
   }
 ]
 
 const downloadableRules = [
   {
-    title: '中国积分规则2024-2025版',
-    description: '完整的中国积分计算规则文档',
-    size: '2.3 MB',
+    title: '中国高山滑雪赛事积分规则 v4.0',
+    description: '全新简化的v4.0积分计算规则文档',
+    size: '1.8 MB',
     format: 'PDF',
     language: '中英对照',
     url: '#'
@@ -64,14 +64,14 @@ const downloadableRules = [
   }
 ]
 
-export default function FISRulesPage() {
+export default function ChinaSkiRulesPage() {
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
       {/* Header */}
       <div className="mb-8">
-        <h1 className="section-title">FIS规则文档</h1>
+        <h1 className="section-title">中国高山滑雪积分规则 v4.0</h1>
         <p className="text-gray-600 text-lg">
-          查看中国滑雪协会官方规则文档和积分计算规则，确保比赛的公平性和准确性
+          查看最新的v4.0简化积分规则文档，了解三步计算公式和扩展青少年体系
         </p>
       </div>
 
@@ -79,26 +79,26 @@ export default function FISRulesPage() {
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
         <div className="card text-center">
           <Calculator className="h-12 w-12 text-ski-blue mx-auto mb-4" />
-          <h3 className="text-lg font-semibold text-ski-navy mb-2">积分计算器</h3>
-          <p className="text-gray-600 text-sm mb-4">在线计算比赛积分</p>
-          <button className="btn-secondary text-sm w-full" disabled>
-            即将上线
-          </button>
+          <h3 className="text-lg font-semibold text-ski-navy mb-2">v4.0积分计算器</h3>
+          <p className="text-gray-600 text-sm mb-4">使用简化公式计算积分</p>
+          <a href="/points/calculator" className="btn-primary text-sm w-full inline-block text-center">
+            使用计算器
+          </a>
         </div>
         <div className="card text-center">
           <FileText className="h-12 w-12 text-green-600 mx-auto mb-4" />
-          <h3 className="text-lg font-semibold text-ski-navy mb-2">积分规则详解</h3>
-          <p className="text-gray-600 text-sm mb-4">查看详细规则说明</p>
-          <button className="btn-primary text-sm w-full">
-            查看规则
-          </button>
+          <h3 className="text-lg font-semibold text-ski-navy mb-2">v4.0规则详解</h3>
+          <p className="text-gray-600 text-sm mb-4">查看v4.0简化规则说明</p>
+          <a href="/rules/points" className="btn-primary text-sm w-full inline-block text-center">
+            查看v4.0规则
+          </a>
         </div>
         <div className="card text-center">
           <ExternalLink className="h-12 w-12 text-purple-600 mx-auto mb-4" />
-          <h3 className="text-lg font-semibold text-ski-navy mb-2">FIS官网</h3>
+          <h3 className="text-lg font-semibold text-ski-navy mb-2">中国滑雪协会</h3>
           <p className="text-gray-600 text-sm mb-4">访问中国滑雪协会官网</p>
           <a
-            href="https://www.fis-ski.com"
+            href="https://www.csa.org.cn"
             target="_blank"
             rel="noopener noreferrer"
             className="btn-secondary text-sm w-full inline-block text-center"
@@ -197,41 +197,41 @@ export default function FISRulesPage() {
         <div className="space-y-6">
           <div>
             <h3 className="font-semibold text-gray-900 mb-2">
-              Q: 中国积分是如何计算的？
+              Q: v4.0积分是如何计算的？
             </h3>
             <p className="text-gray-600">
-              A: 中国积分使用公式 P = F × (Tx/To - 1) 计算，其中P是积分，F是项目系数，
-              Tx是选手时间，To是获胜者时间。不同项目有不同的F系数。
+              A: v4.0使用简化的三步计算公式：最终积分 = (基础比赛积分 + 判罚分) × 赛事系数。
+              基础积分使用 P = F × (Tx/To - 1)，去除了复杂的质量系数、人数系数等要素。
             </p>
           </div>
 
           <div>
             <h3 className="font-semibold text-gray-900 mb-2">
-              Q: 积分多长时间更新一次？
+              Q: v4.0的赛事级别是如何划分的？
             </h3>
             <p className="text-gray-600">
-              A: 中国积分每14天更新一次。基础积分表(BL)每年6月发布一次，
-              常规积分表(NL)在赛季期间定期更新。
+              A: v4.0采用三级赛事体系：A级赛事（系数1.0，全国锦标赛、冬运会等）、
+              B级赛事（系数0.6，省级锦标赛等）、C级赛事（系数0.3，地市级赛事）。
             </p>
           </div>
 
           <div>
             <h3 className="font-semibold text-gray-900 mb-2">
-              Q: 什么是惩罚值？
+              Q: v4.0青少年体系有什么特点？
             </h3>
             <p className="text-gray-600">
-              A: 惩罚值用于调整比赛难度。计算公式为：(Sum A + Sum B - Sum C) ÷ 10，
-              其中Sum A、B、C分别代表参赛选手中最好选手的积分总和。
+              A: v4.0扩展了青少年年龄组别，新增了U10、U12、U21组别，
+              实现U10-U21全年龄段覆盖，为青少年发展提供更好的支持。
             </p>
           </div>
 
           <div>
             <h3 className="font-semibold text-gray-900 mb-2">
-              Q: 如何获得参赛资格？
+              Q: v4.0相比v2.0有什么优势？
             </h3>
             <p className="text-gray-600">
-              A: 参赛资格基于运动员的中国积分和各国配额。不同级别的比赛有不同的积分门槛要求，
-              具体要求请参考竞赛规则文档。
+              A: v4.0简化了计算流程，去除了质量系数、人数系数、附加分等复杂要素，
+              提高了计算效率和透明度，同时扩展了青少年体系，更加高效、透明。
             </p>
           </div>
         </div>
