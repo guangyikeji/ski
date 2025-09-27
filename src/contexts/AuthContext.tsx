@@ -6,12 +6,30 @@ import { User, UserRole, UserStatus, AuthState, LoginRequest, RegisterRequest, R
 // 权限规则配置 - 中国高山滑雪积分管理平台
 const PERMISSIONS_MAP: Record<UserRole, Record<Resource, Action[]>> = {
   [UserRole.PUBLIC]: {
-    // 未登录用户只能访问基础公众信息
+    // DEBUG模式: 未登录用户可访问所有页面用于调试
     [Resource.HOME]: [Action.READ],
     [Resource.ABOUT]: [Action.READ],
     [Resource.NEWS]: [Action.READ],
     [Resource.CONTACT]: [Action.READ],
-    // 其他所有功能均需要登录
+
+    // DEBUG: 开放积分系统功能
+    [Resource.PROFILE]: [Action.READ],
+    [Resource.MY_POINTS]: [Action.READ],
+    [Resource.POINTS_QUERY]: [Action.READ],
+    [Resource.POINTS_RANKING]: [Action.READ],
+    [Resource.POINTS_CALCULATOR]: [Action.READ],
+    [Resource.POINTS_TRENDS]: [Action.READ],
+    [Resource.RULES_POINTS]: [Action.READ],
+
+    // DEBUG: 开放赛事功能
+    [Resource.COMPETITIONS]: [Action.READ],
+    [Resource.COMPETITIONS_SCHEDULE]: [Action.READ],
+    [Resource.REGISTRATION]: [Action.READ],
+    [Resource.EVENTS]: [Action.READ],
+
+    // DEBUG: 开放运动员管理
+    [Resource.USER_MANAGEMENT]: [Action.READ],
+    [Resource.STATISTICS]: [Action.READ],
   } as Record<Resource, Action[]>,
 
   [UserRole.ATHLETE]: {

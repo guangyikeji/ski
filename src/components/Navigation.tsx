@@ -141,9 +141,11 @@ export default function Navigation() {
       // 首页始终显示
       if (item.name === '首页') return true
 
-      // 检查是否包含公开的子菜单项
+      // 检查是否包含公开的子菜单项 (DEBUG模式: 扩大公开范围)
       const hasPublicChildren = item.children?.some(child =>
-        ['四大积分系统', '积分排行榜', '中国积分规则', '竞赛规则', '赛事日程', '积分变化趋势'].includes(child.name)
+        ['四大积分系统', '积分排行榜', '中国积分查询', '积分计算器', '积分变化趋势',
+         '中国积分规则', '竞赛规则', '技术规范', '赛事日程', '比赛列表',
+         '运动员档案', '成绩历史', '成绩统计', '在线报名'].includes(child.name)
       )
 
       // 如果包含公开子菜单或用户有权限，则显示主菜单
@@ -168,9 +170,11 @@ export default function Navigation() {
         return true
       }).map(child => ({
         ...child,
-        // 公开页面不需要登录 - 四大积分系统、积分排名、积分规则、赛事日程
+        // DEBUG模式: 扩大公开页面范围
         needsAuth: !isAuthenticated && child.resource && child.action &&
-                  !['四大积分系统', '积分排行榜', '中国积分规则', '竞赛规则', '赛事日程', '积分变化趋势'].includes(child.name)
+                  !['四大积分系统', '积分排行榜', '中国积分查询', '积分计算器', '积分变化趋势',
+                    '中国积分规则', '竞赛规则', '技术规范', '赛事日程', '比赛列表',
+                    '运动员档案', '成绩历史', '成绩统计', '在线报名'].includes(child.name)
       })) : undefined,
       // 如果包含公开子菜单，主菜单也不需要认证标记
       needsAuth: !isAuthenticated && item.resource && item.action && item.name !== '首页' &&
