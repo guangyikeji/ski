@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <title>登录｜中国滑雪赛事积分系统</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="登录中国滑雪赛事积分系统，进入个人中心、积分查询与赛事管理。" />
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="min-h-screen flex flex-col">
+  <!-- 头部导航占位（可选） -->
+  <div id="site-nav"></div>
+
+  <main id="main" class="flex-1">
+    <section class="mx-auto max-w-6xl px-4 py-10">
+      <h1 class="text-2xl sm:text-3xl font-bold tracking-tight">登录</h1>
+      <p class="mt-2 text-gray-600 max-w-3xl">使用您的账户进入系统</p>
+
+      <form class="max-w-md space-y-4 mt-8" onsubmit="return fakeLogin(event)">
+        <div>
+          <label class="block text-sm mb-1">邮箱</label>
+          <input type="email" class="w-full border rounded px-3 py-2" placeholder="name@example.com" required />
+        </div>
+        <div>
+          <label class="block text-sm mb-1">密码</label>
+          <input type="password" class="w-full border rounded px-3 py-2" required />
+        </div>
+        <p id="login-error" class="text-sm text-red-600 hidden">登录失败，请检查邮箱或密码</p>
+        <button type="submit" class="inline-flex items-center justify-center rounded bg-black text-white px-4 py-2 text-sm">登录</button>
+        <div class="text-sm flex items-center gap-3 mt-2">
+          <a class="text-blue-600 hover:underline" href="/ski/reset-password">忘记密码？</a>
+          <span class="text-gray-400">|</span>
+          <a class="text-blue-600 hover:underline" href="/ski/register">没有账号？去注册</a>
+        </div>
+      </form>
+    </section>
+  </main>
+
+  <div id="site-footer"></div>
+  <script src="/ski/assets/footer.js"></script>
+  <script>
+    function fakeLogin(e){
+      e.preventDefault();
+      // 这里替换为真实 API
+      document.getElementById('login-error').classList.remove('hidden');
+      return false;
+    }
+  </script>
+</body>
+</html>

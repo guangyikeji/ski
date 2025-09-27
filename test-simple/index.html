@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <title>简单测试页面｜中国滑雪赛事积分系统</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="用于验证 H1、统一页脚、导航与可访问性等基础结构。" />
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="min-h-screen flex flex-col">
+  <div id="site-nav"></div>
+
+  <main id="main" class="flex-1">
+    <section class="mx-auto max-w-6xl px-4 py-10">
+      <h1 class="text-2xl sm:text-3xl font-bold tracking-tight">简单测试页面</h1>
+      <p class="mt-2 text-gray-600 max-w-3xl">用于验证 H1 / 页脚 / 导航 / 可访问性等基础结构。</p>
+
+      <div class="grid sm:grid-cols-2 gap-6 mt-8">
+        <div class="border rounded p-4">
+          <h2 class="font-semibold mb-2">结构检查</h2>
+          <ul class="list-disc pl-5 text-sm space-y-1">
+            <li>存在唯一 H1（本页）</li>
+            <li>页脚包含服务条款/隐私政策链接</li>
+            <li>顶部导航可达并高亮当前路由</li>
+          </ul>
+        </div>
+        <div class="border rounded p-4">
+          <h2 class="font-semibold mb-2">交互检查</h2>
+          <p class="text-sm">按钮/链接 hover/active 状态、键盘可达等。</p>
+          <a href="/ski/login" class="inline-flex items-center mt-2 rounded bg-black text-white px-3 py-2 text-sm">去登录</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <div id="site-footer"></div>
+  <script src="/ski/assets/footer.js"></script>
+</body>
+</html>

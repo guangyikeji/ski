@@ -1,0 +1,40 @@
+{
+  "urls": [
+    "https://gaohao10010111-sketch.github.io/ski/",
+    "https://gaohao10010111-sketch.github.io/ski/about",
+    "https://gaohao10010111-sketch.github.io/ski/scoring-systems",
+
+    "https://gaohao10010111-sketch.github.io/ski/points",
+    "https://gaohao10010111-sketch.github.io/ski/points/calculator",
+    "https://gaohao10010111-sketch.github.io/ski/points/fis",
+    "https://gaohao10010111-sketch.github.io/ski/points/rankings",
+    "https://gaohao10010111-sketch.github.io/ski/points/trends",
+
+    "https://gaohao10010111-sketch.github.io/ski/athletes",
+
+    "https://gaohao10010111-sketch.github.io/ski/competitions",
+    "https://gaohao10010111-sketch.github.io/ski/competitions/schedule",
+    "https://gaohao10010111-sketch.github.io/ski/competitions/stats",
+
+    "https://gaohao10010111-sketch.github.io/ski/registration",
+    "https://gaohao10010111-sketch.github.io/ski/registration/fees",
+    "https://gaohao10010111-sketch.github.io/ski/registration/manage",
+    "https://gaohao10010111-sketch.github.io/ski/registration/online",
+
+    "https://gaohao10010111-sketch.github.io/ski/rules",
+    "https://gaohao10010111-sketch.github.io/ski/rules/competition",
+    "https://gaohao10010111-sketch.github.io/ski/rules/fis",
+    "https://gaohao10010111-sketch.github.io/ski/rules/points",
+
+    "https://gaohao10010111-sketch.github.io/ski/results-announcement",
+    "https://gaohao10010111-sketch.github.io/ski/results-import",
+    "https://gaohao10010111-sketch.github.io/ski/results-query",
+
+    "https://gaohao10010111-sketch.github.io/ski/login",
+    "https://gaohao10010111-sketch.github.io/ski/register",
+    "https://gaohao10010111-sketch.github.io/ski/profile",
+
+    "https://gaohao10010111-sketch.github.io/ski/test-accounts",
+    "https://gaohao10010111-sketch.github.io/ski/test-simple"
+  ]
+}
