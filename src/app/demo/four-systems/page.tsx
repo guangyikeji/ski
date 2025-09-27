@@ -16,6 +16,8 @@ import {
 
 // 导入四大积分系统
 import { fourSystemsManager, FourSystemsUtils } from '@/utils/fourSystemsManager'
+import { EventLevel } from '@/utils/chinaSkiPointsCalculatorV4'
+import { PointsCategory } from '@/data/multiSportData'
 
 // 示例数据
 const demoData = {
@@ -26,7 +28,7 @@ const demoData = {
     competitionDate: '2024-12-15',
     athleteTime: 128.45,
     winnerTime: 125.20,
-    eventLevel: 'A' as const,
+    eventLevel: EventLevel.A,
     rank: 5
   },
   snowboardAlpine: {
@@ -36,7 +38,7 @@ const demoData = {
     competitionDate: '2024-12-15',
     athleteTime: 45.20,
     winnerTime: 43.80,
-    eventLevel: 'B' as const,
+    eventLevel: EventLevel.B,
     rank: 3
   },
   snowboardRanking: {
@@ -45,7 +47,7 @@ const demoData = {
     competitionId: 'chn_2024_ba_001',
     competitionDate: '2024-12-15',
     finalRank: 2,
-    pointsCategory: 'CATEGORY_1' as const,
+    pointsCategory: PointsCategory.CATEGORY_1,
     scoreResult: 87.5
   },
   freestyleRanking: {
@@ -54,7 +56,7 @@ const demoData = {
     competitionId: 'chn_2024_ss_001',
     competitionDate: '2024-12-15',
     finalRank: 1,
-    pointsCategory: 'CATEGORY_1' as const,
+    pointsCategory: PointsCategory.CATEGORY_1,
     scoreResult: 94.2
   }
 }
