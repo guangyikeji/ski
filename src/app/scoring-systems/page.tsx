@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useState } from 'react'
+import React from 'react'
 import Link from 'next/link'
 import {
   Calculator,
@@ -10,9 +10,7 @@ import {
   Target,
   ArrowRight,
   CheckCircle,
-  AlertCircle,
   Info,
-  Snowflake,
   Mountain,
   Zap
 } from 'lucide-react'
@@ -47,7 +45,7 @@ const scoringSystems = [
     title: '单板平行项目积分系统',
     subtitle: 'Snowboard Alpine Points System',
     description: '类似高山滑雪逻辑，积分越低越好',
-    icon: Snowflake,
+    icon: Target,
     color: 'cyan',
     features: [
       '时间基础积分计算，专用项目系数',
@@ -70,7 +68,7 @@ const scoringSystems = [
     title: '单板技巧积分系统',
     subtitle: 'Snowboard Ranking Points System',
     description: '基于排名的240/360/120分档积分体系',
-    icon: Target,
+    icon: Trophy,
     color: 'green',
     features: [
       '排名基础积分分配：第1名100%，第2名80%，第3名60%',
@@ -126,19 +124,6 @@ const pointsTable = [
 ]
 
 export default function ScoringSystemsPage() {
-  const [selectedSystem, setSelectedSystem] = useState(scoringSystems[0])
-  const [activeTab, setActiveTab] = useState('overview')
-
-  const getColorClasses = (color: string) => {
-    const colors = {
-      blue: 'border-blue-500 bg-blue-50 text-blue-700',
-      cyan: 'border-cyan-500 bg-cyan-50 text-cyan-700',
-      green: 'border-green-500 bg-green-50 text-green-700',
-      purple: 'border-purple-500 bg-purple-50 text-purple-700'
-    }
-    return colors[color as keyof typeof colors] || colors.blue
-  }
-
   return (
     <div className="min-h-screen bg-gray-50">
       {/* Header Section */}
@@ -183,258 +168,196 @@ export default function ScoringSystemsPage() {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             {scoringSystems.map((system) => {
               const IconComponent = system.icon
               return (
                 <div
                   key={system.id}
-                  className={`bg-white rounded-lg shadow-lg p-6 cursor-pointer transition-all duration-200 hover:shadow-xl border-2 ${
-                    selectedSystem.id === system.id
-                      ? getColorClasses(system.color)
-                      : 'border-gray-200 hover:border-gray-300'
-                  }`}
-                  onClick={() => setSelectedSystem(system)}
+                  className="bg-white rounded-lg shadow-lg p-8 hover:shadow-xl transition-shadow border-l-4 border-ski-blue"
                 >
-                  <div className="flex items-center justify-center mb-4">
-                    <div className={`p-3 rounded-full ${
-                      selectedSystem.id === system.id
-                        ? `bg-${system.color}-100`
-                        : 'bg-gray-100'
-                    }`}>
-                      <IconComponent className={`h-8 w-8 ${
-                        selectedSystem.id === system.id
-                          ? `text-${system.color}-600`
-                          : 'text-gray-600'
-                      }`} />
+                  <div className="flex items-center mb-6">
+                    <div className="p-3 bg-blue-100 rounded-full mr-4">
+                      <IconComponent className="h-8 w-8 text-blue-600" />
+                    </div>
+                    <div>
+                      <h3 className="text-xl font-semibold text-ski-navy mb-2">
+                        {system.title}
+                      </h3>
+                      <p className="text-sm text-gray-600">{system.subtitle}</p>
                     </div>
                   </div>
-                  <h3 className="text-lg font-semibold text-center mb-2">
-                    {system.title}
-                  </h3>
-                  <p className="text-sm text-gray-600 text-center mb-3">
-                    {system.subtitle}
-                  </p>
-                  <p className="text-xs text-gray-500 text-center">
-                    {system.description}
-                  </p>
+
+                  <p className="text-gray-700 mb-6">{system.description}</p>
+
+                  <div className="space-y-4 mb-6">
+                    <div className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
+                      <span className="font-medium">积分方向</span>
+                      <span className={`px-3 py-1 rounded-full text-sm font-medium ${
+                        system.pointsDirection.includes('低')
+                          ? 'bg-red-100 text-red-700'
+                          : 'bg-green-100 text-green-700'
+                      }`}>
+                        {system.pointsDirection}
+                      </span>
+                    </div>
+                    <div className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
+                      <span className="font-medium">计算基础</span>
+                      <span className="text-gray-700">{system.calculationBasis}</span>
+                    </div>
+                    <div className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
+                      <span className="font-medium">赛季策略</span>
+                      <span className="text-gray-700">{system.seasonStrategy}</span>
+                    </div>
+                  </div>
+
+                  <div className="mb-6">
+                    <h4 className="font-semibold text-ski-navy mb-3">系统特点</h4>
+                    <ul className="space-y-2">
+                      {system.features.slice(0, 3).map((feature, index) => (
+                        <li key={index} className="flex items-start">
+                          <CheckCircle className="h-4 w-4 text-green-500 mr-2 mt-1 flex-shrink-0" />
+                          <span className="text-gray-700 text-sm">{feature}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+
+                  <div className="mb-6">
+                    <h4 className="font-semibold text-ski-navy mb-3">适用项目</h4>
+                    <div className="flex flex-wrap gap-2">
+                      {system.disciplines.map((discipline, index) => (
+                        <span
+                          key={index}
+                          className="px-3 py-1 bg-blue-50 text-blue-700 rounded-full text-sm font-medium border border-blue-200"
+                        >
+                          {discipline}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+
+                  <div className="border-t border-gray-200 pt-4">
+                    <h4 className="font-semibold text-gray-900 mb-2">计算示例</h4>
+                    <div className="text-sm text-gray-600 mb-1">
+                      <strong>输入:</strong> {system.example.input}
+                    </div>
+                    <div className="text-sm font-medium text-blue-600">
+                      <strong>输出:</strong> {system.example.output}
+                    </div>
+                  </div>
                 </div>
               )
             })}
           </div>
+        </div>
+      </section>
 
-          {/* Detailed System Information */}
-          <div className="bg-white rounded-lg shadow-lg overflow-hidden">
-            {/* Tabs */}
-            <div className="border-b border-gray-200">
-              <nav className="flex space-x-8 px-6">
-                {[
-                  { id: 'overview', label: '系统概览', icon: Info },
-                  { id: 'calculation', label: '计算方式', icon: Calculator },
-                  { id: 'example', label: '计算示例', icon: BarChart3 }
-                ].map((tab) => {
-                  const TabIcon = tab.icon
-                  return (
-                    <button
-                      key={tab.id}
-                      onClick={() => setActiveTab(tab.id)}
-                      className={`py-4 px-2 border-b-2 font-medium text-sm transition-colors ${
-                        activeTab === tab.id
-                          ? 'border-ski-blue text-ski-blue'
-                          : 'border-transparent text-gray-500 hover:text-gray-700'
-                      }`}
-                    >
-                      <div className="flex items-center space-x-2">
-                        <TabIcon className="h-4 w-4" />
-                        <span>{tab.label}</span>
-                      </div>
-                    </button>
-                  )
-                })}
-              </nav>
+      {/* Calculation Details */}
+      <section className="py-16 bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl font-bold text-ski-navy mb-4">计算方法详解</h2>
+            <p className="text-gray-600 text-lg">两种不同的积分计算方式</p>
+          </div>
+
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            {/* 时间制计算 */}
+            <div className="bg-blue-50 border border-blue-200 rounded-lg p-8">
+              <div className="flex items-center mb-6">
+                <Clock className="h-8 w-8 text-blue-600 mr-3" />
+                <h3 className="text-xl font-bold text-blue-900">时间基础积分计算</h3>
+              </div>
+
+              <div className="mb-6">
+                <h4 className="font-semibold text-blue-900 mb-3">核心公式</h4>
+                <div className="font-mono text-lg bg-white p-4 rounded border mb-4">
+                  P = F × (Tx/To - 1)
+                </div>
+                <div className="space-y-2 text-sm text-blue-800">
+                  <p><strong>P</strong> = 基础比赛积分</p>
+                  <p><strong>F</strong> = 项目系数 (DH=1250, SL=730, GS=1010, SG=1190, AC=1360)</p>
+                  <p><strong>Tx</strong> = 运动员时间</p>
+                  <p><strong>To</strong> = 冠军时间</p>
+                </div>
+              </div>
+
+              <div className="mb-6">
+                <h4 className="font-semibold text-blue-900 mb-3">最终积分计算</h4>
+                <div className="font-mono text-base bg-white p-4 rounded border mb-4">
+                  最终积分 = (基础积分 + 判罚分) × 赛事系数
+                </div>
+                <div className="grid grid-cols-3 gap-2 text-center text-sm">
+                  <div className="bg-white p-3 rounded border">
+                    <div className="text-xl font-bold text-blue-600">1.0</div>
+                    <div className="text-gray-600">A级赛事</div>
+                  </div>
+                  <div className="bg-white p-3 rounded border">
+                    <div className="text-xl font-bold text-green-600">0.6</div>
+                    <div className="text-gray-600">B级赛事</div>
+                  </div>
+                  <div className="bg-white p-3 rounded border">
+                    <div className="text-xl font-bold text-orange-600">0.3</div>
+                    <div className="text-gray-600">C级赛事</div>
+                  </div>
+                </div>
+              </div>
+
+              <div className="text-sm text-blue-700">
+                <strong>适用项目:</strong> 高山滑雪、单板平行项目<br/>
+                <strong>特点:</strong> 积分越低成绩越好
+              </div>
             </div>
 
-            {/* Tab Content */}
-            <div className="p-6">
-              {activeTab === 'overview' && (
-                <div>
-                  <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-                    <div>
-                      <h3 className="text-2xl font-bold text-ski-navy mb-4">
-                        {selectedSystem.title}
-                      </h3>
-                      <p className="text-gray-600 mb-6">{selectedSystem.description}</p>
+            {/* 排名制计算 */}
+            <div className="bg-green-50 border border-green-200 rounded-lg p-8">
+              <div className="flex items-center mb-6">
+                <Trophy className="h-8 w-8 text-green-600 mr-3" />
+                <h3 className="text-xl font-bold text-green-900">排名基础积分分配</h3>
+              </div>
 
-                      <div className="space-y-4">
-                        <div className="flex items-center justify-between p-4 bg-gray-50 rounded-lg">
-                          <span className="font-medium">积分方向</span>
-                          <span className={`px-3 py-1 rounded-full text-sm font-medium ${
-                            selectedSystem.pointsDirection.includes('低')
-                              ? 'bg-red-100 text-red-700'
-                              : 'bg-green-100 text-green-700'
-                          }`}>
-                            {selectedSystem.pointsDirection}
-                          </span>
-                        </div>
-                        <div className="flex items-center justify-between p-4 bg-gray-50 rounded-lg">
-                          <span className="font-medium">计算基础</span>
-                          <span className="text-gray-700">{selectedSystem.calculationBasis}</span>
-                        </div>
-                        <div className="flex items-center justify-between p-4 bg-gray-50 rounded-lg">
-                          <span className="font-medium">赛季策略</span>
-                          <span className="text-gray-700">{selectedSystem.seasonStrategy}</span>
-                        </div>
-                      </div>
-                    </div>
-
-                    <div>
-                      <h4 className="text-lg font-semibold text-ski-navy mb-4">系统特点</h4>
-                      <ul className="space-y-3 mb-6">
-                        {selectedSystem.features.map((feature, index) => (
-                          <li key={index} className="flex items-start">
-                            <CheckCircle className="h-5 w-5 text-green-500 mr-3 mt-0.5 flex-shrink-0" />
-                            <span className="text-gray-700">{feature}</span>
-                          </li>
-                        ))}
-                      </ul>
-
-                      <h4 className="text-lg font-semibold text-ski-navy mb-4">适用项目</h4>
-                      <div className="flex flex-wrap gap-2">
-                        {selectedSystem.disciplines.map((discipline, index) => (
-                          <span
-                            key={index}
-                            className={`px-3 py-1 rounded-full text-sm font-medium ${getColorClasses(selectedSystem.color)}`}
-                          >
-                            {discipline}
-                          </span>
-                        ))}
-                      </div>
-                    </div>
-                  </div>
+              <div className="mb-6">
+                <h4 className="font-semibold text-green-900 mb-3">积分分配原则</h4>
+                <p className="text-green-800 mb-4 text-sm">
+                  根据最终排名按固定比例分配积分，第1名获得100%积分，其他名次按比例递减
+                </p>
+                <div className="overflow-x-auto">
+                  <table className="min-w-full bg-white rounded border text-sm">
+                    <thead className="bg-gray-50">
+                      <tr>
+                        <th className="px-3 py-2 text-left">排名</th>
+                        <th className="px-3 py-2 text-left">比例</th>
+                        <th className="px-3 py-2 text-left">一类</th>
+                        <th className="px-3 py-2 text-left">二类</th>
+                        <th className="px-3 py-2 text-left">三类</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {pointsTable.slice(0, 5).map((row, index) => (
+                        <tr key={index} className="border-t">
+                          <td className="px-3 py-2 font-medium">第{row.rank}名</td>
+                          <td className="px-3 py-2">{row.percentage}</td>
+                          <td className="px-3 py-2 text-blue-600 font-medium">{row.category1}</td>
+                          <td className="px-3 py-2 text-green-600 font-medium">{row.category2}</td>
+                          <td className="px-3 py-2 text-orange-600 font-medium">{row.category3}</td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
                 </div>
-              )}
+              </div>
 
-              {activeTab === 'calculation' && (
-                <div>
-                  {selectedSystem.id === 'alpine' || selectedSystem.id === 'snowboard-alpine' ? (
-                    <div className="space-y-6">
-                      <h3 className="text-xl font-bold text-ski-navy">时间基础积分计算</h3>
-
-                      <div className="bg-blue-50 border border-blue-200 rounded-lg p-6">
-                        <h4 className="font-semibold text-blue-900 mb-3">核心公式</h4>
-                        <div className="font-mono text-lg bg-white p-4 rounded border">
-                          P = F × (Tx/To - 1)
-                        </div>
-                        <div className="mt-4 space-y-2 text-sm text-blue-800">
-                          <p><strong>P</strong> = 基础比赛积分</p>
-                          <p><strong>F</strong> = 项目系数 (高山滑雪: DH=1250, SL=730, GS=1010, SG=1190, AC=1360)</p>
-                          <p><strong>Tx</strong> = 运动员时间</p>
-                          <p><strong>To</strong> = 冠军时间</p>
-                        </div>
-                      </div>
-
-                      <div className="bg-gray-50 border border-gray-200 rounded-lg p-6">
-                        <h4 className="font-semibold text-gray-900 mb-3">最终积分计算</h4>
-                        <div className="font-mono text-lg bg-white p-4 rounded border mb-4">
-                          最终积分 = (基础积分 + 判罚分) × 赛事系数
-                        </div>
-                        <div className="grid grid-cols-3 gap-4 text-center">
-                          <div className="bg-white p-4 rounded border">
-                            <div className="text-2xl font-bold text-blue-600">1.0</div>
-                            <div className="text-sm text-gray-600">A级赛事</div>
-                          </div>
-                          <div className="bg-white p-4 rounded border">
-                            <div className="text-2xl font-bold text-green-600">0.6</div>
-                            <div className="text-sm text-gray-600">B级赛事</div>
-                          </div>
-                          <div className="bg-white p-4 rounded border">
-                            <div className="text-2xl font-bold text-orange-600">0.3</div>
-                            <div className="text-sm text-gray-600">C级赛事</div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  ) : (
-                    <div className="space-y-6">
-                      <h3 className="text-xl font-bold text-ski-navy">排名基础积分分配</h3>
-
-                      <div className="bg-green-50 border border-green-200 rounded-lg p-6">
-                        <h4 className="font-semibold text-green-900 mb-3">积分分配原则</h4>
-                        <p className="text-green-800 mb-4">
-                          根据最终排名按固定比例分配积分，第1名获得100%积分，其他名次按比例递减
-                        </p>
-                        <div className="overflow-x-auto">
-                          <table className="min-w-full bg-white rounded border">
-                            <thead className="bg-gray-50">
-                              <tr>
-                                <th className="px-4 py-2 text-left">排名</th>
-                                <th className="px-4 py-2 text-left">积分比例</th>
-                                <th className="px-4 py-2 text-left">一类赛事(360)</th>
-                                <th className="px-4 py-2 text-left">二类赛事(240)</th>
-                                <th className="px-4 py-2 text-left">三类赛事(120)</th>
-                              </tr>
-                            </thead>
-                            <tbody>
-                              {pointsTable.map((row, index) => (
-                                <tr key={index} className="border-t">
-                                  <td className="px-4 py-2 font-medium">第{row.rank}名</td>
-                                  <td className="px-4 py-2">{row.percentage}</td>
-                                  <td className="px-4 py-2 text-blue-600 font-medium">{row.category1}</td>
-                                  <td className="px-4 py-2 text-green-600 font-medium">{row.category2}</td>
-                                  <td className="px-4 py-2 text-orange-600 font-medium">{row.category3}</td>
-                                </tr>
-                              ))}
-                            </tbody>
-                          </table>
-                        </div>
-                      </div>
-                    </div>
-                  )}
-                </div>
-              )}
-
-              {activeTab === 'example' && (
-                <div>
-                  <h3 className="text-xl font-bold text-ski-navy mb-6">计算示例</h3>
-
-                  <div className="bg-gray-50 border border-gray-200 rounded-lg p-6">
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                      <div>
-                        <h4 className="font-semibold text-gray-900 mb-3">输入数据</h4>
-                        <div className="bg-white p-4 rounded border">
-                          <p className="text-gray-700">{selectedSystem.example.input}</p>
-                        </div>
-                      </div>
-                      <div>
-                        <h4 className="font-semibold text-gray-900 mb-3">计算结果</h4>
-                        <div className="bg-white p-4 rounded border">
-                          <p className="text-gray-700 font-medium">{selectedSystem.example.output}</p>
-                        </div>
-                      </div>
-                    </div>
-
-                    <div className="mt-6 p-4 bg-blue-50 border border-blue-200 rounded">
-                      <div className="flex items-center">
-                        <AlertCircle className="h-5 w-5 text-blue-600 mr-2" />
-                        <span className="text-blue-800 font-medium">积分说明</span>
-                      </div>
-                      <p className="text-blue-700 mt-2">
-                        {selectedSystem.pointsDirection.includes('低')
-                          ? '在低分制系统中，积分越低表示成绩越好，排名越高'
-                          : '在高分制系统中，积分越高表示成绩越好，排名越高'
-                        }
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              )}
+              <div className="text-sm text-green-700">
+                <strong>适用项目:</strong> 单板技巧、自由式滑雪<br/>
+                <strong>特点:</strong> 积分越高成绩越好
+              </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Technical Implementation Section */}
-      <section className="py-16 bg-white">
+      {/* Technical Implementation */}
+      <section className="py-16 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
             <h2 className="text-3xl font-bold text-ski-navy mb-4">技术实现</h2>
