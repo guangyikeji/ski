@@ -1,0 +1,15 @@
+
+> alpine-ski-points@1.0.0 build
+> next build
+
+ ⚠ Invalid next.config.js options detected: 
+ ⚠     Expected object, received boolean at "experimental.turbo"
+ ⚠ See more info here: https://nextjs.org/docs/messages/invalid-next-config
+ ⚠ Disabling SWC Minifer will not be an option in the next major version. Please report any issues you may be experiencing to https://github.com/vercel/next.js/issues
+  ▲ Next.js 14.2.32
+  - Experiments (use with caution):
+    · turbo
+    · optimizeServerReact
+
+   Creating an optimized production build ...
+ ⚠ Production code optimization has been disabled in your project. Read more: https://nextjs.org/docs/messages/minification-disabled
