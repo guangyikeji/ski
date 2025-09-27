@@ -1,5 +1,6 @@
 import './globals.css'
 import type { Metadata } from 'next'
+import { ClientProviders } from '@/components/ClientProviders'
 
 export const metadata: Metadata = {
   title: '中国滑雪赛事积分系统',
@@ -13,7 +14,11 @@ export default function RootLayout({
 }) {
   return (
     <html lang="zh-CN">
-      <body>{children}</body>
+      <body>
+        <ClientProviders>
+          {children}
+        </ClientProviders>
+      </body>
     </html>
   )
 }

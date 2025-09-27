@@ -14,15 +14,6 @@ const nextConfig = {
     unoptimized: true,
   },
 
-  // 最小配置避免挂起
-  experimental: {
-    workerThreads: false,
-    cpus: 1
-  },
-  swcMinify: false,
-  compress: false,
-  poweredByHeader: false,
-  reactStrictMode: false,
   eslint: {
     ignoreDuringBuilds: true,
   },
