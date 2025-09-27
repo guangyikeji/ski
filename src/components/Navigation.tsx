@@ -74,7 +74,6 @@ const navigationItems = [
     children: [
       { name: '运动员档案', href: '/athletes', active: true, resource: Resource.USER_MANAGEMENT, action: Action.READ },
       { name: '成绩历史', href: '/athletes/history', active: true, resource: Resource.POINTS_QUERY, action: Action.READ },
-      { name: '积分排名', href: '/athletes/rankings', active: true, resource: Resource.POINTS_RANKING, action: Action.READ },
       { name: '成绩统计', href: '/athletes/stats', active: true, resource: Resource.STATISTICS, action: Action.READ }
     ]
   },
@@ -144,7 +143,7 @@ export default function Navigation() {
 
       // 检查是否包含公开的子菜单项
       const hasPublicChildren = item.children?.some(child =>
-        ['四大积分系统', '积分排行榜', '中国积分规则', '竞赛规则', '赛事日程'].includes(child.name)
+        ['四大积分系统', '积分排行榜', '中国积分规则', '竞赛规则', '赛事日程', '积分变化趋势'].includes(child.name)
       )
 
       // 如果包含公开子菜单或用户有权限，则显示主菜单
@@ -171,7 +170,7 @@ export default function Navigation() {
         ...child,
         // 公开页面不需要登录 - 四大积分系统、积分排名、积分规则、赛事日程
         needsAuth: !isAuthenticated && child.resource && child.action &&
-                  !['四大积分系统', '积分排行榜', '中国积分规则', '竞赛规则', '赛事日程'].includes(child.name)
+                  !['四大积分系统', '积分排行榜', '中国积分规则', '竞赛规则', '赛事日程', '积分变化趋势'].includes(child.name)
       })) : undefined,
       // 如果包含公开子菜单，主菜单也不需要认证标记
       needsAuth: !isAuthenticated && item.resource && item.action && item.name !== '首页' &&

@@ -91,10 +91,10 @@ const features = [
 ]
 
 const stats = [
-  { label: '支持项目', value: '5+', icon: Award },
+  { label: '滑雪项目', value: '15+', description: '高山·自由式·单板', icon: Award },
   { label: '积分规则', value: '100%', description: '符合中国标准', icon: CheckCircle },
-  { label: '更新频率', value: '21天', description: '积分周期', icon: Clock },
-  { label: '管理标准', value: '国家级', description: '权威平台', icon: Database }
+  { label: '积分更新', value: '7天', description: '每周更新', icon: Clock },
+  { label: '注册用户', value: '1,200+', description: '运动员教练', icon: Database }
 ]
 
 
@@ -194,11 +194,8 @@ export default function HomePage() {
                 </div>
               </h1>
               <div className="mb-8">
-                <p className="text-lg sm:text-xl md:text-2xl lg:text-3xl text-gray-200 mb-6 leading-relaxed font-semibold">
-                  传承雪山精神，追求卓越竞技
-                  <span className="inline-block ml-3 px-3 py-1 bg-blue-500/20 text-blue-300 text-sm rounded-full border border-blue-400/30">
-                    ✨ 自动部署演示 - {new Date().toLocaleTimeString('zh-CN')}
-                  </span>
+                <p className="text-lg sm:text-xl md:text-2xl text-gray-200 mb-6 leading-relaxed font-medium">
+                  权威·专业·精准的中国滑雪运动积分管理平台
                 </p>
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 md:gap-4 text-sm md:text-base lg:text-lg">
                   <div className="flex items-center bg-white/10 backdrop-blur-sm rounded-lg px-4 py-3 border border-white/20">
@@ -221,21 +218,23 @@ export default function HomePage() {
                     <div className="flex flex-col sm:flex-row gap-4">
                       <Link
                         href="/scoring-systems"
-                        className="inline-flex items-center justify-center px-6 py-3 bg-ski-blue text-white rounded-lg hover:bg-ski-blue/90 transition-colors font-semibold text-lg"
+                        className="inline-flex items-center justify-center px-6 py-3 bg-ski-blue text-white rounded-lg hover:bg-ski-blue/90 transition-all duration-300 font-semibold text-lg shadow-lg hover:shadow-xl transform hover:scale-105"
+                        title="了解中国滑雪积分体系"
                       >
                         <Calculator className="h-5 w-5 mr-2" />
-                        四大积分系统
+                        探索积分系统
                       </Link>
                       <Link
-                        href="/about"
-                        className="inline-flex items-center justify-center px-6 py-3 border-2 border-white text-white rounded-lg hover:bg-white hover:text-ski-navy transition-colors font-semibold text-lg"
+                        href="/register"
+                        className="inline-flex items-center justify-center px-6 py-3 border-2 border-white text-white rounded-lg hover:bg-white hover:text-ski-navy transition-all duration-300 font-semibold text-lg shadow-lg hover:shadow-xl transform hover:scale-105"
+                        title="免费注册成为会员"
                       >
-                        <FileText className="h-5 w-5 mr-2" />
-                        了解平台
+                        <UserPlus className="h-5 w-5 mr-2" />
+                        免费注册
                       </Link>
                     </div>
                     <p className="text-gray-300 text-sm mt-4">
-                      了解中国滑雪竞赛积分体系，掌握高山、自由式、单板滑雪专业竞赛规则
+                      🏆 专业运动员、教练员、赛事组织者的首选平台 • 国家体育总局认证标准
                     </p>
                   </div>
                 )}

@@ -13,14 +13,41 @@ export default function LoginPage() {
     password: ''
   })
   const [showPassword, setShowPassword] = useState(false)
-  const [emailError, setEmailError] = useState('')
+  const [errors, setErrors] = useState({
+    email: '',
+    password: ''
+  })
+  const [touched, setTouched] = useState({
+    email: false,
+    password: false
+  })
   const { login, isLoading, error, isAuthenticated, clearError } = useAuth()
   const router = useRouter()
 
-  // 邮箱验证函数
-  const validateEmail = (email: string): boolean => {
+  // 表单验证函数
+  const validateEmail = (email: string): string => {
+    if (!email) return '请输入邮箱地址'
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
-    return emailRegex.test(email)
+    if (!emailRegex.test(email)) return '请输入有效的邮箱地址'
+    return ''
+  }
+
+  const validatePassword = (password: string): string => {
+    if (!password) return '请输入密码'
+    if (password.length < 6) return '密码至少需要6个字符'
+    return ''
+  }
+
+  const validateForm = () => {
+    const emailError = validateEmail(formData.email)
+    const passwordError = validatePassword(formData.password)
+
+    setErrors({
+      email: emailError,
+      password: passwordError
+    })
+
+    return !emailError && !passwordError
   }
 
   useEffect(() => {
@@ -32,21 +59,15 @@ export default function LoginPage() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     clearError()
-    setEmailError('')
 
-    // 前端验证
-    if (!formData.email) {
-      setEmailError('请输入邮箱地址')
-      return
-    }
+    // 标记所有字段为已触摸
+    setTouched({
+      email: true,
+      password: true
+    })
 
-    if (!validateEmail(formData.email)) {
-      setEmailError('请输入有效的邮箱地址')
-      return
-    }
-
-    if (!formData.password) {
-      setEmailError('请输入密码')
+    // 表单验证
+    if (!validateForm()) {
       return
     }
 
@@ -64,11 +85,25 @@ export default function LoginPage() {
       [name]: value
     })
 
-    // 实时邮箱验证
-    if (name === 'email' && emailError) {
-      if (value && validateEmail(value)) {
-        setEmailError('')
+    // 实时验证
+    if (touched[name as keyof typeof touched]) {
+      if (name === 'email') {
+        setErrors(prev => ({ ...prev, email: validateEmail(value) }))
+      } else if (name === 'password') {
+        setErrors(prev => ({ ...prev, password: validatePassword(value) }))
       }
+    }
+  }
+
+  const handleBlur = (e: React.FocusEvent<HTMLInputElement>) => {
+    const { name } = e.target
+    setTouched(prev => ({ ...prev, [name]: true }))
+
+    // 失焦时验证
+    if (name === 'email') {
+      setErrors(prev => ({ ...prev, email: validateEmail(formData.email) }))
+    } else if (name === 'password') {
+      setErrors(prev => ({ ...prev, password: validatePassword(formData.password) }))
     }
   }
 
@@ -140,16 +175,20 @@ export default function LoginPage() {
                     required
                     value={formData.email}
                     onChange={handleChange}
-                    className={`pl-10 w-full px-3 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:border-transparent ${
-                      emailError
+                    onBlur={handleBlur}
+                    className={`pl-10 w-full px-3 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:border-transparent transition-colors ${
+                      errors.email
                         ? 'border-red-300 focus:ring-red-500'
                         : 'border-gray-300 focus:ring-ski-blue'
                     }`}
                     placeholder="请输入您的邮箱地址"
                   />
                 </div>
-                {emailError && (
-                  <p className="mt-1 text-sm text-red-600">{emailError}</p>
+                {errors.email && (
+                  <p className="mt-1 text-sm text-red-600 flex items-center">
+                    <span className="inline-block w-1 h-1 bg-red-500 rounded-full mr-2"></span>
+                    {errors.email}
+                  </p>
                 )}
               </div>
 
@@ -168,7 +207,12 @@ export default function LoginPage() {
                     required
                     value={formData.password}
                     onChange={handleChange}
-                    className="pl-10 pr-10 w-full px-3 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-ski-blue focus:border-transparent"
+                    onBlur={handleBlur}
+                    className={`pl-10 pr-10 w-full px-3 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:border-transparent transition-colors ${
+                      errors.password
+                        ? 'border-red-300 focus:ring-red-500'
+                        : 'border-gray-300 focus:ring-ski-blue'
+                    }`}
                     placeholder="请输入您的密码"
                   />
                   <button
@@ -183,6 +227,12 @@ export default function LoginPage() {
                     )}
                   </button>
                 </div>
+                {errors.password && (
+                  <p className="mt-1 text-sm text-red-600 flex items-center">
+                    <span className="inline-block w-1 h-1 bg-red-500 rounded-full mr-2"></span>
+                    {errors.password}
+                  </p>
+                )}
               </div>
             </div>
 
