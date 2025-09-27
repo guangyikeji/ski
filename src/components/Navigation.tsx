@@ -141,12 +141,8 @@ export default function Navigation() {
       // 首页始终显示
       if (item.name === '首页') return true
 
-      // 检查是否包含公开的子菜单项 (DEBUG模式: 扩大公开范围)
-      const hasPublicChildren = item.children?.some(child =>
-        ['四大积分系统', '积分排行榜', '中国积分查询', '积分计算器', '积分变化趋势',
-         '中国积分规则', '竞赛规则', '技术规范', '赛事日程', '比赛列表',
-         '运动员档案', '成绩历史', '成绩统计', '在线报名'].includes(child.name)
-      )
+      // DEBUG模式: 所有菜单项完全公开
+      const hasPublicChildren = true // 强制所有主菜单显示
 
       // 如果包含公开子菜单或用户有权限，则显示主菜单
       if (hasPublicChildren || (item.resource && item.action && hasPermission(item.resource, item.action))) {
@@ -170,15 +166,11 @@ export default function Navigation() {
         return true
       }).map(child => ({
         ...child,
-        // DEBUG模式: 扩大公开页面范围
-        needsAuth: !isAuthenticated && child.resource && child.action &&
-                  !['四大积分系统', '积分排行榜', '中国积分查询', '积分计算器', '积分变化趋势',
-                    '中国积分规则', '竞赛规则', '技术规范', '赛事日程', '比赛列表',
-                    '运动员档案', '成绩历史', '成绩统计', '在线报名'].includes(child.name)
+        // DEBUG模式: 所有子菜单项完全公开，无需登录
+        needsAuth: false
       })) : undefined,
-      // 如果包含公开子菜单，主菜单也不需要认证标记
-      needsAuth: !isAuthenticated && item.resource && item.action && item.name !== '首页' &&
-                !item.children?.some(child => ['四大积分系统', '积分排行榜', '中国积分规则', '竞赛规则', '赛事日程'].includes(child.name))
+      // DEBUG模式: 所有主菜单项完全公开，无需登录
+      needsAuth: false
     }))
   }
 
@@ -220,7 +212,7 @@ export default function Navigation() {
                     {openDropdown === item.name && (
                       <div className="dropdown-menu">
                         {item.children.map((child) => (
-                          child.needsAuth ? (
+                          false ? ( // DEBUG模式: 移除"需要登录"的显示
                             <div
                               key={child.name}
                               className="dropdown-item text-gray-400 cursor-not-allowed"
@@ -398,7 +390,7 @@ export default function Navigation() {
                 {item.children && (item.active || item.needsAuth) && (
                   <div className="ml-6 space-y-1">
                     {item.children.map((child) => (
-                      child.needsAuth ? (
+                      false ? ( // DEBUG模式: 移除"需要登录"的显示
                         <div
                           key={child.name}
                           className="block px-3 py-2 rounded-md text-sm text-gray-400 cursor-not-allowed"
