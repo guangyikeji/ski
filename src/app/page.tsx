@@ -203,7 +203,7 @@ export default function HomePage() {
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 md:gap-4 text-sm md:text-base lg:text-lg">
                   <div className="flex items-center bg-white/10 backdrop-blur-sm rounded-lg px-4 py-3 border border-white/20">
                     <div className="w-3 h-3 bg-ski-blue rounded-full mr-3 flex-shrink-0"></div>
-                    <span className="text-white font-medium">高山·自由式·单板滑雪</span>
+                    <span className="text-white font-medium">四大积分系统</span>
                   </div>
                   <div className="flex items-center bg-white/10 backdrop-blur-sm rounded-lg px-4 py-3 border border-white/20">
                     <div className="w-3 h-3 bg-green-400 rounded-full mr-3 flex-shrink-0"></div>
@@ -220,18 +220,18 @@ export default function HomePage() {
                   <div className="mt-8">
                     <div className="flex flex-col sm:flex-row gap-4">
                       <Link
-                        href="/about"
+                        href="/scoring-systems"
                         className="inline-flex items-center justify-center px-6 py-3 bg-ski-blue text-white rounded-lg hover:bg-ski-blue/90 transition-colors font-semibold text-lg"
+                      >
+                        <Calculator className="h-5 w-5 mr-2" />
+                        四大积分系统
+                      </Link>
+                      <Link
+                        href="/about"
+                        className="inline-flex items-center justify-center px-6 py-3 border-2 border-white text-white rounded-lg hover:bg-white hover:text-ski-navy transition-colors font-semibold text-lg"
                       >
                         <FileText className="h-5 w-5 mr-2" />
                         了解平台
-                      </Link>
-                      <Link
-                        href="/rules/points"
-                        className="inline-flex items-center justify-center px-6 py-3 border-2 border-white text-white rounded-lg hover:bg-white hover:text-ski-navy transition-colors font-semibold text-lg"
-                      >
-                        <Calculator className="h-5 w-5 mr-2" />
-                        积分规则
                       </Link>
                     </div>
                     <p className="text-gray-300 text-sm mt-4">
