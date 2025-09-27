@@ -37,9 +37,10 @@ jobs:
 
       - name: Build with Next.js
         run: |
-          npm run build
+          GITHUB_PAGES=true NODE_ENV=production timeout 300s npm run build
         env:
           GITHUB_PAGES: true
+          NODE_OPTIONS: "--max-old-space-size=4096"
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
